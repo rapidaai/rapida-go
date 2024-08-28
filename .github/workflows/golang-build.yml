@@ -61,6 +61,9 @@ jobs:
       - name: Install dependencies
         run: go mod tidy
 
+      - name: Test and create coverage
+        run: go test -coverprofile=coverage.out ./...
+
       - name: Tag the release
         id: tag
         run: |

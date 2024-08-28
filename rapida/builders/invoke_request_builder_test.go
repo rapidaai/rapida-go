@@ -61,7 +61,7 @@ func TestInvokeRequestBuilder(t *testing.T) {
 	mockEndpoint := NewMockEndpointDefinition(12345, "v1")
 
 	// Initialize the builder
-	builder := InvokeRequestBuilder(mockEndpoint)
+	builder := NewInvokeRequestBuilder(mockEndpoint)
 
 	// Test default values
 	t.Run("Test Default Values", func(t *testing.T) {
@@ -141,7 +141,7 @@ func TestInvokeRequestBuilder(t *testing.T) {
 
 	// Test Build Without Setting Any Optional Fields
 	t.Run("Test Build Without Optional Fields", func(t *testing.T) {
-		builder := InvokeRequestBuilder(mockEndpoint)
+		builder := NewInvokeRequestBuilder(mockEndpoint)
 		ctx, endpoint, inputs, metadata, options := builder.Build()
 		assert.Equal(t, context.Background(), ctx)
 		assert.Equal(t, mockEndpoint, endpoint)

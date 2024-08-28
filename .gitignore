@@ -1,0 +1,53 @@
+# Go binary and build files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+*.prof
+*.cover
+
+# Dependency directories
+vendor/
+Gopkg.lock
+Gopkg.toml
+
+# Go module cache
+.go/
+.golangci.yml
+
+# IDE and editor-specific files
+*.swp
+*.swo
+*.swn
+.idea/
+*.iml
+*.vscode/
+
+# Logs
+*.log
+
+# Environment and configuration files
+.env
+.envrc
+*.json
+*.yml
+*.yaml
+
+# Test coverage reports
+coverage.out
+
+# Protocol buffer files (not to be pushed)
+*.proto
+
+# Others
+.DS_Store
+*.tgz
+*.zip
+
+# System-specific files
+Thumbs.db
+
+bin/

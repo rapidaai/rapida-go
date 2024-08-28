@@ -41,15 +41,15 @@ type invokeRequestBuilder struct {
 	options  map[string]*any.Any
 }
 
-type RequestBuilder interface {
-	WithContext(context.Context) RequestBuilder
-	WithInputs(inputs map[string]*any.Any) RequestBuilder
-	WithMetadata(metadata map[string]*any.Any) RequestBuilder
-	WithOptions(options map[string]*any.Any) RequestBuilder
+type InvokeRequestBuilder interface {
+	WithContext(context.Context) InvokeRequestBuilder
+	WithInputs(inputs map[string]*any.Any) InvokeRequestBuilder
+	WithMetadata(metadata map[string]*any.Any) InvokeRequestBuilder
+	WithOptions(options map[string]*any.Any) InvokeRequestBuilder
 	Build() (context.Context, rapida_definitions.EndpointDefinition, map[string]*any.Any, map[string]*any.Any, map[string]*any.Any)
 }
 
-func InvokeRequestBuilder(endpoint rapida_definitions.EndpointDefinition) RequestBuilder {
+func NewInvokeRequestBuilder(endpoint rapida_definitions.EndpointDefinition) InvokeRequestBuilder {
 	return &invokeRequestBuilder{
 		endpoint: endpoint,
 		ctx:      context.Background(),
@@ -60,25 +60,25 @@ func InvokeRequestBuilder(endpoint rapida_definitions.EndpointDefinition) Reques
 }
 
 // WithInputs sets the inputs parameter
-func (b *invokeRequestBuilder) WithContext(ctx context.Context) RequestBuilder {
+func (b *invokeRequestBuilder) WithContext(ctx context.Context) InvokeRequestBuilder {
 	b.ctx = ctx
 	return b
 }
 
 // WithInputs sets the inputs parameter
-func (b *invokeRequestBuilder) WithInputs(inputs map[string]*any.Any) RequestBuilder {
+func (b *invokeRequestBuilder) WithInputs(inputs map[string]*any.Any) InvokeRequestBuilder {
 	b.inputs = inputs
 	return b
 }
 
 // WithMetadata sets the metadata parameter
-func (b *invokeRequestBuilder) WithMetadata(metadata map[string]*any.Any) RequestBuilder {
+func (b *invokeRequestBuilder) WithMetadata(metadata map[string]*any.Any) InvokeRequestBuilder {
 	b.metadata = metadata
 	return b
 }
 
 // WithOptions sets the options parameter
-func (b *invokeRequestBuilder) WithOptions(options map[string]*any.Any) RequestBuilder {
+func (b *invokeRequestBuilder) WithOptions(options map[string]*any.Any) InvokeRequestBuilder {
 	b.options = options
 	return b
 }

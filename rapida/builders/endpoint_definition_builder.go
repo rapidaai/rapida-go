@@ -23,29 +23,53 @@
  *
  */
 
-package rapida_definitions
+package rapida_builders
 
-type EndpointDefinition interface {
-	GetEndpoint() uint64
-	GetEndpointVersion() string
-}
+import (
+	"errors"
+	"strconv"
 
-type endpointDefinition struct {
+	rapida_definitions "github.com/rapidaai/rapida-go/rapida/definitions"
+)
+
+type endpointBuilder struct {
 	endpoint        uint64
 	endpointVersion string
 }
 
-func NewEndpoint(endpoint uint64, endpointVersion string) EndpointDefinition {
-	return &endpointDefinition{
-		endpoint:        endpoint,
-		endpointVersion: endpointVersion,
+type EndpointDefinitionBuilder interface {
+}
+
+// NewEndpointBuilder initializes a new builder with default values.
+func NewEndpointDefinitionBuilder() EndpointDefinitionBuilder {
+	return &endpointBuilder{}
+}
+
+func (b *endpointBuilder) WithEndpointId(endpointId uint64) EndpointDefinitionBuilder {
+	b.endpoint = endpointId
+	return b
+}
+
+// WithEndpoint sets the endpoint value.
+func (b *endpointBuilder) WithEndpoint(endpoint string) EndpointDefinitionBuilder {
+	var err error
+	b.endpoint, err = strconv.ParseUint(endpoint, 10, 64)
+	if err != nil {
+		b.endpoint = 0 // Default or invalid state
 	}
+	return b
 }
 
-func (ed *endpointDefinition) GetEndpoint() uint64 {
-	return ed.endpoint
+// WithEndpointVersion sets the endpoint version value.
+func (b *endpointBuilder) WithEndpointVersion(version string) EndpointDefinitionBuilder {
+	b.endpointVersion = version
+	return b
 }
 
-func (ed *endpointDefinition) GetEndpointVersion() string {
-	return ed.endpointVersion
+// Build constructs the EndpointDefinition.
+func (b *endpointBuilder) Build() (rapida_definitions.EndpointDefinition, error) {
+	if b.endpoint == 0 {
+		return nil, errors.New("endpoint must be set")
+	}
+	return rapida_definitions.NewEndpoint(b.endpoint, b.endpointVersion), nil
 }
