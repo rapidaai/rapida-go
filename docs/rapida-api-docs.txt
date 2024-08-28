@@ -1,0 +1,89 @@
+package rapida // import "github.com/rapidaai/rapida-sdk/rapida"
+
+
+CONSTANTS
+
+const (
+	ENDPOINT_URL  = "connect.rapida.ai"
+	ASSISTANT_URL = "assistant.rapida.ai:8080"
+)
+
+FUNCTIONS
+
+func Ptr[T any](v T) *T
+func GetClient(options *RapidaClientOption) (*rapidaClient, error)
+    NewRapidaClient creates a new instance of RapidaClient with the provided
+    options.
+
+
+TYPES
+
+type Client interface {
+	Invoke(
+		ctx context.Context,
+		endpoint rapida_definitions.EndpointDefinition,
+		inputs map[string]*anypb.Any,
+		metadata map[string]*anypb.Any,
+		options map[string]*anypb.Any,
+	) (*rapida_definitions.InvokeResponseWrapper, error)
+}
+
+type RapidaBridge interface {
+	InvokeWithContext(
+		ctx context.Context,
+		endpoint rapida_definitions.EndpointDefinition,
+		inputs map[string]*anypb.Any,
+		metadata map[string]*anypb.Any,
+		options map[string]*anypb.Any,
+	) (*rapida_definitions.InvokeResponseWrapper, error)
+}
+
+func NewRapidaBridge(options *RapidaClientOption) (RapidaBridge, error)
+
+type RapidaClientOption struct {
+	RapidaApiKey       *string
+	RapidaEndpointUrl  *string
+	RapidaAssistantUrl *string
+	RapidaRegion       *rapida_constants.RapidaRegion
+	RapidaEnvironment  *rapida_constants.RapidaEnvironment
+	IsSecure           bool
+}
+
+func NewRapidaClientOption() *RapidaClientOption
+    NewRapidaClientOption initializes RapidaClientOption with default
+    parameters.
+
+func NewRapidaClientOptionWithParams(apiKey, endpointUrl, assistantUrl string, environment rapida_constants.RapidaEnvironment, region rapida_constants.RapidaRegion, isSecure bool) *RapidaClientOption
+    NewRapidaClientOptionWithParams initializes RapidaClientOption with provided
+    parameters.
+
+func (o *RapidaClientOption) GetAssistantUrl() *string
+    GetAssistantUrl returns the assistant URL.
+
+func (o *RapidaClientOption) GetRapidaApiKey() *string
+    GetRapidaApiKey returns the API key.
+
+func (o *RapidaClientOption) GetRapidaEndpointUrl() *string
+    GetRapidaEndpointUrl returns the endpoint URL.
+
+func (o *RapidaClientOption) GetRapidaEnvironment() *rapida_constants.RapidaEnvironment
+    GetRapidaEnvironment returns the RapidaEnvironment.
+
+func (o *RapidaClientOption) GetRapidaRegion() *rapida_constants.RapidaRegion
+    GetRapidaRegion returns the RapidaRegion.
+
+func (o *RapidaClientOption) SetRapidaAssistantUrl(assistantUrl string)
+    SetRapidaAssistantUrl sets the assistant URL.
+
+func (o *RapidaClientOption) SetRapidaEndpointUrl(endpointUrl string)
+    SetRapidaEndpointUrl sets the endpoint URL.
+
+func (o *RapidaClientOption) SetRapidaEnvironment(environment rapida_constants.RapidaEnvironment)
+    SetRapidaEnvironment sets the RapidaEnvironment.
+
+func (o *RapidaClientOption) SetRapidaRegion(region rapida_constants.RapidaRegion)
+    SetRapidaRegion sets the RapidaRegion.
+
+func (o *RapidaClientOption) SetSecure(secure bool)
+    SetSecure sets the security flag.
+
