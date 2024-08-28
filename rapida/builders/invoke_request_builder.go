@@ -23,7 +23,7 @@
  *
  */
 
-package rapdia_builders
+package rapida_builders
 
 import (
 	"context"

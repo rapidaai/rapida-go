@@ -29,6 +29,7 @@ import (
 	"os"
 
 	rapida_constants "github.com/rapidaai/rapida-go/rapida/constants"
+	rapida_utils "github.com/rapidaai/rapida-go/rapida/utils"
 )
 
 type RapidaClientOption struct {
@@ -62,10 +63,10 @@ func NewRapidaClientOption() *RapidaClientOption {
 	apiKey := os.Getenv("RAPIDA_API_KEY")
 	return &RapidaClientOption{
 		RapidaApiKey:       &apiKey,
-		RapidaEndpointUrl:  Ptr(ENDPOINT_URL),
-		RapidaAssistantUrl: Ptr(ASSISTANT_URL),
-		RapidaEnvironment:  Ptr(rapida_constants.PRODUCTION),
-		RapidaRegion:       Ptr(rapida_constants.ALL),
+		RapidaEndpointUrl:  rapida_utils.Ptr(ENDPOINT_URL),
+		RapidaAssistantUrl: rapida_utils.Ptr(ASSISTANT_URL),
+		RapidaEnvironment:  rapida_utils.Ptr(rapida_constants.PRODUCTION),
+		RapidaRegion:       rapida_utils.Ptr(rapida_constants.ALL),
 		IsSecure:           true,
 	}
 }
@@ -104,7 +105,7 @@ func (o *RapidaClientOption) GetRapidaRegion() *rapida_constants.RapidaRegion {
 	if o.RapidaRegion != nil {
 		return o.RapidaRegion
 	}
-	return Ptr(rapida_constants.ALL)
+	return rapida_utils.Ptr(rapida_constants.ALL)
 }
 
 // GetRapidaEnvironment returns the RapidaEnvironment.
@@ -112,7 +113,7 @@ func (o *RapidaClientOption) GetRapidaEnvironment() *rapida_constants.RapidaEnvi
 	if o.RapidaEnvironment != nil {
 		return o.RapidaEnvironment
 	}
-	return Ptr(rapida_constants.PRODUCTION)
+	return rapida_utils.Ptr(rapida_constants.PRODUCTION)
 }
 
 // SetRapidaEndpointUrl sets the endpoint URL.
@@ -138,10 +139,4 @@ func (o *RapidaClientOption) SetRapidaEnvironment(environment rapida_constants.R
 // SetSecure sets the security flag.
 func (o *RapidaClientOption) SetSecure(secure bool) {
 	o.IsSecure = secure
-}
-
-// Utility functions to create pointers from values
-
-func Ptr[T any](v T) *T {
-	return &v
 }
