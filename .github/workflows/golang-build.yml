@@ -1,0 +1,89 @@
+name: Build and Publish Golang SDK
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.21
+
+      - name: Install dependencies
+        run: go mod tidy
+
+      - name: Build the SDK
+        run: go build -v ./rapida/...
+
+      - name: Test the SDK
+        run: go test -v ./rapida/...
+
+      - name: Generate Documentation
+        run: go doc -all rapida > docs/rapida-api-docs.txt
+
+  publish:
+    name: Publish Go Module
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      contents: write
+      actions: write
+      attestations: write
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: 1.21
+
+      - name: Install dependencies
+        run: go mod tidy
+
+      - name: Tag the release
+        id: tag
+        run: |
+          VERSION=$(cat rapida-golang/version.txt)
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git tag -a "v${VERSION}-go" -m "Release version ${VERSION}-go"
+          git push origin "v${VERSION}-go"
+
+      - name: Configure Go Module Proxy
+        run: |
+          go env -w GOPROXY=https://proxy.golang.org,direct
+
+      - name: Publish to GitHub Packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=$(cat rapida-golang/version.txt)
+          GOPROXY="https://proxy.golang.org,direct" \
+          go list -m github.com/rapidaai/rapida-sdk@v${VERSION}-go
+
+      - name: Upload Documentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: sdk-documentation
+          path: docs/rapida-api-docs.txt

@@ -1,0 +1,153 @@
+syntax = "proto3";
+package talk_api;
+option go_package = "github.com/lexatic/web-backend/protos/lexatic-backend";
+option java_package = "ai.rapida.sdk.artifacts";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/any.proto";
+import "common.proto";
+
+//
+//
+//
+
+message AssistantConversationMessage {
+  uint64 id = 1 [ jstype = JS_STRING ];
+  uint64 assistantConversationId = 2 [ jstype = JS_STRING ];
+  string requestRole = 4;
+  Message request = 5;
+  string responseRole = 6;
+  Message response = 7;
+  uint64 externalAuditId = 8;
+  string source = 9;
+  repeated Metric metrics = 10;
+  string status = 11;
+  uint64 createdBy = 12;
+  uint64 updatedBy = 13;
+  repeated string suggestedQuestions = 14;
+  repeated AssistantMessageStage stages = 15;
+
+  google.protobuf.Timestamp createdDate = 26;
+  google.protobuf.Timestamp updatedDate = 27;
+}
+
+message CreateAssistantMessageRequest {
+
+  // assistant parameter
+  uint64 assistantId = 1 [ jstype = JS_STRING ];
+  uint64 assistantProviderModelId = 2 [ jstype = JS_STRING ];
+
+  //   actual message
+  Message message = 3;
+  optional uint64 assistantConversationId = 4 [ jstype = JS_STRING ];
+
+  // metadata
+  map<string, google.protobuf.Any> metadata = 6;
+
+  //   source
+  Source source = 7;
+
+  // identifier
+  optional ResourceIdentifier identifier = 5;
+}
+
+enum RAGStage {
+  UNDEFINED_STAGE = 0;
+  QUERY_FORMULATION = 1;
+  INFORMATION_RETRIEVAL = 2;
+  DOCUMENT_RETRIEVAL = 3;
+  CONTEXT_AUGMENTATION = 4;
+  TEXT_GENERATION = 5;
+  OUTPUT_EVALUATION = 6;
+}
+
+message AssistantMessageStage {
+  RAGStage stage = 1;
+  map<string, string> additionalData = 2;
+  uint64 timetaken = 3;
+}
+message CreateAssistantMessageResponse {
+  int32 code = 1;
+  bool success = 2;
+  AssistantConversationMessage data = 3;
+  Error error = 4;
+}
+
+message AssistantConversation {
+  uint64 id = 1 [ jstype = JS_STRING ];
+  uint64 userId = 2 [ jstype = JS_STRING ];
+  uint64 assistantId = 3 [ jstype = JS_STRING ];
+  string name = 4;
+  uint64 projectId = 5 [ jstype = JS_STRING ];
+  uint64 organizationId = 6 [ jstype = JS_STRING ];
+  string source = 7;
+  uint64 createdBy = 8 [ jstype = JS_STRING ];
+  uint64 updatedBy = 9 [ jstype = JS_STRING ];
+  User user = 10;
+  uint64 assistantProviderModelId = 12 [ jstype = JS_STRING ];
+  repeated AssistantConversationMessage assistantConversationMessage = 13;
+
+  google.protobuf.Timestamp createdDate = 26;
+  google.protobuf.Timestamp updatedDate = 27;
+}
+
+//
+//
+//
+message GetAllAssistantConversationRequest {
+  uint64 assistantId = 1 [ jstype = JS_STRING ];
+  Paginate paginate = 2;
+  repeated Criteria criterias = 3;
+
+  //   source
+  Source source = 7;
+
+  // identifier
+  optional ResourceIdentifier identifier = 8;
+}
+
+message GetAllAssistantConversationResponse {
+  int32 code = 1;
+  bool success = 2;
+  repeated AssistantConversation data = 3;
+  Error error = 4;
+  Paginated paginated = 5;
+}
+
+//
+//
+//
+message GetAllConversationMessageRequest {
+  uint64 assistantId = 1 [ jstype = JS_STRING ];
+  uint64 assistantConversationId = 2 [ jstype = JS_STRING ];
+  Paginate paginate = 3;
+  repeated Criteria criterias = 4;
+  Ordering order = 5;
+
+  //   source
+  Source source = 7;
+
+  // identifier
+  optional ResourceIdentifier identifier = 8;
+}
+
+message GetAllConversationMessageResponse {
+  int32 code = 1;
+  bool success = 2;
+  repeated AssistantConversationMessage data = 3;
+  Error error = 4;
+  Paginated paginated = 5;
+}
+
+//
+//
+//
+
+service TalkService {
+  rpc CreateAssistantMessage(CreateAssistantMessageRequest)
+      returns (stream CreateAssistantMessageResponse);
+  rpc GetAllAssistantConversation(GetAllAssistantConversationRequest)
+      returns (GetAllAssistantConversationResponse);
+  rpc GetAllConversationMessage(GetAllConversationMessageRequest)
+      returns (GetAllConversationMessageResponse);
+}
