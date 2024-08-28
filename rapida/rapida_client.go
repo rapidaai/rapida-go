@@ -29,7 +29,7 @@ import (
 	"context"
 	"errors"
 
-	rapida_definitions "github.com/rapidaai/rapida-sdk/rapida/definitions"
+	rapida_definitions "github.com/rapidaai/rapida-go/rapida/definitions"
 	"google.golang.org/protobuf/types/known/anypb"
 )
 

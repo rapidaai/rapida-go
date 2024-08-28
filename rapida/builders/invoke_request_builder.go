@@ -29,7 +29,7 @@ import (
 	"context"
 
 	"github.com/golang/protobuf/ptypes/any"
-	rapida_definitions "github.com/rapidaai/rapida-sdk/rapida/definitions"
+	rapida_definitions "github.com/rapidaai/rapida-go/rapida/definitions"
 )
 
 // Builder pattern for Invoke function parameters

@@ -27,7 +27,7 @@ import (
 	"errors"
 	"log"
 
-	lexatic_backend "github.com/rapidaai/rapida-sdk/rapida/clients/protos"
+	lexatic_backend "github.com/rapidaai/rapida-go/rapida/clients/protos"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/types/known/structpb"
 )

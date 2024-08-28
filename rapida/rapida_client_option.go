@@ -28,7 +28,7 @@ package rapida
 import (
 	"os"
 
-	rapida_constants "github.com/rapidaai/rapida-sdk/rapida/constants"
+	rapida_constants "github.com/rapidaai/rapida-go/rapida/constants"
 )
 
 type RapidaClientOption struct {

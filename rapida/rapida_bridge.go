@@ -5,9 +5,9 @@ import (
 	"errors"
 	"fmt"
 
-	lexatic_backend "github.com/rapidaai/rapida-sdk/rapida/clients/protos"
-	rapida_constants "github.com/rapidaai/rapida-sdk/rapida/constants"
-	rapida_definitions "github.com/rapidaai/rapida-sdk/rapida/definitions"
+	lexatic_backend "github.com/rapidaai/rapida-go/rapida/clients/protos"
+	rapida_constants "github.com/rapidaai/rapida-go/rapida/constants"
+	rapida_definitions "github.com/rapidaai/rapida-go/rapida/definitions"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/protobuf/types/known/anypb"

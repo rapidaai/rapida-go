@@ -1,4 +1,4 @@
-module github.com/rapidaai/rapida-sdk
+module github.com/rapidaai/rapida-go
 
 go 1.21.0
 
