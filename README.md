@@ -1,5 +1,7 @@
 # Rapida SDK
 
+[![Build and Publish Golang SDK](https://github.com/rapidaai/rapida-go/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/rapidaai/rapida-go/actions/workflows/build.yml)
+
 The Rapida SDK provides a powerful interface for interacting with Rapida AI services. This SDK simplifies the process of making API calls, handling authentication, and managing responses from Rapida endpoints.
 
 ## Installation

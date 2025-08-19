@@ -32,48 +32,48 @@ import (
 	rapida_definitions "github.com/rapidaai/rapida-go/rapida/definitions"
 )
 
-type endpointBuilder struct {
-	endpoint        uint64
-	endpointVersion *string
+type assistantBuilder struct {
+	assistant        uint64
+	assistantVersion *string
 }
 
-type EndpointDefinitionBuilder interface {
-	WithEndpointId(endpointId uint64) EndpointDefinitionBuilder
-	WithEndpoint(endpoint string) EndpointDefinitionBuilder
-	WithEndpointVersion(version string) EndpointDefinitionBuilder
-	Build() (rapida_definitions.EndpointDefinition, error)
+type AssistantDefinitionBuilder interface {
+	WithAssistantId(assistantId uint64) AssistantDefinitionBuilder
+	WithAssistant(assistant string) AssistantDefinitionBuilder
+	WithAssistantVersion(version string) AssistantDefinitionBuilder
+	Build() (rapida_definitions.AssistantDefinition, error)
 }
 
-// NewEndpointBuilder initializes a new builder with default values.
-func NewEndpointDefinitionBuilder() EndpointDefinitionBuilder {
-	return &endpointBuilder{}
+// NewAssistantBuilder initializes a new builder with default values.
+func NewAssistantDefinitionBuilder() AssistantDefinitionBuilder {
+	return &assistantBuilder{}
 }
 
-func (b *endpointBuilder) WithEndpointId(endpointId uint64) EndpointDefinitionBuilder {
-	b.endpoint = endpointId
+func (b *assistantBuilder) WithAssistantId(assistantId uint64) AssistantDefinitionBuilder {
+	b.assistant = assistantId
 	return b
 }
 
-// WithEndpoint sets the endpoint value.
-func (b *endpointBuilder) WithEndpoint(endpoint string) EndpointDefinitionBuilder {
+// WithAssistant sets the assistant value.
+func (b *assistantBuilder) WithAssistant(assistant string) AssistantDefinitionBuilder {
 	var err error
-	b.endpoint, err = strconv.ParseUint(endpoint, 10, 64)
+	b.assistant, err = strconv.ParseUint(assistant, 10, 64)
 	if err != nil {
-		b.endpoint = 0 // Default or invalid state
+		b.assistant = 0 // Default or invalid state
 	}
 	return b
 }
 
-// WithEndpointVersion sets the endpoint version value.
-func (b *endpointBuilder) WithEndpointVersion(version string) EndpointDefinitionBuilder {
-	b.endpointVersion = &version
+// WithAssistantVersion sets the assistant version value.
+func (b *assistantBuilder) WithAssistantVersion(version string) AssistantDefinitionBuilder {
+	b.assistantVersion = &version
 	return b
 }
 
-// Build constructs the EndpointDefinition.
-func (b *endpointBuilder) Build() (rapida_definitions.EndpointDefinition, error) {
-	if b.endpoint == 0 {
-		return nil, errors.New("please provide an endpoint to call")
+// Build constructs the AssistantDefinition.
+func (b *assistantBuilder) Build() (rapida_definitions.AssistantDefinition, error) {
+	if b.assistant == 0 {
+		return nil, errors.New("please provide an assistant to call")
 	}
-	return rapida_definitions.NewEndpoint(b.endpoint, b.endpointVersion), nil
+	return rapida_definitions.NewAssistant(b.assistant, b.assistantVersion), nil
 }

@@ -41,11 +41,6 @@ type RapidaClientOption struct {
 	IsSecure           bool
 }
 
-const (
-	ENDPOINT_URL  = "connect.rapida.ai"
-	ASSISTANT_URL = "assistant.rapida.ai:8080"
-)
-
 // NewRapidaClientOptionWithParams initializes RapidaClientOption with provided parameters.
 func NewRapidaClientOptionWithParams(apiKey, endpointUrl, assistantUrl string, environment rapida_constants.RapidaEnvironment, region rapida_constants.RapidaRegion, isSecure bool) *RapidaClientOption {
 	return &RapidaClientOption{
@@ -63,8 +58,8 @@ func NewRapidaClientOption() *RapidaClientOption {
 	apiKey := os.Getenv("RAPIDA_API_KEY")
 	return &RapidaClientOption{
 		RapidaApiKey:       &apiKey,
-		RapidaEndpointUrl:  rapida_utils.Ptr(ENDPOINT_URL),
-		RapidaAssistantUrl: rapida_utils.Ptr(ASSISTANT_URL),
+		RapidaEndpointUrl:  rapida_utils.Ptr(rapida_constants.ENDPOINT_URL),
+		RapidaAssistantUrl: rapida_utils.Ptr(rapida_constants.ASSISTANT_URL),
 		RapidaEnvironment:  rapida_utils.Ptr(rapida_constants.PRODUCTION),
 		RapidaRegion:       rapida_utils.Ptr(rapida_constants.ALL),
 		IsSecure:           true,
@@ -83,7 +78,7 @@ func (o *RapidaClientOption) GetRapidaEndpointUrl() *string {
 	}
 	endpointUrl := os.Getenv("RAPIDA_ENDPOINT_URL")
 	if endpointUrl == "" {
-		endpointUrl = ENDPOINT_URL
+		endpointUrl = rapida_constants.ENDPOINT_URL
 	}
 	return &endpointUrl
 }
@@ -95,7 +90,7 @@ func (o *RapidaClientOption) GetAssistantUrl() *string {
 	}
 	assistantUrl := os.Getenv("RAPIDA_ASSISTANT_URL")
 	if assistantUrl == "" {
-		assistantUrl = ASSISTANT_URL
+		assistantUrl = rapida_constants.ASSISTANT_URL
 	}
 	return &assistantUrl
 }

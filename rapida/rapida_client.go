@@ -29,6 +29,7 @@ import (
 	"context"
 	"errors"
 
+	lexatic_backend "github.com/rapidaai/rapida-go/rapida/clients/protos"
 	rapida_definitions "github.com/rapidaai/rapida-go/rapida/definitions"
 	"google.golang.org/protobuf/types/known/anypb"
 )
@@ -64,7 +65,7 @@ func GetClient(options *RapidaClientOption) (*rapidaClient, error) {
 
 	bridge, err := NewRapidaBridge(options)
 	if err != nil {
-		return nil, errors.New("unable to initialize the rapida client")
+		return nil, err
 	}
 	return &rapidaClient{
 		rapidaBridge: bridge,
@@ -80,4 +81,23 @@ func (client *rapidaClient) Invoke(
 	options map[string]*anypb.Any,
 ) (*rapida_definitions.InvokeResponseWrapper, error) {
 	return client.rapidaBridge.InvokeWithContext(ctx, endpoint, inputs, metadata, options)
+}
+
+func (client *rapidaClient) NewTalkerClient(
+	ctx context.Context,
+	assistant rapida_definitions.AssistantDefinition,
+	metadata map[string]*anypb.Any,
+	options map[string]*anypb.Any,
+) (TalkClient, error) {
+	return client.rapidaBridge.NewTalkerClient(ctx, assistant, metadata, options)
+}
+
+func (client *rapidaClient) SendMessage(
+	ctx context.Context,
+	assistant rapida_definitions.AssistantDefinition,
+	message *lexatic_backend.Message,
+	metadata map[string]*anypb.Any,
+	options map[string]*anypb.Any,
+) (MessageClient, error) {
+	return client.rapidaBridge.SendMessage(ctx, assistant, message, metadata, options)
 }

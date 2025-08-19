@@ -25,12 +25,6 @@
 
 package rapida_definitions
 
-import (
-	"errors"
-	"fmt"
-	"strconv"
-)
-
 type AssistantDefinition interface {
 	GetAssistant() uint64
 	GetAssistantVersion() string
@@ -38,27 +32,14 @@ type AssistantDefinition interface {
 
 type assistantDefinition struct {
 	assistant        uint64
-	assistantVersion string
+	assistantVersion *string
 }
 
-func NewAssistant(assistant interface{}, assistantVersion string) (AssistantDefinition, error) {
-	var parsedAssistant uint64
-	switch v := assistant.(type) {
-	case uint64:
-		parsedAssistant = v
-	case string:
-		var err error
-		parsedAssistant, err = strconv.ParseUint(v, 10, 64)
-		if err != nil {
-			return nil, fmt.Errorf("invalid assistant format: %v", err)
-		}
-	default:
-		return nil, errors.New("unsupported assistant type: must be uint64 or string")
-	}
+func NewAssistant(assistant uint64, assistantVersion *string) AssistantDefinition {
 	return &assistantDefinition{
-		assistant:        parsedAssistant,
+		assistant:        assistant,
 		assistantVersion: assistantVersion,
-	}, nil
+	}
 }
 
 func (ed *assistantDefinition) GetAssistant() uint64 {
@@ -66,5 +47,8 @@ func (ed *assistantDefinition) GetAssistant() uint64 {
 }
 
 func (ed *assistantDefinition) GetAssistantVersion() string {
-	return ed.assistantVersion
+	if ed.assistantVersion == nil {
+		return "latest"
+	}
+	return *ed.assistantVersion
 }

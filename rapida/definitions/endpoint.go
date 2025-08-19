@@ -32,10 +32,10 @@ type EndpointDefinition interface {
 
 type endpointDefinition struct {
 	endpoint        uint64
-	endpointVersion string
+	endpointVersion *string
 }
 
-func NewEndpoint(endpoint uint64, endpointVersion string) EndpointDefinition {
+func NewEndpoint(endpoint uint64, endpointVersion *string) EndpointDefinition {
 	return &endpointDefinition{
 		endpoint:        endpoint,
 		endpointVersion: endpointVersion,
@@ -47,5 +47,8 @@ func (ed *endpointDefinition) GetEndpoint() uint64 {
 }
 
 func (ed *endpointDefinition) GetEndpointVersion() string {
-	return ed.endpointVersion
+	if ed.endpointVersion == nil {
+		return "latest"
+	}
+	return *ed.endpointVersion
 }

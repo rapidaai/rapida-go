@@ -25,16 +25,26 @@
 
 package rapida_constants
 
-var (
-	// 10mb
-	MaxRecvMsgSize = 1024 * 1024 * 10
-	MaxSendMsgSize = 1024 * 1024 * 10
+const (
+	TEXT_CONTENT        = "text"
+	AUDIO_CONTENT       = "audio"
+	IMAGE_CONTENT       = "image"
+	MULTI_MEDIA_CONTENT = "mutli"
+)
 
-	HEADER_API_KEY         = "x-api-key"
-	HEADER_SOURCE_KEY      = "x-client-source"
-	HEADER_ENVIRONMENT_KEY = "x-rapida-environment"
-	HEADER_REGION_KEY      = "x-rapida-region"
+const (
+	// raw string in byte format
+	TEXT_CONTENT_FORMAT_RAW  = "raw"
+	TEXT_CONTENT_FORMAT_WORD = "word"
 
-	ENDPOINT_URL  = "https://connect.rapida.ai:443"
-	ASSISTANT_URL = "assistant.rapida.ai:8080"
+	//
+	AUDIO_CONTENT_FORMAT_RAW = "raw"
+	AUDIO_CONTENT_FORMAT_URL = "url"
+
+	//
+	IMAGE_CONTENT_FORMAT_RAW = "raw"
+	IMAGE_CONTENT_FORMAT_URL = "url"
+
+	MULTI_MEDIA_CONTENT_FORMAT_RAW = "raw"
+	MULTI_MEDIA_CONTENT_FORMAT_URL = "url"
 )
