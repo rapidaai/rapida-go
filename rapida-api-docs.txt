@@ -1,0 +1,74 @@
+package clients // import "github.com/rapidaai/rapida-go/rapida/clients"
+
+Copyright (c) 2024 Rapida Licensed under the MIT License. See LICENSE file for
+details.
+
+Copyright (c) 2024 Rapida Licensed under the MIT License. See LICENSE file for
+details.
+
+Copyright (c) 2024 Rapida Licensed under the MIT License. See LICENSE file for
+details.
+
+Copyright (c) 2024 Rapida Licensed under the MIT License. See LICENSE file for
+details.
+
+Copyright (c) 2024 Rapida Licensed under the MIT License. See LICENSE file for
+details.
+
+FUNCTIONS
+
+func AssistantMessaging(connection connections.ConnectionConfig, ctx context.Context, req *web_api.AssistantMessagingRequest) (web_api.TalkService_AssistantMessagingClient, error)
+func AssistantTalk(connection connections.ConnectionConfig, ctx context.Context) (web_api.TalkService_AssistantTalkClient, error)
+func CreateAssistant(connection connections.ConnectionConfig, ctx context.Context, in *web_api.CreateAssistantRequest) (*web_api.GetAssistantResponse, error)
+func CreateAssistantAnalysis(connection connections.ConnectionConfig, ctx context.Context, in *web_api.CreateAssistantAnalysisRequest) (*web_api.GetAssistantAnalysisResponse, error)
+func CreateAssistantApiDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateAssistantApiDeploymentRequest) (*web_api.AssistantApiDeploymentResponse, error)
+func CreateAssistantDebuggerDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateAssistantDebuggerDeploymentRequest) (*web_api.AssistantDebuggerDeploymentResponse, error)
+func CreateAssistantKnowledge(connection connections.ConnectionConfig, ctx context.Context, in *web_api.CreateAssistantKnowledgeRequest) (*web_api.GetAssistantKnowledgeResponse, error)
+func CreateAssistantPhoneDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateAssistantPhoneDeploymentRequest) (*web_api.AssistantPhoneDeploymentResponse, error)
+func CreateAssistantProviderModel(connection connections.ConnectionConfig, ctx context.Context, in *web_api.CreateAssistantProviderModelRequest) (*web_api.GetAssistantProviderModelResponse, error)
+func CreateAssistantTag(connection connections.ConnectionConfig, ctx context.Context, in *web_api.CreateAssistantTagRequest) (*web_api.GetAssistantResponse, error)
+func CreateAssistantTool(connection connections.ConnectionConfig, ctx context.Context, in *web_api.CreateAssistantToolRequest) (*web_api.GetAssistantToolResponse, error)
+func CreateAssistantWebhook(connection connections.ConnectionConfig, ctx context.Context, in *web_api.CreateAssistantWebhookRequest) (*web_api.GetAssistantWebhookResponse, error)
+func CreateAssistantWebpluginDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateAssistantWebpluginDeploymentRequest) (*web_api.AssistantWebpluginDeploymentResponse, error)
+func CreateAssistantWhatsappDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateAssistantWhatsappDeploymentRequest) (*web_api.AssistantWhatsappDeploymentResponse, error)
+func CreateBulkPhoneCall(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateBulkPhoneCallRequest) (*web_api.CreateBulkPhoneCallResponse, error)
+func CreateConversationMetric(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateConversationMetricRequest) (*web_api.CreateConversationMetricResponse, error)
+func CreateMessageMetric(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateMessageMetricRequest) (*web_api.CreateMessageMetricResponse, error)
+func CreatePhoneCall(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreatePhoneCallRequest) (*web_api.CreatePhoneCallResponse, error)
+func DeleteAssistant(connection connections.ConnectionConfig, ctx context.Context, in *web_api.DeleteAssistantRequest) (*web_api.GetAssistantResponse, error)
+func DeleteAssistantAnalysis(connection connections.ConnectionConfig, ctx context.Context, in *web_api.DeleteAssistantAnalysisRequest) (*web_api.GetAssistantAnalysisResponse, error)
+func DeleteAssistantKnowledge(connection connections.ConnectionConfig, ctx context.Context, in *web_api.DeleteAssistantKnowledgeRequest) (*web_api.GetAssistantKnowledgeResponse, error)
+func DeleteAssistantTool(connection connections.ConnectionConfig, ctx context.Context, in *web_api.DeleteAssistantToolRequest) (*web_api.GetAssistantToolResponse, error)
+func DeleteAssistantWebhook(connection connections.ConnectionConfig, ctx context.Context, in *web_api.DeleteAssistantWebhookRequest) (*web_api.GetAssistantWebhookResponse, error)
+func GetAllAssistant(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAllAssistantRequest) (*web_api.GetAllAssistantResponse, error)
+func GetAllAssistantAnalysis(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAllAssistantAnalysisRequest) (*web_api.GetAllAssistantAnalysisResponse, error)
+func GetAllAssistantConversation(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAllAssistantConversationRequest) (*web_api.GetAllAssistantConversationResponse, error)
+func GetAllAssistantKnowledge(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAllAssistantKnowledgeRequest) (*web_api.GetAllAssistantKnowledgeResponse, error)
+func GetAllAssistantMessage(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAllAssistantMessageRequest) (*web_api.GetAllAssistantMessageResponse, error)
+func GetAllAssistantProviderModel(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAllAssistantProviderModelRequest) (*web_api.GetAllAssistantProviderModelResponse, error)
+func GetAllAssistantTool(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAllAssistantToolRequest) (*web_api.GetAllAssistantToolResponse, error)
+func GetAllAssistantWebhook(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAllAssistantWebhookRequest) (*web_api.GetAllAssistantWebhookResponse, error)
+func GetAllAssistantWebhookLog(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAllAssistantWebhookLogRequest) (*web_api.GetAllAssistantWebhookLogResponse, error)
+func GetAllConversationMessage(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAllConversationMessageRequest) (*web_api.GetAllConversationMessageResponse, error)
+func GetAllMessage(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAllMessageRequest) (*web_api.GetAllMessageResponse, error)
+func GetAssistant(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAssistantRequest) (*web_api.GetAssistantResponse, error)
+func GetAssistantAnalysis(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAssistantAnalysisRequest) (*web_api.GetAssistantAnalysisResponse, error)
+func GetAssistantApiDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAssistantDeploymentRequest) (*web_api.AssistantApiDeploymentResponse, error)
+func GetAssistantConversation(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAssistantConversationRequest) (*web_api.GetAssistantConversationResponse, error)
+func GetAssistantDebuggerDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAssistantDeploymentRequest) (*web_api.AssistantDebuggerDeploymentResponse, error)
+func GetAssistantKnowledge(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAssistantKnowledgeRequest) (*web_api.GetAssistantKnowledgeResponse, error)
+func GetAssistantPhoneDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAssistantDeploymentRequest) (*web_api.AssistantPhoneDeploymentResponse, error)
+func GetAssistantTool(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAssistantToolRequest) (*web_api.GetAssistantToolResponse, error)
+func GetAssistantWebhook(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAssistantWebhookRequest) (*web_api.GetAssistantWebhookResponse, error)
+func GetAssistantWebhookLog(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAssistantWebhookLogRequest) (*web_api.GetAssistantWebhookLogResponse, error)
+func GetAssistantWebpluginDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAssistantDeploymentRequest) (*web_api.AssistantWebpluginDeploymentResponse, error)
+func GetAssistantWhatsappDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAssistantDeploymentRequest) (*web_api.AssistantWhatsappDeploymentResponse, error)
+func Invoke(connection connections.ConnectionConfig, ctx context.Context, req *web_api.InvokeRequest, opts ...grpc.CallOption) (*web_api.InvokeResponse, error)
+func Probe(connection connections.ConnectionConfig, ctx context.Context, req *web_api.ProbeRequest, opts ...grpc.CallOption) (*web_api.ProbeResponse, error)
+func Update(connection connections.ConnectionConfig, ctx context.Context, req *web_api.UpdateRequest, opts ...grpc.CallOption) (*web_api.UpdateResponse, error)
+func UpdateAssistantAnalysis(connection connections.ConnectionConfig, ctx context.Context, in *web_api.UpdateAssistantAnalysisRequest) (*web_api.GetAssistantAnalysisResponse, error)
+func UpdateAssistantDetail(connection connections.ConnectionConfig, ctx context.Context, in *web_api.UpdateAssistantDetailRequest) (*web_api.GetAssistantResponse, error)
+func UpdateAssistantKnowledge(connection connections.ConnectionConfig, ctx context.Context, in *web_api.UpdateAssistantKnowledgeRequest) (*web_api.GetAssistantKnowledgeResponse, error)
+func UpdateAssistantTool(connection connections.ConnectionConfig, ctx context.Context, in *web_api.UpdateAssistantToolRequest) (*web_api.GetAssistantToolResponse, error)
+func UpdateAssistantVersion(connection connections.ConnectionConfig, ctx context.Context, in *web_api.UpdateAssistantVersionRequest) (*web_api.GetAssistantResponse, error)
+func UpdateAssistantWebhook(connection connections.ConnectionConfig, ctx context.Context, in *web_api.UpdateAssistantWebhookRequest) (*web_api.GetAssistantWebhookResponse, error)

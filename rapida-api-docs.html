@@ -1,0 +1,1096 @@
+using module mode; GOMOD=/Users/prashant.srivastav/Documents/codes/lexatic/sdk/rapida-sdk/rapida-golang/go.mod
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#375EAB">
+
+  <title>clients - Go Documentation Server</title>
+
+<link type="text/css" rel="stylesheet" href="/lib/godoc/style.css">
+
+<script>window.initFuncs = [];</script>
+<script src="/lib/godoc/jquery.js" defer></script>
+
+
+
+<script>var goVersion = "go1.24.6";</script>
+<script src="/lib/godoc/godocs.js" defer></script>
+</head>
+<body>
+
+<div id='lowframe' style="position: fixed; bottom: 0; left: 0; height: 0; width: 100%; border-top: thin solid grey; background-color: white; overflow: auto;">
+...
+</div><!-- #lowframe -->
+
+<div id="topbar" class="wide"><div class="container">
+<div class="top-heading" id="heading-wide"><a href="/pkg/">Go Documentation Server</a></div>
+<div class="top-heading" id="heading-narrow"><a href="/pkg/">GoDoc</a></div>
+<a href="#" id="menu-button"><span id="menu-button-arrow">&#9661;</span></a>
+<form method="GET" action="/search">
+<div id="menu">
+
+<span class="search-box"><input type="search" id="search" name="q" placeholder="Search" aria-label="Search" required><button type="submit"><span><!-- magnifying glass: --><svg width="24" height="24" viewBox="0 0 24 24"><title>submit search</title><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M0 0h24v24H0z" fill="none"/></svg></span></button></span>
+</div>
+</form>
+
+</div></div>
+
+
+
+<div id="page" class="wide">
+<div class="container">
+
+
+  <h1>
+    Package clients
+    <span class="text-muted"></span>
+  </h1>
+
+
+
+
+
+
+
+<div id="nav"></div>
+
+
+<!--
+	Copyright 2009 The Go Authors. All rights reserved.
+	Use of this source code is governed by a BSD-style
+	license that can be found in the LICENSE file.
+-->
+<!--
+	Note: Static (i.e., not template-generated) href and id
+	attributes start with "pkg-" to make it impossible for
+	them to conflict with generated attributes (some of which
+	correspond to Go identifiers).
+-->
+
+	<script>
+	document.ANALYSIS_DATA = null;
+	document.CALLGRAPH = null;
+	</script>
+
+	
+		
+		<div id="short-nav">
+			<dl>
+			<dd><code>import "github.com/rapidaai/rapida-go/rapida/clients"</code></dd>
+			</dl>
+			<dl>
+			<dd><a href="#pkg-overview" class="overviewLink">Overview</a></dd>
+			<dd><a href="#pkg-index" class="indexLink">Index</a></dd>
+			
+			
+				<dd><a href="#pkg-subdirectories">Subdirectories</a></dd>
+			
+			</dl>
+		</div>
+		<!-- The package's Name is printed as title by the top-level template -->
+		<div id="pkg-overview" class="toggleVisible">
+			<div class="collapsed">
+				<h2 class="toggleButton" title="Click to show Overview section">Overview ▹</h2>
+			</div>
+			<div class="expanded">
+				<h2 class="toggleButton" title="Click to hide Overview section">Overview ▾</h2>
+				<p>Copyright (c) 2024 Rapida
+Licensed under the MIT License. See LICENSE file for details.
+<p>Copyright (c) 2024 Rapida
+Licensed under the MIT License. See LICENSE file for details.
+<p>Copyright (c) 2024 Rapida
+Licensed under the MIT License. See LICENSE file for details.
+<p>Copyright (c) 2024 Rapida
+Licensed under the MIT License. See LICENSE file for details.
+<p>Copyright (c) 2024 Rapida
+Licensed under the MIT License. See LICENSE file for details.
+
+				
+			</div>
+		</div>
+
+		<div id="pkg-index" class="toggleVisible">
+		<div class="collapsed">
+			<h2 class="toggleButton" title="Click to show Index section">Index ▹</h2>
+		</div>
+		<div class="expanded">
+			<h2 class="toggleButton" title="Click to hide Index section">Index ▾</h2>
+
+		<!-- Table of contents for API; must be named manual-nav to turn off auto nav. -->
+			<div id="manual-nav">
+			<dl>
+			
+			
+			
+				
+				<dd><a href="#AssistantMessaging">func AssistantMessaging(connection connections.ConnectionConfig, ctx context.Context, req *web_api.AssistantMessagingRequest) (web_api.TalkService_AssistantMessagingClient, error)</a></dd>
+			
+				
+				<dd><a href="#AssistantTalk">func AssistantTalk(connection connections.ConnectionConfig, ctx context.Context) (web_api.TalkService_AssistantTalkClient, error)</a></dd>
+			
+				
+				<dd><a href="#CreateAssistant">func CreateAssistant(connection connections.ConnectionConfig, ctx context.Context, in *web_api.CreateAssistantRequest) (*web_api.GetAssistantResponse, error)</a></dd>
+			
+				
+				<dd><a href="#CreateAssistantAnalysis">func CreateAssistantAnalysis(connection connections.ConnectionConfig, ctx context.Context, in *web_api.CreateAssistantAnalysisRequest) (*web_api.GetAssistantAnalysisResponse, error)</a></dd>
+			
+				
+				<dd><a href="#CreateAssistantApiDeployment">func CreateAssistantApiDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateAssistantApiDeploymentRequest) (*web_api.AssistantApiDeploymentResponse, error)</a></dd>
+			
+				
+				<dd><a href="#CreateAssistantDebuggerDeployment">func CreateAssistantDebuggerDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateAssistantDebuggerDeploymentRequest) (*web_api.AssistantDebuggerDeploymentResponse, error)</a></dd>
+			
+				
+				<dd><a href="#CreateAssistantKnowledge">func CreateAssistantKnowledge(connection connections.ConnectionConfig, ctx context.Context, in *web_api.CreateAssistantKnowledgeRequest) (*web_api.GetAssistantKnowledgeResponse, error)</a></dd>
+			
+				
+				<dd><a href="#CreateAssistantPhoneDeployment">func CreateAssistantPhoneDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateAssistantPhoneDeploymentRequest) (*web_api.AssistantPhoneDeploymentResponse, error)</a></dd>
+			
+				
+				<dd><a href="#CreateAssistantProviderModel">func CreateAssistantProviderModel(connection connections.ConnectionConfig, ctx context.Context, in *web_api.CreateAssistantProviderModelRequest) (*web_api.GetAssistantProviderModelResponse, error)</a></dd>
+			
+				
+				<dd><a href="#CreateAssistantTag">func CreateAssistantTag(connection connections.ConnectionConfig, ctx context.Context, in *web_api.CreateAssistantTagRequest) (*web_api.GetAssistantResponse, error)</a></dd>
+			
+				
+				<dd><a href="#CreateAssistantTool">func CreateAssistantTool(connection connections.ConnectionConfig, ctx context.Context, in *web_api.CreateAssistantToolRequest) (*web_api.GetAssistantToolResponse, error)</a></dd>
+			
+				
+				<dd><a href="#CreateAssistantWebhook">func CreateAssistantWebhook(connection connections.ConnectionConfig, ctx context.Context, in *web_api.CreateAssistantWebhookRequest) (*web_api.GetAssistantWebhookResponse, error)</a></dd>
+			
+				
+				<dd><a href="#CreateAssistantWebpluginDeployment">func CreateAssistantWebpluginDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateAssistantWebpluginDeploymentRequest) (*web_api.AssistantWebpluginDeploymentResponse, error)</a></dd>
+			
+				
+				<dd><a href="#CreateAssistantWhatsappDeployment">func CreateAssistantWhatsappDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateAssistantWhatsappDeploymentRequest) (*web_api.AssistantWhatsappDeploymentResponse, error)</a></dd>
+			
+				
+				<dd><a href="#CreateBulkPhoneCall">func CreateBulkPhoneCall(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateBulkPhoneCallRequest) (*web_api.CreateBulkPhoneCallResponse, error)</a></dd>
+			
+				
+				<dd><a href="#CreateConversationMetric">func CreateConversationMetric(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateConversationMetricRequest) (*web_api.CreateConversationMetricResponse, error)</a></dd>
+			
+				
+				<dd><a href="#CreateMessageMetric">func CreateMessageMetric(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateMessageMetricRequest) (*web_api.CreateMessageMetricResponse, error)</a></dd>
+			
+				
+				<dd><a href="#CreatePhoneCall">func CreatePhoneCall(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreatePhoneCallRequest) (*web_api.CreatePhoneCallResponse, error)</a></dd>
+			
+				
+				<dd><a href="#DeleteAssistant">func DeleteAssistant(connection connections.ConnectionConfig, ctx context.Context, in *web_api.DeleteAssistantRequest) (*web_api.GetAssistantResponse, error)</a></dd>
+			
+				
+				<dd><a href="#DeleteAssistantAnalysis">func DeleteAssistantAnalysis(connection connections.ConnectionConfig, ctx context.Context, in *web_api.DeleteAssistantAnalysisRequest) (*web_api.GetAssistantAnalysisResponse, error)</a></dd>
+			
+				
+				<dd><a href="#DeleteAssistantKnowledge">func DeleteAssistantKnowledge(connection connections.ConnectionConfig, ctx context.Context, in *web_api.DeleteAssistantKnowledgeRequest) (*web_api.GetAssistantKnowledgeResponse, error)</a></dd>
+			
+				
+				<dd><a href="#DeleteAssistantTool">func DeleteAssistantTool(connection connections.ConnectionConfig, ctx context.Context, in *web_api.DeleteAssistantToolRequest) (*web_api.GetAssistantToolResponse, error)</a></dd>
+			
+				
+				<dd><a href="#DeleteAssistantWebhook">func DeleteAssistantWebhook(connection connections.ConnectionConfig, ctx context.Context, in *web_api.DeleteAssistantWebhookRequest) (*web_api.GetAssistantWebhookResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAllAssistant">func GetAllAssistant(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAllAssistantRequest) (*web_api.GetAllAssistantResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAllAssistantAnalysis">func GetAllAssistantAnalysis(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAllAssistantAnalysisRequest) (*web_api.GetAllAssistantAnalysisResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAllAssistantConversation">func GetAllAssistantConversation(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAllAssistantConversationRequest) (*web_api.GetAllAssistantConversationResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAllAssistantKnowledge">func GetAllAssistantKnowledge(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAllAssistantKnowledgeRequest) (*web_api.GetAllAssistantKnowledgeResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAllAssistantMessage">func GetAllAssistantMessage(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAllAssistantMessageRequest) (*web_api.GetAllAssistantMessageResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAllAssistantProviderModel">func GetAllAssistantProviderModel(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAllAssistantProviderModelRequest) (*web_api.GetAllAssistantProviderModelResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAllAssistantTool">func GetAllAssistantTool(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAllAssistantToolRequest) (*web_api.GetAllAssistantToolResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAllAssistantWebhook">func GetAllAssistantWebhook(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAllAssistantWebhookRequest) (*web_api.GetAllAssistantWebhookResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAllAssistantWebhookLog">func GetAllAssistantWebhookLog(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAllAssistantWebhookLogRequest) (*web_api.GetAllAssistantWebhookLogResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAllConversationMessage">func GetAllConversationMessage(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAllConversationMessageRequest) (*web_api.GetAllConversationMessageResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAllMessage">func GetAllMessage(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAllMessageRequest) (*web_api.GetAllMessageResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAssistant">func GetAssistant(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAssistantRequest) (*web_api.GetAssistantResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAssistantAnalysis">func GetAssistantAnalysis(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAssistantAnalysisRequest) (*web_api.GetAssistantAnalysisResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAssistantApiDeployment">func GetAssistantApiDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAssistantDeploymentRequest) (*web_api.AssistantApiDeploymentResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAssistantConversation">func GetAssistantConversation(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAssistantConversationRequest) (*web_api.GetAssistantConversationResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAssistantDebuggerDeployment">func GetAssistantDebuggerDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAssistantDeploymentRequest) (*web_api.AssistantDebuggerDeploymentResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAssistantKnowledge">func GetAssistantKnowledge(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAssistantKnowledgeRequest) (*web_api.GetAssistantKnowledgeResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAssistantPhoneDeployment">func GetAssistantPhoneDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAssistantDeploymentRequest) (*web_api.AssistantPhoneDeploymentResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAssistantTool">func GetAssistantTool(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAssistantToolRequest) (*web_api.GetAssistantToolResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAssistantWebhook">func GetAssistantWebhook(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAssistantWebhookRequest) (*web_api.GetAssistantWebhookResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAssistantWebhookLog">func GetAssistantWebhookLog(connection connections.ConnectionConfig, ctx context.Context, in *web_api.GetAssistantWebhookLogRequest) (*web_api.GetAssistantWebhookLogResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAssistantWebpluginDeployment">func GetAssistantWebpluginDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAssistantDeploymentRequest) (*web_api.AssistantWebpluginDeploymentResponse, error)</a></dd>
+			
+				
+				<dd><a href="#GetAssistantWhatsappDeployment">func GetAssistantWhatsappDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAssistantDeploymentRequest) (*web_api.AssistantWhatsappDeploymentResponse, error)</a></dd>
+			
+				
+				<dd><a href="#Invoke">func Invoke(connection connections.ConnectionConfig, ctx context.Context, req *web_api.InvokeRequest, opts ...grpc.CallOption) (*web_api.InvokeResponse, error)</a></dd>
+			
+				
+				<dd><a href="#Probe">func Probe(connection connections.ConnectionConfig, ctx context.Context, req *web_api.ProbeRequest, opts ...grpc.CallOption) (*web_api.ProbeResponse, error)</a></dd>
+			
+				
+				<dd><a href="#Update">func Update(connection connections.ConnectionConfig, ctx context.Context, req *web_api.UpdateRequest, opts ...grpc.CallOption) (*web_api.UpdateResponse, error)</a></dd>
+			
+				
+				<dd><a href="#UpdateAssistantAnalysis">func UpdateAssistantAnalysis(connection connections.ConnectionConfig, ctx context.Context, in *web_api.UpdateAssistantAnalysisRequest) (*web_api.GetAssistantAnalysisResponse, error)</a></dd>
+			
+				
+				<dd><a href="#UpdateAssistantDetail">func UpdateAssistantDetail(connection connections.ConnectionConfig, ctx context.Context, in *web_api.UpdateAssistantDetailRequest) (*web_api.GetAssistantResponse, error)</a></dd>
+			
+				
+				<dd><a href="#UpdateAssistantKnowledge">func UpdateAssistantKnowledge(connection connections.ConnectionConfig, ctx context.Context, in *web_api.UpdateAssistantKnowledgeRequest) (*web_api.GetAssistantKnowledgeResponse, error)</a></dd>
+			
+				
+				<dd><a href="#UpdateAssistantTool">func UpdateAssistantTool(connection connections.ConnectionConfig, ctx context.Context, in *web_api.UpdateAssistantToolRequest) (*web_api.GetAssistantToolResponse, error)</a></dd>
+			
+				
+				<dd><a href="#UpdateAssistantVersion">func UpdateAssistantVersion(connection connections.ConnectionConfig, ctx context.Context, in *web_api.UpdateAssistantVersionRequest) (*web_api.GetAssistantResponse, error)</a></dd>
+			
+				
+				<dd><a href="#UpdateAssistantWebhook">func UpdateAssistantWebhook(connection connections.ConnectionConfig, ctx context.Context, in *web_api.UpdateAssistantWebhookRequest) (*web_api.GetAssistantWebhookResponse, error)</a></dd>
+			
+			
+			
+			</dl>
+			</div><!-- #manual-nav -->
+
+		
+
+		
+			<h3>Package files</h3>
+			<p>
+			<span style="font-size:90%">
+			
+				<a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go">assistant.go</a>
+			
+				<a href="/src/github.com/rapidaai/rapida-go/rapida/clients/call.go">call.go</a>
+			
+				<a href="/src/github.com/rapidaai/rapida-go/rapida/clients/deployment.go">deployment.go</a>
+			
+				<a href="/src/github.com/rapidaai/rapida-go/rapida/clients/invoke.go">invoke.go</a>
+			
+				<a href="/src/github.com/rapidaai/rapida-go/rapida/clients/talk.go">talk.go</a>
+			
+			</span>
+			</p>
+		
+		</div><!-- .expanded -->
+		</div><!-- #pkg-index -->
+
+		
+
+		
+		
+		
+			
+			
+			<h2 id="AssistantMessaging">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/talk.go?s=250:429#L2">AssistantMessaging</a>
+				<a class="permalink" href="#AssistantMessaging">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func AssistantMessaging(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#AssistantMessagingRequest">AssistantMessagingRequest</a>) (<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#TalkService_AssistantMessagingClient">TalkService_AssistantMessagingClient</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="AssistantTalk">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/talk.go?s=575:704#L10">AssistantTalk</a>
+				<a class="permalink" href="#AssistantTalk">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func AssistantTalk(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>) (<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#TalkService_AssistantTalkClient">TalkService_AssistantTalkClient</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="CreateAssistant">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=850:1007#L16">CreateAssistant</a>
+				<a class="permalink" href="#CreateAssistant">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CreateAssistant(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreateAssistantRequest">CreateAssistantRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantResponse">GetAssistantResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="CreateAssistantAnalysis">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=7091:7272#L150">CreateAssistantAnalysis</a>
+				<a class="permalink" href="#CreateAssistantAnalysis">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CreateAssistantAnalysis(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreateAssistantAnalysisRequest">CreateAssistantAnalysisRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantAnalysisResponse">GetAssistantAnalysisResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="CreateAssistantApiDeployment">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/deployment.go?s=250:444#L2">CreateAssistantApiDeployment</a>
+				<a class="permalink" href="#CreateAssistantApiDeployment">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CreateAssistantApiDeployment(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreateAssistantApiDeploymentRequest">CreateAssistantApiDeploymentRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#AssistantApiDeploymentResponse">AssistantApiDeploymentResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="CreateAssistantDebuggerDeployment">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/deployment.go?s=1728:1937#L34">CreateAssistantDebuggerDeployment</a>
+				<a class="permalink" href="#CreateAssistantDebuggerDeployment">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CreateAssistantDebuggerDeployment(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreateAssistantDebuggerDeploymentRequest">CreateAssistantDebuggerDeploymentRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#AssistantDebuggerDeploymentResponse">AssistantDebuggerDeploymentResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="CreateAssistantKnowledge">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=9688:9872#L206">CreateAssistantKnowledge</a>
+				<a class="permalink" href="#CreateAssistantKnowledge">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CreateAssistantKnowledge(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreateAssistantKnowledgeRequest">CreateAssistantKnowledgeRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantKnowledgeResponse">GetAssistantKnowledgeResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="CreateAssistantPhoneDeployment">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/deployment.go?s=3234:3434#L66">CreateAssistantPhoneDeployment</a>
+				<a class="permalink" href="#CreateAssistantPhoneDeployment">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CreateAssistantPhoneDeployment(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreateAssistantPhoneDeploymentRequest">CreateAssistantPhoneDeploymentRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#AssistantPhoneDeploymentResponse">AssistantPhoneDeploymentResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="CreateAssistantProviderModel">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=1814:2010#L37">CreateAssistantProviderModel</a>
+				<a class="permalink" href="#CreateAssistantProviderModel">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CreateAssistantProviderModel(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreateAssistantProviderModelRequest">CreateAssistantProviderModelRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantProviderModelResponse">GetAssistantProviderModelResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="CreateAssistantTag">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=2169:2332#L44">CreateAssistantTag</a>
+				<a class="permalink" href="#CreateAssistantTag">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CreateAssistantTag(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreateAssistantTagRequest">CreateAssistantTagRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantResponse">GetAssistantResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="CreateAssistantTool">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=8099:8268#L171">CreateAssistantTool</a>
+				<a class="permalink" href="#CreateAssistantTool">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CreateAssistantTool(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreateAssistantToolRequest">CreateAssistantToolRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantToolResponse">GetAssistantToolResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="CreateAssistantWebhook">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=5437:5615#L115">CreateAssistantWebhook</a>
+				<a class="permalink" href="#CreateAssistantWebhook">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CreateAssistantWebhook(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreateAssistantWebhookRequest">CreateAssistantWebhookRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantWebhookResponse">GetAssistantWebhookResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="CreateAssistantWebpluginDeployment">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/deployment.go?s=968:1180#L18">CreateAssistantWebpluginDeployment</a>
+				<a class="permalink" href="#CreateAssistantWebpluginDeployment">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CreateAssistantWebpluginDeployment(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreateAssistantWebpluginDeploymentRequest">CreateAssistantWebpluginDeploymentRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#AssistantWebpluginDeploymentResponse">AssistantWebpluginDeploymentResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="CreateAssistantWhatsappDeployment">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/deployment.go?s=2481:2690#L50">CreateAssistantWhatsappDeployment</a>
+				<a class="permalink" href="#CreateAssistantWhatsappDeployment">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CreateAssistantWhatsappDeployment(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreateAssistantWhatsappDeploymentRequest">CreateAssistantWhatsappDeploymentRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#AssistantWhatsappDeploymentResponse">AssistantWhatsappDeploymentResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="CreateBulkPhoneCall">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/call.go?s=554:727#L10">CreateBulkPhoneCall</a>
+				<a class="permalink" href="#CreateBulkPhoneCall">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CreateBulkPhoneCall(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreateBulkPhoneCallRequest">CreateBulkPhoneCallRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreateBulkPhoneCallResponse">CreateBulkPhoneCallResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="CreateConversationMetric">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/talk.go?s=1856:2044#L42">CreateConversationMetric</a>
+				<a class="permalink" href="#CreateConversationMetric">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CreateConversationMetric(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreateConversationMetricRequest">CreateConversationMetricRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreateConversationMetricResponse">CreateConversationMetricResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="CreateMessageMetric">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/talk.go?s=1536:1709#L34">CreateMessageMetric</a>
+				<a class="permalink" href="#CreateMessageMetric">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CreateMessageMetric(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreateMessageMetricRequest">CreateMessageMetricRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreateMessageMetricResponse">CreateMessageMetricResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="CreatePhoneCall">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/call.go?s=250:411#L2">CreatePhoneCall</a>
+				<a class="permalink" href="#CreatePhoneCall">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func CreatePhoneCall(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreatePhoneCallRequest">CreatePhoneCallRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#CreatePhoneCallResponse">CreatePhoneCallResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="DeleteAssistant">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=1153:1310#L23">DeleteAssistant</a>
+				<a class="permalink" href="#DeleteAssistant">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func DeleteAssistant(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#DeleteAssistantRequest">DeleteAssistantRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantResponse">GetAssistantResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="DeleteAssistantAnalysis">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=7426:7607#L157">DeleteAssistantAnalysis</a>
+				<a class="permalink" href="#DeleteAssistantAnalysis">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func DeleteAssistantAnalysis(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#DeleteAssistantAnalysisRequest">DeleteAssistantAnalysisRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantAnalysisResponse">GetAssistantAnalysisResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="DeleteAssistantKnowledge">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=10699:10883#L227">DeleteAssistantKnowledge</a>
+				<a class="permalink" href="#DeleteAssistantKnowledge">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func DeleteAssistantKnowledge(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#DeleteAssistantKnowledgeRequest">DeleteAssistantKnowledgeRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantKnowledgeResponse">GetAssistantKnowledgeResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="DeleteAssistantTool">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=9050:9219#L192">DeleteAssistantTool</a>
+				<a class="permalink" href="#DeleteAssistantTool">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func DeleteAssistantTool(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#DeleteAssistantToolRequest">DeleteAssistantToolRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantToolResponse">GetAssistantToolResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="DeleteAssistantWebhook">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=6099:6277#L129">DeleteAssistantWebhook</a>
+				<a class="permalink" href="#DeleteAssistantWebhook">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func DeleteAssistantWebhook(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#DeleteAssistantWebhookRequest">DeleteAssistantWebhookRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantWebhookResponse">GetAssistantWebhookResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAllAssistant">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=544:704#L9">GetAllAssistant</a>
+				<a class="permalink" href="#GetAllAssistant">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAllAssistant(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllAssistantRequest">GetAllAssistantRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllAssistantResponse">GetAllAssistantResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAllAssistantAnalysis">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=7761:7945#L164">GetAllAssistantAnalysis</a>
+				<a class="permalink" href="#GetAllAssistantAnalysis">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAllAssistantAnalysis(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllAssistantAnalysisRequest">GetAllAssistantAnalysisRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllAssistantAnalysisResponse">GetAllAssistantAnalysisResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAllAssistantConversation">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/talk.go?s=840:1037#L18">GetAllAssistantConversation</a>
+				<a class="permalink" href="#GetAllAssistantConversation">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAllAssistantConversation(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllAssistantConversationRequest">GetAllAssistantConversationRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllAssistantConversationResponse">GetAllAssistantConversationResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAllAssistantKnowledge">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=10357:10544#L220">GetAllAssistantKnowledge</a>
+				<a class="permalink" href="#GetAllAssistantKnowledge">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAllAssistantKnowledge(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllAssistantKnowledgeRequest">GetAllAssistantKnowledgeRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllAssistantKnowledgeResponse">GetAllAssistantKnowledgeResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAllAssistantMessage">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=3126:3307#L65">GetAllAssistantMessage</a>
+				<a class="permalink" href="#GetAllAssistantMessage">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAllAssistantMessage(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllAssistantMessageRequest">GetAllAssistantMessageRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllAssistantMessageResponse">GetAllAssistantMessageResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAllAssistantProviderModel">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=1456:1655#L30">GetAllAssistantProviderModel</a>
+				<a class="permalink" href="#GetAllAssistantProviderModel">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAllAssistantProviderModel(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllAssistantProviderModelRequest">GetAllAssistantProviderModelRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllAssistantProviderModelResponse">GetAllAssistantProviderModelResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAllAssistantTool">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=8728:8900#L185">GetAllAssistantTool</a>
+				<a class="permalink" href="#GetAllAssistantTool">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAllAssistantTool(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllAssistantToolRequest">GetAllAssistantToolRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllAssistantToolResponse">GetAllAssistantToolResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAllAssistantWebhook">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=4781:4962#L101">GetAllAssistantWebhook</a>
+				<a class="permalink" href="#GetAllAssistantWebhook">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAllAssistantWebhook(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllAssistantWebhookRequest">GetAllAssistantWebhookRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllAssistantWebhookResponse">GetAllAssistantWebhookResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAllAssistantWebhookLog">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=4435:4625#L94">GetAllAssistantWebhookLog</a>
+				<a class="permalink" href="#GetAllAssistantWebhookLog">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAllAssistantWebhookLog(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllAssistantWebhookLogRequest">GetAllAssistantWebhookLogRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllAssistantWebhookLogResponse">GetAllAssistantWebhookLogResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAllConversationMessage">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/talk.go?s=1192:1383#L26">GetAllConversationMessage</a>
+				<a class="permalink" href="#GetAllConversationMessage">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAllConversationMessage(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllConversationMessageRequest">GetAllConversationMessageRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllConversationMessageResponse">GetAllConversationMessageResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAllMessage">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=3460:3614#L72">GetAllMessage</a>
+				<a class="permalink" href="#GetAllMessage">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAllMessage(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllMessageRequest">GetAllMessageRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAllMessageResponse">GetAllMessageResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAssistant">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=250:401#L2">GetAssistant</a>
+				<a class="permalink" href="#GetAssistant">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAssistant(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantRequest">GetAssistantRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantResponse">GetAssistantResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAssistantAnalysis">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=6430:6605#L136">GetAssistantAnalysis</a>
+				<a class="permalink" href="#GetAssistantAnalysis">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAssistantAnalysis(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantAnalysisRequest">GetAssistantAnalysisRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantAnalysisResponse">GetAssistantAnalysisResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAssistantApiDeployment">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/deployment.go?s=615:800#L10">GetAssistantApiDeployment</a>
+				<a class="permalink" href="#GetAssistantApiDeployment">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAssistantApiDeployment(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantDeploymentRequest">GetAssistantDeploymentRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#AssistantApiDeploymentResponse">AssistantApiDeploymentResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAssistantConversation">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=3759:3946#L80">GetAssistantConversation</a>
+				<a class="permalink" href="#GetAssistantConversation">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAssistantConversation(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantConversationRequest">GetAssistantConversationRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantConversationResponse">GetAssistantConversationResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAssistantDebuggerDeployment">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/deployment.go?s=2113:2308#L42">GetAssistantDebuggerDeployment</a>
+				<a class="permalink" href="#GetAssistantDebuggerDeployment">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAssistantDebuggerDeployment(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantDeploymentRequest">GetAssistantDeploymentRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#AssistantDebuggerDeploymentResponse">AssistantDebuggerDeploymentResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAssistantKnowledge">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=10027:10205#L213">GetAssistantKnowledge</a>
+				<a class="permalink" href="#GetAssistantKnowledge">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAssistantKnowledge(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantKnowledgeRequest">GetAssistantKnowledgeRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantKnowledgeResponse">GetAssistantKnowledgeResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAssistantPhoneDeployment">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/deployment.go?s=3607:3796#L74">GetAssistantPhoneDeployment</a>
+				<a class="permalink" href="#GetAssistantPhoneDeployment">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAssistantPhoneDeployment(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantDeploymentRequest">GetAssistantDeploymentRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#AssistantPhoneDeploymentResponse">AssistantPhoneDeploymentResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAssistantTool">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=8418:8581#L178">GetAssistantTool</a>
+				<a class="permalink" href="#GetAssistantTool">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAssistantTool(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantToolRequest">GetAssistantToolRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantToolResponse">GetAssistantToolResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAssistantWebhook">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=5115:5287#L108">GetAssistantWebhook</a>
+				<a class="permalink" href="#GetAssistantWebhook">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAssistantWebhook(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantWebhookRequest">GetAssistantWebhookRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantWebhookResponse">GetAssistantWebhookResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAssistantWebhookLog">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=4101:4282#L87">GetAssistantWebhookLog</a>
+				<a class="permalink" href="#GetAssistantWebhookLog">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAssistantWebhookLog(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantWebhookLogRequest">GetAssistantWebhookLogRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantWebhookLogResponse">GetAssistantWebhookLogResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAssistantWebpluginDeployment">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/deployment.go?s=1357:1554#L26">GetAssistantWebpluginDeployment</a>
+				<a class="permalink" href="#GetAssistantWebpluginDeployment">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAssistantWebpluginDeployment(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantDeploymentRequest">GetAssistantDeploymentRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#AssistantWebpluginDeploymentResponse">AssistantWebpluginDeploymentResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="GetAssistantWhatsappDeployment">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/deployment.go?s=2866:3061#L58">GetAssistantWhatsappDeployment</a>
+				<a class="permalink" href="#GetAssistantWhatsappDeployment">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func GetAssistantWhatsappDeployment(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantDeploymentRequest">GetAssistantDeploymentRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#AssistantWhatsappDeploymentResponse">AssistantWhatsappDeploymentResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="Invoke">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/invoke.go?s=276:435#L3">Invoke</a>
+				<a class="permalink" href="#Invoke">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func Invoke(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#InvokeRequest">InvokeRequest</a>, opts ...<a href="/pkg/google.golang.org/grpc/">grpc</a>.<a href="/pkg/google.golang.org/grpc/#CallOption">CallOption</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#InvokeResponse">InvokeResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="Probe">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/invoke.go?s=878:1034#L19">Probe</a>
+				<a class="permalink" href="#Probe">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func Probe(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#ProbeRequest">ProbeRequest</a>, opts ...<a href="/pkg/google.golang.org/grpc/">grpc</a>.<a href="/pkg/google.golang.org/grpc/#CallOption">CallOption</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#ProbeResponse">ProbeResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="Update">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/invoke.go?s=577:736#L11">Update</a>
+				<a class="permalink" href="#Update">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func Update(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, req *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#UpdateRequest">UpdateRequest</a>, opts ...<a href="/pkg/google.golang.org/grpc/">grpc</a>.<a href="/pkg/google.golang.org/grpc/#CallOption">CallOption</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#UpdateResponse">UpdateResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="UpdateAssistantAnalysis">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=6756:6937#L143">UpdateAssistantAnalysis</a>
+				<a class="permalink" href="#UpdateAssistantAnalysis">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func UpdateAssistantAnalysis(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#UpdateAssistantAnalysisRequest">UpdateAssistantAnalysisRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantAnalysisResponse">GetAssistantAnalysisResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="UpdateAssistantDetail">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=2805:2974#L58">UpdateAssistantDetail</a>
+				<a class="permalink" href="#UpdateAssistantDetail">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func UpdateAssistantDetail(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#UpdateAssistantDetailRequest">UpdateAssistantDetailRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantResponse">GetAssistantResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="UpdateAssistantKnowledge">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=11038:11222#L234">UpdateAssistantKnowledge</a>
+				<a class="permalink" href="#UpdateAssistantKnowledge">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func UpdateAssistantKnowledge(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#UpdateAssistantKnowledgeRequest">UpdateAssistantKnowledgeRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantKnowledgeResponse">GetAssistantKnowledgeResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="UpdateAssistantTool">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=9369:9538#L199">UpdateAssistantTool</a>
+				<a class="permalink" href="#UpdateAssistantTool">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func UpdateAssistantTool(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#UpdateAssistantToolRequest">UpdateAssistantToolRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantToolResponse">GetAssistantToolResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="UpdateAssistantVersion">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=2481:2652#L51">UpdateAssistantVersion</a>
+				<a class="permalink" href="#UpdateAssistantVersion">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func UpdateAssistantVersion(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#UpdateAssistantVersionRequest">UpdateAssistantVersionRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantResponse">GetAssistantResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+			
+			
+			<h2 id="UpdateAssistantWebhook">func <a href="/src/github.com/rapidaai/rapida-go/rapida/clients/assistant.go?s=5768:5946#L122">UpdateAssistantWebhook</a>
+				<a class="permalink" href="#UpdateAssistantWebhook">&#xb6;</a>
+				
+				
+			</h2>
+			<pre>func UpdateAssistantWebhook(connection <a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/">connections</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/connections/#ConnectionConfig">ConnectionConfig</a>, ctx <a href="/pkg/context/">context</a>.<a href="/pkg/context/#Context">Context</a>, in *<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#UpdateAssistantWebhookRequest">UpdateAssistantWebhookRequest</a>) (*<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/">web_api</a>.<a href="/pkg/github.com/rapidaai/rapida-go/rapida/clients/protos/#GetAssistantWebhookResponse">GetAssistantWebhookResponse</a>, <a href="/pkg/builtin/#error">error</a>)</pre>
+			
+			
+			
+
+		
+		
+	
+
+	
+
+
+
+
+
+	
+	
+		<h2 id="pkg-subdirectories">Subdirectories</h2>
+	
+	<div class="pkg-dir">
+		<table>
+			<tr>
+				<th class="pkg-name">Name</th>
+				<th class="pkg-synopsis">Synopsis</th>
+			</tr>
+
+			
+			<tr>
+				<td colspan="2"><a href="..">..</a></td>
+			</tr>
+			
+
+			
+				<tr>
+				
+					<td class="pkg-name" style="padding-left: 0px;">
+						<a href="protos/">protos</a>
+					</td>
+				
+					<td class="pkg-synopsis">
+						
+					</td>
+				</tr>
+			
+		</table>
+	</div>
+
+
+
+<div id="footer">
+Build version go1.24.6.<br>
+Except as <a href="https://developers.google.com/site-policies#restrictions">noted</a>,
+the content of this page is licensed under the
+Creative Commons Attribution 3.0 License,
+and code is licensed under a <a href="/LICENSE">BSD license</a>.<br>
+<a href="https://golang.org/doc/tos.html">Terms of Service</a> |
+<a href="https://www.google.com/intl/en/policies/privacy/">Privacy Policy</a>
+</div>
+
+</div><!-- .container -->
+</div><!-- #page -->
+</body>
+</html>
