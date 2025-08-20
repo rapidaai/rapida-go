@@ -37,7 +37,10 @@ jobs:
         run: go test -v ./rapida/...
 
       - name: Generate Documentation
-        run: go doc -all rapida > docs/rapida-api-docs.txt
+        run: go doc -all rapida/clients > docs/rapida-api-docs.txt
+
+      - name: Generate HTML Documentation
+        run: godoc -url=/pkg/github.com/rapidaai/rapida-go/rapida/clients/ > docs/rapida-api-docs.html
 
   publish:
     name: Publish Go Module
@@ -89,4 +92,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: sdk-documentation
-          path: docs/rapida-api-docs.txt
+          path: |
+            docs/rapida-api-docs.txt
+            docs/rapida-api-docs.html

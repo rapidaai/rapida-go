@@ -1,3 +1,5 @@
+// Copyright (c) 2024 Rapida
+// Licensed under the MIT License. See LICENSE file for details.
 package utils
 
 import (
