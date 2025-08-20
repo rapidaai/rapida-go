@@ -21,43 +21,15 @@
  *
  *  Author: Prashant <prashant@rapida.ai>
  *
+ *  This module provides functions for managing projects through the ProjectService.
  */
 
-package rapida_constants
+package configs
 
-import (
-	"log"
-	"strings"
-)
+var ASSISTANT_API = "workflow-01.rapida.ai"
+var ENDPOINT_API = "endpoint-01.rapida.ai"
+var WEB_API = "web-01.rapida.ai"
 
-type RapidaRegion string
-
-const (
-	AP  RapidaRegion = "ap"
-	US  RapidaRegion = "us"
-	EU  RapidaRegion = "eu"
-	ALL RapidaRegion = "all"
-)
-
-// Get returns the string value of the RapidaRegion
-func (r RapidaRegion) Get() string {
-	return string(r)
-}
-
-// FromStr returns the corresponding RapidaRegion for a given string,
-// or ALL if the string does not match any region.
-func (r RapidaRegion) FromStr(label string) RapidaRegion {
-	switch strings.ToLower(label) {
-	case "ap":
-		return AP
-	case "us":
-		return US
-	case "eu":
-		return EU
-	case "all":
-		return ALL
-	default:
-		log.Printf("The region is not supported. Supported regions are 'ap', 'us', 'eu', and 'all'.")
-		return ALL
-	}
-}
+var LOCAL_ASSISTANT_API = "localhost:9007"
+var LOCAL_ENDPOINT_API = "localhost:9005"
+var LOCAL_WEB_API = "localhost:9001"

@@ -1,3 +1,5 @@
+package utils
+
 /*
  *  Copyright (c) 2024. Rapida
  *
@@ -23,28 +25,15 @@
  *
  */
 
-package rapida_constants
+func AverageFloat32(numbers []float32) float32 {
+	if len(numbers) == 0 {
+		return 0
+	}
 
-const (
-	TEXT_CONTENT        = "text"
-	AUDIO_CONTENT       = "audio"
-	IMAGE_CONTENT       = "image"
-	MULTI_MEDIA_CONTENT = "mutli"
-)
+	sum := float32(0)
+	for _, num := range numbers {
+		sum += num
+	}
 
-const (
-	// raw string in byte format
-	TEXT_CONTENT_FORMAT_RAW  = "raw"
-	TEXT_CONTENT_FORMAT_WORD = "word"
-
-	//
-	AUDIO_CONTENT_FORMAT_RAW = "raw"
-	AUDIO_CONTENT_FORMAT_URL = "url"
-
-	//
-	IMAGE_CONTENT_FORMAT_RAW = "raw"
-	IMAGE_CONTENT_FORMAT_URL = "url"
-
-	MULTI_MEDIA_CONTENT_FORMAT_RAW = "raw"
-	MULTI_MEDIA_CONTENT_FORMAT_URL = "url"
-)
+	return sum / float32(len(numbers))
+}

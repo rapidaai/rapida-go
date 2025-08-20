@@ -19,13 +19,32 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  *  THE SOFTWARE.
  *
- *  Author: Prashant Srivastav
+ *  Author: Prashant <prashant@rapida.ai>
  *
+ *  This module provides functions for accessing audit logs via gRPC. It includes
+ *  operations for retrieving lists of audit logs and fetching specific audit log entries.
  */
-package rapida_utils
+package clients
 
-// Utility functions to create pointers from values
+import (
+	"context"
 
-func Ptr[T any](v T) *T {
-	return &v
+	web_api "github.com/rapidaai/rapida-go/rapida/clients/protos"
+	"github.com/rapidaai/rapida-go/rapida/connections"
+)
+
+func CreatePhoneCall(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreatePhoneCallRequest) (*web_api.CreatePhoneCallResponse, error) {
+	c, err := connection.TalkServiceClient()
+	if err != nil {
+		return nil, err
+	}
+	return c.CreatePhoneCall(connection.WithAuth(ctx), req)
+}
+
+func CreateBulkPhoneCall(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateBulkPhoneCallRequest) (*web_api.CreateBulkPhoneCallResponse, error) {
+	c, err := connection.TalkServiceClient()
+	if err != nil {
+		return nil, err
+	}
+	return c.CreateBulkPhoneCall(connection.WithAuth(ctx), req)
 }

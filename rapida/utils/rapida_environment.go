@@ -1,3 +1,5 @@
+package utils
+
 /*
  *  Copyright (c) 2024. Rapida
  *
@@ -23,32 +25,33 @@
  *
  */
 
-package rapida_definitions
+import (
+	"log"
+	"strings"
+)
 
-type EndpointDefinition interface {
-	GetEndpoint() uint64
-	GetEndpointVersion() string
+type RapidaEnvironment string
+
+const (
+	PRODUCTION  RapidaEnvironment = "production"
+	DEVELOPMENT RapidaEnvironment = "development"
+)
+
+// Get returns the string value of the RapidaEnvironment
+func (e RapidaEnvironment) Get() string {
+	return string(e)
 }
 
-type endpointDefinition struct {
-	endpoint        uint64
-	endpointVersion *string
-}
-
-func NewEndpoint(endpoint uint64, endpointVersion *string) EndpointDefinition {
-	return &endpointDefinition{
-		endpoint:        endpoint,
-		endpointVersion: endpointVersion,
+// FromStr returns the corresponding RapidaEnvironment for a given string,
+// or DEVELOPMENT if the string does not match any environment.
+func FromEnvironmentStr(label string) RapidaEnvironment {
+	switch strings.ToLower(label) {
+	case "production":
+		return PRODUCTION
+	case "development":
+		return DEVELOPMENT
+	default:
+		log.Printf("The environment is not supported. Only 'production' and 'development' are allowed.")
+		return DEVELOPMENT
 	}
-}
-
-func (ed *endpointDefinition) GetEndpoint() uint64 {
-	return ed.endpoint
-}
-
-func (ed *endpointDefinition) GetEndpointVersion() string {
-	if ed.endpointVersion == nil {
-		return "latest"
-	}
-	return *ed.endpointVersion
 }

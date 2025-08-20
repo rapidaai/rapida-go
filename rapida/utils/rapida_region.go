@@ -1,3 +1,5 @@
+package utils
+
 /*
  *  Copyright (c) 2024. Rapida
  *
@@ -23,18 +25,39 @@
  *
  */
 
-package rapida_constants
-
-var (
-	// 10mb
-	MaxRecvMsgSize = 1024 * 1024 * 10
-	MaxSendMsgSize = 1024 * 1024 * 10
-
-	HEADER_API_KEY         = "x-api-key"
-	HEADER_SOURCE_KEY      = "x-client-source"
-	HEADER_ENVIRONMENT_KEY = "x-rapida-environment"
-	HEADER_REGION_KEY      = "x-rapida-region"
-
-	ENDPOINT_URL  = "https://connect.rapida.ai:443"
-	ASSISTANT_URL = "assistant.rapida.ai:8080"
+import (
+	"log"
+	"strings"
 )
+
+type RapidaRegion string
+
+const (
+	AP  RapidaRegion = "ap"
+	US  RapidaRegion = "us"
+	EU  RapidaRegion = "eu"
+	ALL RapidaRegion = "all"
+)
+
+// Get returns the string value of the RapidaRegion
+func (r RapidaRegion) Get() string {
+	return string(r)
+}
+
+// FromStr returns the corresponding RapidaRegion for a given string,
+// or ALL if the string does not match any region.
+func FromRegionStr(label string) RapidaRegion {
+	switch strings.ToLower(label) {
+	case "ap":
+		return AP
+	case "us":
+		return US
+	case "eu":
+		return EU
+	case "all":
+		return ALL
+	default:
+		log.Printf("The region is not supported. Supported regions are 'ap', 'us', 'eu', and 'all'.")
+		return ALL
+	}
+}

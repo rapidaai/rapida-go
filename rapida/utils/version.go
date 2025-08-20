@@ -1,3 +1,10 @@
+package utils
+
+import (
+	"strconv"
+	"strings"
+)
+
 /*
  *  Copyright (c) 2024. Rapida
  *
@@ -22,36 +29,18 @@
  *  Author: Prashant <prashant@rapida.ai>
  *
  */
-
-package rapida_constants
-
-import (
-	"log"
-	"strings"
-)
-
-type RapidaEnvironment string
-
 const (
-	PRODUCTION  RapidaEnvironment = "production"
-	DEVELOPMENT RapidaEnvironment = "development"
+	VERSION_PREFIX = "vrsn_"
 )
 
-// Get returns the string value of the RapidaEnvironment
-func (e RapidaEnvironment) Get() string {
-	return string(e)
-}
-
-// FromStr returns the corresponding RapidaEnvironment for a given string,
-// or DEVELOPMENT if the string does not match any environment.
-func (e RapidaEnvironment) FromStr(label string) RapidaEnvironment {
-	switch strings.ToLower(label) {
-	case "production":
-		return PRODUCTION
-	case "development":
-		return DEVELOPMENT
-	default:
-		log.Printf("The environment is not supported. Only 'production' and 'development' are allowed.")
-		return DEVELOPMENT
+func GetVersionDefinition(version string) *uint64 {
+	if version == "" || version == "latest" {
+		return nil
 	}
+	_vrsn := strings.Replace(version, VERSION_PREFIX, "", 1)
+	_pid, err := strconv.ParseUint(_vrsn, 10, 64)
+	if err != nil {
+		return nil
+	}
+	return &_pid
 }

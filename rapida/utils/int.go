@@ -1,3 +1,5 @@
+package utils
+
 /*
  *  Copyright (c) 2024. Rapida
  *
@@ -23,32 +25,17 @@
  *
  */
 
-package rapida_definitions
-
-type AssistantDefinition interface {
-	GetAssistant() uint64
-	GetAssistantVersion() string
-}
-
-type assistantDefinition struct {
-	assistant        uint64
-	assistantVersion *string
-}
-
-func NewAssistant(assistant uint64, assistantVersion *string) AssistantDefinition {
-	return &assistantDefinition{
-		assistant:        assistant,
-		assistantVersion: assistantVersion,
+func MaxUint64(a, b uint64) uint64 {
+	if a > b {
+		return a
 	}
+	return b
 }
 
-func (ed *assistantDefinition) GetAssistant() uint64 {
-	return ed.assistant
-}
-
-func (ed *assistantDefinition) GetAssistantVersion() string {
-	if ed.assistantVersion == nil {
-		return "latest"
+// MinUint64 returns the minimum of two uint64 numbers
+func MinUint64(a, b uint64) uint64 {
+	if a < b {
+		return a
 	}
-	return *ed.assistantVersion
+	return b
 }
