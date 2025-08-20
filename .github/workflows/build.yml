@@ -16,7 +16,7 @@ jobs:
     name: Build and Test
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
 
     steps:
       - name: Checkout code
@@ -34,22 +34,37 @@ jobs:
         run: go build -v ./rapida/...
 
       - name: Test the SDK
-        run: go test -v ./rapida/...
+        run: go test -v -coverprofile=coverage.out ./rapida/...
 
       - name: Generate Documentation
-        run: go doc -all rapida/clients > docs/rapida-api-docs.txt
+        run: |
+          go install golang.org/x/tools/cmd/godoc@latest
+          godoc -http=:6060 &
+          sleep 5
+          wget -r -np -N -E -p -k http://localhost:6060/pkg/github.com/rapidaai/rapida-go/
+          mkdir -p docs
+          mv localhost:6060/* docs/
+          kill %1
 
-      - name: Generate HTML Documentation
-        run: godoc -url=/pkg/github.com/rapidaai/rapida-go/rapida/clients/ > docs/rapida-api-docs.html
+      - name: Upload Documentation
+        uses: actions/upload-artifact@v3
+        with:
+          name: sdk-documentation
+          path: docs
+
+      - name: Upload Coverage
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: coverage.out
 
   publish:
-    name: Publish Go Module
+    name: Publish Go Module and Documentation
     runs-on: ubuntu-latest
     needs: build
     permissions:
       contents: write
-      actions: write
-      attestations: write
+      packages: write
     if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
 
     steps:
@@ -64,9 +79,6 @@ jobs:
       - name: Install dependencies
         run: go mod tidy
 
-      - name: Test and create coverage
-        run: go test -coverprofile=coverage.out ./...
-
       - name: Tag the release
         id: tag
         run: |
@@ -76,22 +88,38 @@ jobs:
           git tag -a "v${VERSION}" -m "Release version ${VERSION}"
           git push origin "v${VERSION}"
 
-      - name: Configure Go Module Proxy
-        run: |
-          go env -w GOPROXY=https://proxy.golang.org,direct
-
-      - name: Publish to GitHub Packages
+      - name: Create GitHub Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           VERSION=$(cat version.txt)
-          GOPROXY="https://proxy.golang.org,direct" \
-          go list -m github.com/rapidaai/rapida-go@v${VERSION}
+          gh release create "v${VERSION}" --title "Release ${VERSION}" --notes "Release notes for version ${VERSION}"
 
-      - name: Upload Documentation
-        uses: actions/upload-artifact@v3
+      - name: Configure Go Module Proxy
+        run: |
+          go env -w GOPROXY=https://proxy.golang.org,direct
+
+      - name: Publish to Go Module Proxy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=$(cat version.txt)
+          GOPROXY="https://proxy.golang.org,direct" go list -m github.com/rapidaai/rapida-go@v${VERSION}
+
+      - name: Verify Module Availability
+        run: |
+          VERSION=$(cat version.txt)
+          go mod download github.com/rapidaai/rapida-go@v${VERSION}
+
+      - name: Download Documentation
+        uses: actions/download-artifact@v3
         with:
           name: sdk-documentation
-          path: |
-            docs/rapida-api-docs.txt
-            docs/rapida-api-docs.html
+          path: docs
+
+      - name: Publish Documentation to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs
+          commit_message: "Update documentation for version ${{ steps.tag.outputs.VERSION }}"
