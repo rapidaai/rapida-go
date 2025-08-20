@@ -36,16 +36,6 @@ jobs:
       - name: Test the SDK
         run: go test -v -coverprofile=coverage.out ./rapida/...
 
-      - name: Generate Documentation
-        run: |
-          go install golang.org/x/tools/cmd/godoc@latest
-          godoc -http=:6060 &
-          sleep 5
-          wget -r -np -N -E -p -k http://localhost:6060/pkg/github.com/rapidaai/rapida-go/
-          mkdir -p docs
-          mv localhost:6060/* docs/
-          kill %1
-
       - name: Upload Documentation
         uses: actions/upload-artifact@v4
         with:
