@@ -13,9 +13,22 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
+type ConnectionConfig interface {
+	WithLocal() ConnectionConfig
+	// all the clients
+	TalkServiceClient() (web_api.TalkServiceClient, error)
+	AuthenticationServiceClient() (web_api.AuthenticationServiceClient, error)
+	AssistantServiceClient() (web_api.AssistantServiceClient, error)
+	AssistantDeploymentServiceClient() (web_api.AssistantDeploymentServiceClient, error)
+	DeploymentClient() (web_api.DeploymentClient, error)
+
+	//
+	WithAuth(ctx context.Context) context.Context
+}
+
 type RapidaCredential map[string]string
 
-type ConnectionConfig struct {
+type connectionConfig struct {
 	endpoint struct {
 		assistant string
 		web       string
@@ -25,8 +38,8 @@ type ConnectionConfig struct {
 	auth     map[string]string
 }
 
-func NewConnectionConfig(auth RapidaCredential, endpoint map[string]string, insecure bool) *ConnectionConfig {
-	cc := &ConnectionConfig{
+func NewConnectionConfig(auth RapidaCredential, endpoint map[string]string, insecure bool) ConnectionConfig {
+	cc := &connectionConfig{
 		auth:     auth,
 		insecure: insecure,
 	}
@@ -48,7 +61,7 @@ func NewConnectionConfig(auth RapidaCredential, endpoint map[string]string, inse
 	return cc
 }
 
-func (cc *ConnectionConfig) WithCustomEndpoint(endpoint map[string]string) *ConnectionConfig {
+func (cc *connectionConfig) WithCustomEndpoint(endpoint map[string]string) *connectionConfig {
 	if endpoint != nil {
 		if assistant, ok := endpoint["assistant"]; ok {
 			cc.endpoint.assistant = assistant
@@ -63,13 +76,13 @@ func (cc *ConnectionConfig) WithCustomEndpoint(endpoint map[string]string) *Conn
 	return cc
 }
 
-func (cc *ConnectionConfig) WithInsecureConnection() *ConnectionConfig {
+func (cc *connectionConfig) WithInsecureConnection() *connectionConfig {
 	cc.insecure = true
 	return cc
 }
 
 // Example of one client getter method
-func (cc *ConnectionConfig) TalkServiceClient() (web_api.TalkServiceClient, error) {
+func (cc *connectionConfig) TalkServiceClient() (web_api.TalkServiceClient, error) {
 	conn, err := grpc.NewClient(cc.endpoint.assistant, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, err
@@ -77,7 +90,7 @@ func (cc *ConnectionConfig) TalkServiceClient() (web_api.TalkServiceClient, erro
 	return web_api.NewTalkServiceClient(conn), nil
 }
 
-func (cc *ConnectionConfig) AuthenticationServiceClient() (web_api.AuthenticationServiceClient, error) {
+func (cc *connectionConfig) AuthenticationServiceClient() (web_api.AuthenticationServiceClient, error) {
 	conn, err := grpc.NewClient(cc.endpoint.web, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, err
@@ -85,7 +98,7 @@ func (cc *ConnectionConfig) AuthenticationServiceClient() (web_api.Authenticatio
 	return web_api.NewAuthenticationServiceClient(conn), nil
 }
 
-func (cc *ConnectionConfig) AssistantServiceClient() (web_api.AssistantServiceClient, error) {
+func (cc *connectionConfig) AssistantServiceClient() (web_api.AssistantServiceClient, error) {
 	conn, err := grpc.NewClient(cc.endpoint.assistant, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, err
@@ -93,7 +106,7 @@ func (cc *ConnectionConfig) AssistantServiceClient() (web_api.AssistantServiceCl
 	return web_api.NewAssistantServiceClient(conn), nil
 }
 
-func (cc *ConnectionConfig) AssistantDeploymentServiceClient() (web_api.AssistantDeploymentServiceClient, error) {
+func (cc *connectionConfig) AssistantDeploymentServiceClient() (web_api.AssistantDeploymentServiceClient, error) {
 	conn, err := grpc.NewClient(cc.endpoint.assistant, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, err
@@ -101,7 +114,7 @@ func (cc *ConnectionConfig) AssistantDeploymentServiceClient() (web_api.Assistan
 	return web_api.NewAssistantDeploymentServiceClient(conn), nil
 }
 
-func (cc *ConnectionConfig) DeploymentClient() (web_api.DeploymentClient, error) {
+func (cc *connectionConfig) DeploymentClient() (web_api.DeploymentClient, error) {
 	conn, err := grpc.NewClient(cc.endpoint.endpoint, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, err
@@ -109,14 +122,14 @@ func (cc *ConnectionConfig) DeploymentClient() (web_api.DeploymentClient, error)
 	return web_api.NewDeploymentClient(conn), nil
 }
 
-func (cc *ConnectionConfig) WithAuth(ctx context.Context) context.Context {
+func (cc *connectionConfig) WithAuth(ctx context.Context) context.Context {
 	md := metadata.New(cc.auth)
 	return metadata.NewOutgoingContext(ctx, md)
 }
 
 // Add similar methods for other clients...
 
-func (cc *ConnectionConfig) WithLocal() *ConnectionConfig {
+func (cc *connectionConfig) WithLocal() ConnectionConfig {
 	cc.WithCustomEndpoint(map[string]string{
 		"assistant": configs.LOCAL_ASSISTANT_API,
 		"web":       configs.LOCAL_WEB_API,
@@ -142,10 +155,20 @@ func WithWebpluginClient(apiKey string, userId string) RapidaCredential {
 	}
 }
 
-func WithSDK(apiKey string, userId string) RapidaCredential {
-	return RapidaCredential{
-		utils.HEADER_API_KEY:    apiKey,
-		utils.HEADER_AUTH_KEY:   userId,
+func WithSDK(apiKey ...string) RapidaCredential {
+	if len(apiKey) < 1 {
+		panic("Rapida WithSDK requires at least one API key")
+	}
+	credential := RapidaCredential{
+		utils.HEADER_API_KEY:    apiKey[0],
 		utils.HEADER_SOURCE_KEY: utils.SDK.Get(),
 	}
+	if len(apiKey) > 1 {
+		credential[utils.HEADER_AUTH_KEY] = apiKey[1]
+	}
+	return credential
+}
+
+func DefaultconnectionConfig(credential RapidaCredential) ConnectionConfig {
+	return NewConnectionConfig(credential, nil, false)
 }

@@ -21,22 +21,24 @@ const _ = grpc.SupportPackageIsVersion9
 const (
 	VaultService_CreateProviderCredential_FullMethodName     = "/vault_api.VaultService/CreateProviderCredential"
 	VaultService_CreateToolCredential_FullMethodName         = "/vault_api.VaultService/CreateToolCredential"
-	VaultService_DeleteProviderCredential_FullMethodName     = "/vault_api.VaultService/DeleteProviderCredential"
 	VaultService_GetAllOrganizationCredential_FullMethodName = "/vault_api.VaultService/GetAllOrganizationCredential"
+	VaultService_DeleteCredential_FullMethodName             = "/vault_api.VaultService/DeleteCredential"
 	VaultService_GetProviderCredential_FullMethodName        = "/vault_api.VaultService/GetProviderCredential"
-	VaultService_GetOauth2VaultCredential_FullMethodName     = "/vault_api.VaultService/GetOauth2VaultCredential"
+	VaultService_GetCredential_FullMethodName                = "/vault_api.VaultService/GetCredential"
+	VaultService_GetOauth2Credential_FullMethodName          = "/vault_api.VaultService/GetOauth2Credential"
 )
 
 // VaultServiceClient is the client API for VaultService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type VaultServiceClient interface {
-	CreateProviderCredential(ctx context.Context, in *CreateProviderCredentialRequest, opts ...grpc.CallOption) (*CreateProviderCredentialResponse, error)
-	CreateToolCredential(ctx context.Context, in *CreateToolCredentialRequest, opts ...grpc.CallOption) (*CreateToolCredentialResponse, error)
-	DeleteProviderCredential(ctx context.Context, in *DeleteProviderCredentialRequest, opts ...grpc.CallOption) (*DeleteProviderCredentialResponse, error)
+	CreateProviderCredential(ctx context.Context, in *CreateProviderCredentialRequest, opts ...grpc.CallOption) (*GetCredentialResponse, error)
+	CreateToolCredential(ctx context.Context, in *CreateToolCredentialRequest, opts ...grpc.CallOption) (*GetCredentialResponse, error)
 	GetAllOrganizationCredential(ctx context.Context, in *GetAllOrganizationCredentialRequest, opts ...grpc.CallOption) (*GetAllOrganizationCredentialResponse, error)
-	GetProviderCredential(ctx context.Context, in *GetProviderCredentialRequest, opts ...grpc.CallOption) (*GetProviderCredentialResponse, error)
-	GetOauth2VaultCredential(ctx context.Context, in *GetOauth2VaultCredentialRequest, opts ...grpc.CallOption) (*GetOauth2VaultCredentialResponse, error)
+	DeleteCredential(ctx context.Context, in *DeleteCredentialRequest, opts ...grpc.CallOption) (*GetCredentialResponse, error)
+	GetProviderCredential(ctx context.Context, in *GetProviderCredentialRequest, opts ...grpc.CallOption) (*GetCredentialResponse, error)
+	GetCredential(ctx context.Context, in *GetCredentialRequest, opts ...grpc.CallOption) (*GetCredentialResponse, error)
+	GetOauth2Credential(ctx context.Context, in *GetCredentialRequest, opts ...grpc.CallOption) (*GetCredentialResponse, error)
 }
 
 type vaultServiceClient struct {
@@ -47,9 +49,9 @@ func NewVaultServiceClient(cc grpc.ClientConnInterface) VaultServiceClient {
 	return &vaultServiceClient{cc}
 }
 
-func (c *vaultServiceClient) CreateProviderCredential(ctx context.Context, in *CreateProviderCredentialRequest, opts ...grpc.CallOption) (*CreateProviderCredentialResponse, error) {
+func (c *vaultServiceClient) CreateProviderCredential(ctx context.Context, in *CreateProviderCredentialRequest, opts ...grpc.CallOption) (*GetCredentialResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateProviderCredentialResponse)
+	out := new(GetCredentialResponse)
 	err := c.cc.Invoke(ctx, VaultService_CreateProviderCredential_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -57,20 +59,10 @@ func (c *vaultServiceClient) CreateProviderCredential(ctx context.Context, in *C
 	return out, nil
 }
 
-func (c *vaultServiceClient) CreateToolCredential(ctx context.Context, in *CreateToolCredentialRequest, opts ...grpc.CallOption) (*CreateToolCredentialResponse, error) {
+func (c *vaultServiceClient) CreateToolCredential(ctx context.Context, in *CreateToolCredentialRequest, opts ...grpc.CallOption) (*GetCredentialResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateToolCredentialResponse)
+	out := new(GetCredentialResponse)
 	err := c.cc.Invoke(ctx, VaultService_CreateToolCredential_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *vaultServiceClient) DeleteProviderCredential(ctx context.Context, in *DeleteProviderCredentialRequest, opts ...grpc.CallOption) (*DeleteProviderCredentialResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteProviderCredentialResponse)
-	err := c.cc.Invoke(ctx, VaultService_DeleteProviderCredential_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -87,9 +79,19 @@ func (c *vaultServiceClient) GetAllOrganizationCredential(ctx context.Context, i
 	return out, nil
 }
 
-func (c *vaultServiceClient) GetProviderCredential(ctx context.Context, in *GetProviderCredentialRequest, opts ...grpc.CallOption) (*GetProviderCredentialResponse, error) {
+func (c *vaultServiceClient) DeleteCredential(ctx context.Context, in *DeleteCredentialRequest, opts ...grpc.CallOption) (*GetCredentialResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetProviderCredentialResponse)
+	out := new(GetCredentialResponse)
+	err := c.cc.Invoke(ctx, VaultService_DeleteCredential_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) GetProviderCredential(ctx context.Context, in *GetProviderCredentialRequest, opts ...grpc.CallOption) (*GetCredentialResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCredentialResponse)
 	err := c.cc.Invoke(ctx, VaultService_GetProviderCredential_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -97,10 +99,20 @@ func (c *vaultServiceClient) GetProviderCredential(ctx context.Context, in *GetP
 	return out, nil
 }
 
-func (c *vaultServiceClient) GetOauth2VaultCredential(ctx context.Context, in *GetOauth2VaultCredentialRequest, opts ...grpc.CallOption) (*GetOauth2VaultCredentialResponse, error) {
+func (c *vaultServiceClient) GetCredential(ctx context.Context, in *GetCredentialRequest, opts ...grpc.CallOption) (*GetCredentialResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetOauth2VaultCredentialResponse)
-	err := c.cc.Invoke(ctx, VaultService_GetOauth2VaultCredential_FullMethodName, in, out, cOpts...)
+	out := new(GetCredentialResponse)
+	err := c.cc.Invoke(ctx, VaultService_GetCredential_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *vaultServiceClient) GetOauth2Credential(ctx context.Context, in *GetCredentialRequest, opts ...grpc.CallOption) (*GetCredentialResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCredentialResponse)
+	err := c.cc.Invoke(ctx, VaultService_GetOauth2Credential_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -111,12 +123,13 @@ func (c *vaultServiceClient) GetOauth2VaultCredential(ctx context.Context, in *G
 // All implementations should embed UnimplementedVaultServiceServer
 // for forward compatibility.
 type VaultServiceServer interface {
-	CreateProviderCredential(context.Context, *CreateProviderCredentialRequest) (*CreateProviderCredentialResponse, error)
-	CreateToolCredential(context.Context, *CreateToolCredentialRequest) (*CreateToolCredentialResponse, error)
-	DeleteProviderCredential(context.Context, *DeleteProviderCredentialRequest) (*DeleteProviderCredentialResponse, error)
+	CreateProviderCredential(context.Context, *CreateProviderCredentialRequest) (*GetCredentialResponse, error)
+	CreateToolCredential(context.Context, *CreateToolCredentialRequest) (*GetCredentialResponse, error)
 	GetAllOrganizationCredential(context.Context, *GetAllOrganizationCredentialRequest) (*GetAllOrganizationCredentialResponse, error)
-	GetProviderCredential(context.Context, *GetProviderCredentialRequest) (*GetProviderCredentialResponse, error)
-	GetOauth2VaultCredential(context.Context, *GetOauth2VaultCredentialRequest) (*GetOauth2VaultCredentialResponse, error)
+	DeleteCredential(context.Context, *DeleteCredentialRequest) (*GetCredentialResponse, error)
+	GetProviderCredential(context.Context, *GetProviderCredentialRequest) (*GetCredentialResponse, error)
+	GetCredential(context.Context, *GetCredentialRequest) (*GetCredentialResponse, error)
+	GetOauth2Credential(context.Context, *GetCredentialRequest) (*GetCredentialResponse, error)
 }
 
 // UnimplementedVaultServiceServer should be embedded to have
@@ -126,23 +139,26 @@ type VaultServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedVaultServiceServer struct{}
 
-func (UnimplementedVaultServiceServer) CreateProviderCredential(context.Context, *CreateProviderCredentialRequest) (*CreateProviderCredentialResponse, error) {
+func (UnimplementedVaultServiceServer) CreateProviderCredential(context.Context, *CreateProviderCredentialRequest) (*GetCredentialResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProviderCredential not implemented")
 }
-func (UnimplementedVaultServiceServer) CreateToolCredential(context.Context, *CreateToolCredentialRequest) (*CreateToolCredentialResponse, error) {
+func (UnimplementedVaultServiceServer) CreateToolCredential(context.Context, *CreateToolCredentialRequest) (*GetCredentialResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateToolCredential not implemented")
-}
-func (UnimplementedVaultServiceServer) DeleteProviderCredential(context.Context, *DeleteProviderCredentialRequest) (*DeleteProviderCredentialResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteProviderCredential not implemented")
 }
 func (UnimplementedVaultServiceServer) GetAllOrganizationCredential(context.Context, *GetAllOrganizationCredentialRequest) (*GetAllOrganizationCredentialResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllOrganizationCredential not implemented")
 }
-func (UnimplementedVaultServiceServer) GetProviderCredential(context.Context, *GetProviderCredentialRequest) (*GetProviderCredentialResponse, error) {
+func (UnimplementedVaultServiceServer) DeleteCredential(context.Context, *DeleteCredentialRequest) (*GetCredentialResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCredential not implemented")
+}
+func (UnimplementedVaultServiceServer) GetProviderCredential(context.Context, *GetProviderCredentialRequest) (*GetCredentialResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProviderCredential not implemented")
 }
-func (UnimplementedVaultServiceServer) GetOauth2VaultCredential(context.Context, *GetOauth2VaultCredentialRequest) (*GetOauth2VaultCredentialResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetOauth2VaultCredential not implemented")
+func (UnimplementedVaultServiceServer) GetCredential(context.Context, *GetCredentialRequest) (*GetCredentialResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCredential not implemented")
+}
+func (UnimplementedVaultServiceServer) GetOauth2Credential(context.Context, *GetCredentialRequest) (*GetCredentialResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOauth2Credential not implemented")
 }
 func (UnimplementedVaultServiceServer) testEmbeddedByValue() {}
 
@@ -200,24 +216,6 @@ func _VaultService_CreateToolCredential_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _VaultService_DeleteProviderCredential_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteProviderCredentialRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(VaultServiceServer).DeleteProviderCredential(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: VaultService_DeleteProviderCredential_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VaultServiceServer).DeleteProviderCredential(ctx, req.(*DeleteProviderCredentialRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _VaultService_GetAllOrganizationCredential_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAllOrganizationCredentialRequest)
 	if err := dec(in); err != nil {
@@ -232,6 +230,24 @@ func _VaultService_GetAllOrganizationCredential_Handler(srv interface{}, ctx con
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(VaultServiceServer).GetAllOrganizationCredential(ctx, req.(*GetAllOrganizationCredentialRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VaultService_DeleteCredential_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCredentialRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VaultServiceServer).DeleteCredential(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VaultService_DeleteCredential_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VaultServiceServer).DeleteCredential(ctx, req.(*DeleteCredentialRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -254,20 +270,38 @@ func _VaultService_GetProviderCredential_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
-func _VaultService_GetOauth2VaultCredential_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetOauth2VaultCredentialRequest)
+func _VaultService_GetCredential_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCredentialRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(VaultServiceServer).GetOauth2VaultCredential(ctx, in)
+		return srv.(VaultServiceServer).GetCredential(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: VaultService_GetOauth2VaultCredential_FullMethodName,
+		FullMethod: VaultService_GetCredential_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VaultServiceServer).GetOauth2VaultCredential(ctx, req.(*GetOauth2VaultCredentialRequest))
+		return srv.(VaultServiceServer).GetCredential(ctx, req.(*GetCredentialRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VaultService_GetOauth2Credential_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCredentialRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VaultServiceServer).GetOauth2Credential(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: VaultService_GetOauth2Credential_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VaultServiceServer).GetOauth2Credential(ctx, req.(*GetCredentialRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -288,20 +322,24 @@ var VaultService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _VaultService_CreateToolCredential_Handler,
 		},
 		{
-			MethodName: "DeleteProviderCredential",
-			Handler:    _VaultService_DeleteProviderCredential_Handler,
-		},
-		{
 			MethodName: "GetAllOrganizationCredential",
 			Handler:    _VaultService_GetAllOrganizationCredential_Handler,
+		},
+		{
+			MethodName: "DeleteCredential",
+			Handler:    _VaultService_DeleteCredential_Handler,
 		},
 		{
 			MethodName: "GetProviderCredential",
 			Handler:    _VaultService_GetProviderCredential_Handler,
 		},
 		{
-			MethodName: "GetOauth2VaultCredential",
-			Handler:    _VaultService_GetOauth2VaultCredential_Handler,
+			MethodName: "GetCredential",
+			Handler:    _VaultService_GetCredential_Handler,
+		},
+		{
+			MethodName: "GetOauth2Credential",
+			Handler:    _VaultService_GetOauth2Credential_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

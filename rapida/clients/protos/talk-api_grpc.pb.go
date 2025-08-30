@@ -8,7 +8,6 @@ package lexatic_backend
 
 import (
 	context "context"
-
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -20,7 +19,6 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	TalkService_AssistantMessaging_FullMethodName          = "/talk_api.TalkService/AssistantMessaging"
 	TalkService_AssistantTalk_FullMethodName               = "/talk_api.TalkService/AssistantTalk"
 	TalkService_GetAllAssistantConversation_FullMethodName = "/talk_api.TalkService/GetAllAssistantConversation"
 	TalkService_GetAllConversationMessage_FullMethodName   = "/talk_api.TalkService/GetAllConversationMessage"
@@ -34,7 +32,6 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TalkServiceClient interface {
-	AssistantMessaging(ctx context.Context, in *AssistantMessagingRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[AssistantMessagingResponse], error)
 	AssistantTalk(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[AssistantMessagingRequest, AssistantMessagingResponse], error)
 	GetAllAssistantConversation(ctx context.Context, in *GetAllAssistantConversationRequest, opts ...grpc.CallOption) (*GetAllAssistantConversationResponse, error)
 	GetAllConversationMessage(ctx context.Context, in *GetAllConversationMessageRequest, opts ...grpc.CallOption) (*GetAllConversationMessageResponse, error)
@@ -52,28 +49,9 @@ func NewTalkServiceClient(cc grpc.ClientConnInterface) TalkServiceClient {
 	return &talkServiceClient{cc}
 }
 
-func (c *talkServiceClient) AssistantMessaging(ctx context.Context, in *AssistantMessagingRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[AssistantMessagingResponse], error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &TalkService_ServiceDesc.Streams[0], TalkService_AssistantMessaging_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &grpc.GenericClientStream[AssistantMessagingRequest, AssistantMessagingResponse]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type TalkService_AssistantMessagingClient = grpc.ServerStreamingClient[AssistantMessagingResponse]
-
 func (c *talkServiceClient) AssistantTalk(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[AssistantMessagingRequest, AssistantMessagingResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &TalkService_ServiceDesc.Streams[1], TalkService_AssistantTalk_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &TalkService_ServiceDesc.Streams[0], TalkService_AssistantTalk_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -148,7 +126,6 @@ func (c *talkServiceClient) CreateBulkPhoneCall(ctx context.Context, in *CreateB
 // All implementations should embed UnimplementedTalkServiceServer
 // for forward compatibility.
 type TalkServiceServer interface {
-	AssistantMessaging(*AssistantMessagingRequest, grpc.ServerStreamingServer[AssistantMessagingResponse]) error
 	AssistantTalk(grpc.BidiStreamingServer[AssistantMessagingRequest, AssistantMessagingResponse]) error
 	GetAllAssistantConversation(context.Context, *GetAllAssistantConversationRequest) (*GetAllAssistantConversationResponse, error)
 	GetAllConversationMessage(context.Context, *GetAllConversationMessageRequest) (*GetAllConversationMessageResponse, error)
@@ -165,9 +142,6 @@ type TalkServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedTalkServiceServer struct{}
 
-func (UnimplementedTalkServiceServer) AssistantMessaging(*AssistantMessagingRequest, grpc.ServerStreamingServer[AssistantMessagingResponse]) error {
-	return status.Errorf(codes.Unimplemented, "method AssistantMessaging not implemented")
-}
 func (UnimplementedTalkServiceServer) AssistantTalk(grpc.BidiStreamingServer[AssistantMessagingRequest, AssistantMessagingResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method AssistantTalk not implemented")
 }
@@ -208,17 +182,6 @@ func RegisterTalkServiceServer(s grpc.ServiceRegistrar, srv TalkServiceServer) {
 	}
 	s.RegisterService(&TalkService_ServiceDesc, srv)
 }
-
-func _TalkService_AssistantMessaging_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(AssistantMessagingRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(TalkServiceServer).AssistantMessaging(m, &grpc.GenericServerStream[AssistantMessagingRequest, AssistantMessagingResponse]{ServerStream: stream})
-}
-
-// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type TalkService_AssistantMessagingServer = grpc.ServerStreamingServer[AssistantMessagingResponse]
 
 func _TalkService_AssistantTalk_Handler(srv interface{}, stream grpc.ServerStream) error {
 	return srv.(TalkServiceServer).AssistantTalk(&grpc.GenericServerStream[AssistantMessagingRequest, AssistantMessagingResponse]{ServerStream: stream})
@@ -368,11 +331,6 @@ var TalkService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "AssistantMessaging",
-			Handler:       _TalkService_AssistantMessaging_Handler,
-			ServerStreams: true,
-		},
 		{
 			StreamName:    "AssistantTalk",
 			Handler:       _TalkService_AssistantTalk_Handler,

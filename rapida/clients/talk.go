@@ -9,14 +9,6 @@ import (
 	"github.com/rapidaai/rapida-go/rapida/connections"
 )
 
-func AssistantMessaging(connection connections.ConnectionConfig, ctx context.Context, req *web_api.AssistantMessagingRequest) (web_api.TalkService_AssistantMessagingClient, error) {
-	c, err := connection.TalkServiceClient()
-	if err != nil {
-		return nil, err
-	}
-	return c.AssistantMessaging(connection.WithAuth(ctx), req)
-}
-
 func AssistantTalk(connection connections.ConnectionConfig, ctx context.Context) (web_api.TalkService_AssistantTalkClient, error) {
 	c, err := connection.TalkServiceClient()
 	if err != nil {

@@ -9,18 +9,26 @@ import (
 	"github.com/rapidaai/rapida-go/rapida/connections"
 )
 
-func CreatePhoneCall(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreatePhoneCallRequest) (*web_api.CreatePhoneCallResponse, error) {
+func CreatePhoneCall(
+	ctx context.Context,
+	connection connections.ConnectionConfig,
+	callRequest *web_api.CreatePhoneCallRequest,
+) (*web_api.CreatePhoneCallResponse, error) {
 	c, err := connection.TalkServiceClient()
 	if err != nil {
 		return nil, err
 	}
-	return c.CreatePhoneCall(connection.WithAuth(ctx), req)
+	return c.CreatePhoneCall(connection.WithAuth(ctx), callRequest)
 }
 
-func CreateBulkPhoneCall(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateBulkPhoneCallRequest) (*web_api.CreateBulkPhoneCallResponse, error) {
+func CreateBulkPhoneCall(
+	ctx context.Context,
+	connection connections.ConnectionConfig,
+	callRequest *web_api.CreateBulkPhoneCallRequest,
+) (*web_api.CreateBulkPhoneCallResponse, error) {
 	c, err := connection.TalkServiceClient()
 	if err != nil {
 		return nil, err
 	}
-	return c.CreateBulkPhoneCall(connection.WithAuth(ctx), req)
+	return c.CreateBulkPhoneCall(connection.WithAuth(ctx), callRequest)
 }
