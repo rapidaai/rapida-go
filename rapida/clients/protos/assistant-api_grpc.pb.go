@@ -40,6 +40,8 @@ const (
 	AssistantService_CreateAssistantWebhook_FullMethodName       = "/assistant_api.AssistantService/CreateAssistantWebhook"
 	AssistantService_UpdateAssistantWebhook_FullMethodName       = "/assistant_api.AssistantService/UpdateAssistantWebhook"
 	AssistantService_DeleteAssistantWebhook_FullMethodName       = "/assistant_api.AssistantService/DeleteAssistantWebhook"
+	AssistantService_GetAssistantToolLog_FullMethodName          = "/assistant_api.AssistantService/GetAssistantToolLog"
+	AssistantService_GetAllAssistantToolLog_FullMethodName       = "/assistant_api.AssistantService/GetAllAssistantToolLog"
 	AssistantService_GetAssistantAnalysis_FullMethodName         = "/assistant_api.AssistantService/GetAssistantAnalysis"
 	AssistantService_UpdateAssistantAnalysis_FullMethodName      = "/assistant_api.AssistantService/UpdateAssistantAnalysis"
 	AssistantService_CreateAssistantAnalysis_FullMethodName      = "/assistant_api.AssistantService/CreateAssistantAnalysis"
@@ -83,6 +85,9 @@ type AssistantServiceClient interface {
 	CreateAssistantWebhook(ctx context.Context, in *CreateAssistantWebhookRequest, opts ...grpc.CallOption) (*GetAssistantWebhookResponse, error)
 	UpdateAssistantWebhook(ctx context.Context, in *UpdateAssistantWebhookRequest, opts ...grpc.CallOption) (*GetAssistantWebhookResponse, error)
 	DeleteAssistantWebhook(ctx context.Context, in *DeleteAssistantWebhookRequest, opts ...grpc.CallOption) (*GetAssistantWebhookResponse, error)
+	// tool log
+	GetAssistantToolLog(ctx context.Context, in *GetAssistantToolLogRequest, opts ...grpc.CallOption) (*GetAssistantToolLogResponse, error)
+	GetAllAssistantToolLog(ctx context.Context, in *GetAllAssistantToolLogRequest, opts ...grpc.CallOption) (*GetAllAssistantToolLogResponse, error)
 	// analysis
 	GetAssistantAnalysis(ctx context.Context, in *GetAssistantAnalysisRequest, opts ...grpc.CallOption) (*GetAssistantAnalysisResponse, error)
 	UpdateAssistantAnalysis(ctx context.Context, in *UpdateAssistantAnalysisRequest, opts ...grpc.CallOption) (*GetAssistantAnalysisResponse, error)
@@ -321,6 +326,26 @@ func (c *assistantServiceClient) DeleteAssistantWebhook(ctx context.Context, in 
 	return out, nil
 }
 
+func (c *assistantServiceClient) GetAssistantToolLog(ctx context.Context, in *GetAssistantToolLogRequest, opts ...grpc.CallOption) (*GetAssistantToolLogResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAssistantToolLogResponse)
+	err := c.cc.Invoke(ctx, AssistantService_GetAssistantToolLog_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *assistantServiceClient) GetAllAssistantToolLog(ctx context.Context, in *GetAllAssistantToolLogRequest, opts ...grpc.CallOption) (*GetAllAssistantToolLogResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAllAssistantToolLogResponse)
+	err := c.cc.Invoke(ctx, AssistantService_GetAllAssistantToolLog_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *assistantServiceClient) GetAssistantAnalysis(ctx context.Context, in *GetAssistantAnalysisRequest, opts ...grpc.CallOption) (*GetAssistantAnalysisResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetAssistantAnalysisResponse)
@@ -497,6 +522,9 @@ type AssistantServiceServer interface {
 	CreateAssistantWebhook(context.Context, *CreateAssistantWebhookRequest) (*GetAssistantWebhookResponse, error)
 	UpdateAssistantWebhook(context.Context, *UpdateAssistantWebhookRequest) (*GetAssistantWebhookResponse, error)
 	DeleteAssistantWebhook(context.Context, *DeleteAssistantWebhookRequest) (*GetAssistantWebhookResponse, error)
+	// tool log
+	GetAssistantToolLog(context.Context, *GetAssistantToolLogRequest) (*GetAssistantToolLogResponse, error)
+	GetAllAssistantToolLog(context.Context, *GetAllAssistantToolLogRequest) (*GetAllAssistantToolLogResponse, error)
 	// analysis
 	GetAssistantAnalysis(context.Context, *GetAssistantAnalysisRequest) (*GetAssistantAnalysisResponse, error)
 	UpdateAssistantAnalysis(context.Context, *UpdateAssistantAnalysisRequest) (*GetAssistantAnalysisResponse, error)
@@ -586,6 +614,12 @@ func (UnimplementedAssistantServiceServer) UpdateAssistantWebhook(context.Contex
 }
 func (UnimplementedAssistantServiceServer) DeleteAssistantWebhook(context.Context, *DeleteAssistantWebhookRequest) (*GetAssistantWebhookResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAssistantWebhook not implemented")
+}
+func (UnimplementedAssistantServiceServer) GetAssistantToolLog(context.Context, *GetAssistantToolLogRequest) (*GetAssistantToolLogResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAssistantToolLog not implemented")
+}
+func (UnimplementedAssistantServiceServer) GetAllAssistantToolLog(context.Context, *GetAllAssistantToolLogRequest) (*GetAllAssistantToolLogResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllAssistantToolLog not implemented")
 }
 func (UnimplementedAssistantServiceServer) GetAssistantAnalysis(context.Context, *GetAssistantAnalysisRequest) (*GetAssistantAnalysisResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAssistantAnalysis not implemented")
@@ -1030,6 +1064,42 @@ func _AssistantService_DeleteAssistantWebhook_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AssistantService_GetAssistantToolLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAssistantToolLogRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssistantServiceServer).GetAssistantToolLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssistantService_GetAssistantToolLog_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssistantServiceServer).GetAssistantToolLog(ctx, req.(*GetAssistantToolLogRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AssistantService_GetAllAssistantToolLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllAssistantToolLogRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AssistantServiceServer).GetAllAssistantToolLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AssistantService_GetAllAssistantToolLog_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AssistantServiceServer).GetAllAssistantToolLog(ctx, req.(*GetAllAssistantToolLogRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AssistantService_GetAssistantAnalysis_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAssistantAnalysisRequest)
 	if err := dec(in); err != nil {
@@ -1390,6 +1460,14 @@ var AssistantService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAssistantWebhook",
 			Handler:    _AssistantService_DeleteAssistantWebhook_Handler,
+		},
+		{
+			MethodName: "GetAssistantToolLog",
+			Handler:    _AssistantService_GetAssistantToolLog_Handler,
+		},
+		{
+			MethodName: "GetAllAssistantToolLog",
+			Handler:    _AssistantService_GetAllAssistantToolLog_Handler,
 		},
 		{
 			MethodName: "GetAssistantAnalysis",

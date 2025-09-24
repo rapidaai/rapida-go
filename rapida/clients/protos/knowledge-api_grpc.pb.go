@@ -29,6 +29,8 @@ const (
 	KnowledgeService_UpdateKnowledgeDetail_FullMethodName          = "/knowledge_api.KnowledgeService/UpdateKnowledgeDetail"
 	KnowledgeService_UpdateKnowledgeDocumentSegment_FullMethodName = "/knowledge_api.KnowledgeService/UpdateKnowledgeDocumentSegment"
 	KnowledgeService_DeleteKnowledgeDocumentSegment_FullMethodName = "/knowledge_api.KnowledgeService/DeleteKnowledgeDocumentSegment"
+	KnowledgeService_GetAllKnowledgeLog_FullMethodName             = "/knowledge_api.KnowledgeService/GetAllKnowledgeLog"
+	KnowledgeService_GetKnowledgeLog_FullMethodName                = "/knowledge_api.KnowledgeService/GetKnowledgeLog"
 )
 
 // KnowledgeServiceClient is the client API for KnowledgeService service.
@@ -45,6 +47,9 @@ type KnowledgeServiceClient interface {
 	UpdateKnowledgeDetail(ctx context.Context, in *UpdateKnowledgeDetailRequest, opts ...grpc.CallOption) (*GetKnowledgeResponse, error)
 	UpdateKnowledgeDocumentSegment(ctx context.Context, in *UpdateKnowledgeDocumentSegmentRequest, opts ...grpc.CallOption) (*BaseResponse, error)
 	DeleteKnowledgeDocumentSegment(ctx context.Context, in *DeleteKnowledgeDocumentSegmentRequest, opts ...grpc.CallOption) (*BaseResponse, error)
+	// knowledge log retrieval log
+	GetAllKnowledgeLog(ctx context.Context, in *GetAllKnowledgeLogRequest, opts ...grpc.CallOption) (*GetAllKnowledgeLogResponse, error)
+	GetKnowledgeLog(ctx context.Context, in *GetKnowledgeLogRequest, opts ...grpc.CallOption) (*GetKnowledgeLogResponse, error)
 }
 
 type knowledgeServiceClient struct {
@@ -155,6 +160,26 @@ func (c *knowledgeServiceClient) DeleteKnowledgeDocumentSegment(ctx context.Cont
 	return out, nil
 }
 
+func (c *knowledgeServiceClient) GetAllKnowledgeLog(ctx context.Context, in *GetAllKnowledgeLogRequest, opts ...grpc.CallOption) (*GetAllKnowledgeLogResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAllKnowledgeLogResponse)
+	err := c.cc.Invoke(ctx, KnowledgeService_GetAllKnowledgeLog_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *knowledgeServiceClient) GetKnowledgeLog(ctx context.Context, in *GetKnowledgeLogRequest, opts ...grpc.CallOption) (*GetKnowledgeLogResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetKnowledgeLogResponse)
+	err := c.cc.Invoke(ctx, KnowledgeService_GetKnowledgeLog_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // KnowledgeServiceServer is the server API for KnowledgeService service.
 // All implementations should embed UnimplementedKnowledgeServiceServer
 // for forward compatibility.
@@ -169,6 +194,9 @@ type KnowledgeServiceServer interface {
 	UpdateKnowledgeDetail(context.Context, *UpdateKnowledgeDetailRequest) (*GetKnowledgeResponse, error)
 	UpdateKnowledgeDocumentSegment(context.Context, *UpdateKnowledgeDocumentSegmentRequest) (*BaseResponse, error)
 	DeleteKnowledgeDocumentSegment(context.Context, *DeleteKnowledgeDocumentSegmentRequest) (*BaseResponse, error)
+	// knowledge log retrieval log
+	GetAllKnowledgeLog(context.Context, *GetAllKnowledgeLogRequest) (*GetAllKnowledgeLogResponse, error)
+	GetKnowledgeLog(context.Context, *GetKnowledgeLogRequest) (*GetKnowledgeLogResponse, error)
 }
 
 // UnimplementedKnowledgeServiceServer should be embedded to have
@@ -207,6 +235,12 @@ func (UnimplementedKnowledgeServiceServer) UpdateKnowledgeDocumentSegment(contex
 }
 func (UnimplementedKnowledgeServiceServer) DeleteKnowledgeDocumentSegment(context.Context, *DeleteKnowledgeDocumentSegmentRequest) (*BaseResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteKnowledgeDocumentSegment not implemented")
+}
+func (UnimplementedKnowledgeServiceServer) GetAllKnowledgeLog(context.Context, *GetAllKnowledgeLogRequest) (*GetAllKnowledgeLogResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllKnowledgeLog not implemented")
+}
+func (UnimplementedKnowledgeServiceServer) GetKnowledgeLog(context.Context, *GetKnowledgeLogRequest) (*GetKnowledgeLogResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetKnowledgeLog not implemented")
 }
 func (UnimplementedKnowledgeServiceServer) testEmbeddedByValue() {}
 
@@ -408,6 +442,42 @@ func _KnowledgeService_DeleteKnowledgeDocumentSegment_Handler(srv interface{}, c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _KnowledgeService_GetAllKnowledgeLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllKnowledgeLogRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KnowledgeServiceServer).GetAllKnowledgeLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KnowledgeService_GetAllKnowledgeLog_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KnowledgeServiceServer).GetAllKnowledgeLog(ctx, req.(*GetAllKnowledgeLogRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _KnowledgeService_GetKnowledgeLog_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetKnowledgeLogRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(KnowledgeServiceServer).GetKnowledgeLog(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: KnowledgeService_GetKnowledgeLog_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(KnowledgeServiceServer).GetKnowledgeLog(ctx, req.(*GetKnowledgeLogRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // KnowledgeService_ServiceDesc is the grpc.ServiceDesc for KnowledgeService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -454,6 +524,14 @@ var KnowledgeService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteKnowledgeDocumentSegment",
 			Handler:    _KnowledgeService_DeleteKnowledgeDocumentSegment_Handler,
+		},
+		{
+			MethodName: "GetAllKnowledgeLog",
+			Handler:    _KnowledgeService_GetAllKnowledgeLog_Handler,
+		},
+		{
+			MethodName: "GetKnowledgeLog",
+			Handler:    _KnowledgeService_GetKnowledgeLog_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

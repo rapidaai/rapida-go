@@ -21,8 +21,7 @@ type ConnectionConfig interface {
 	AssistantServiceClient() (web_api.AssistantServiceClient, error)
 	AssistantDeploymentServiceClient() (web_api.AssistantDeploymentServiceClient, error)
 	DeploymentClient() (web_api.DeploymentClient, error)
-
-	//
+	// authenticaton
 	WithAuth(ctx context.Context) context.Context
 }
 

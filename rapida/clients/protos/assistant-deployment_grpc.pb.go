@@ -35,16 +35,16 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AssistantDeploymentServiceClient interface {
-	CreateAssistantApiDeployment(ctx context.Context, in *CreateAssistantApiDeploymentRequest, opts ...grpc.CallOption) (*AssistantApiDeploymentResponse, error)
-	GetAssistantApiDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*AssistantApiDeploymentResponse, error)
-	CreateAssistantWebpluginDeployment(ctx context.Context, in *CreateAssistantWebpluginDeploymentRequest, opts ...grpc.CallOption) (*AssistantWebpluginDeploymentResponse, error)
-	GetAssistantWebpluginDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*AssistantWebpluginDeploymentResponse, error)
-	CreateAssistantDebuggerDeployment(ctx context.Context, in *CreateAssistantDebuggerDeploymentRequest, opts ...grpc.CallOption) (*AssistantDebuggerDeploymentResponse, error)
-	GetAssistantDebuggerDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*AssistantDebuggerDeploymentResponse, error)
-	CreateAssistantWhatsappDeployment(ctx context.Context, in *CreateAssistantWhatsappDeploymentRequest, opts ...grpc.CallOption) (*AssistantWhatsappDeploymentResponse, error)
-	GetAssistantWhatsappDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*AssistantWhatsappDeploymentResponse, error)
-	CreateAssistantPhoneDeployment(ctx context.Context, in *CreateAssistantPhoneDeploymentRequest, opts ...grpc.CallOption) (*AssistantPhoneDeploymentResponse, error)
-	GetAssistantPhoneDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*AssistantPhoneDeploymentResponse, error)
+	CreateAssistantApiDeployment(ctx context.Context, in *CreateAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantApiDeploymentResponse, error)
+	GetAssistantApiDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantApiDeploymentResponse, error)
+	CreateAssistantWebpluginDeployment(ctx context.Context, in *CreateAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantWebpluginDeploymentResponse, error)
+	GetAssistantWebpluginDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantWebpluginDeploymentResponse, error)
+	CreateAssistantDebuggerDeployment(ctx context.Context, in *CreateAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantDebuggerDeploymentResponse, error)
+	GetAssistantDebuggerDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantDebuggerDeploymentResponse, error)
+	CreateAssistantWhatsappDeployment(ctx context.Context, in *CreateAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantWhatsappDeploymentResponse, error)
+	GetAssistantWhatsappDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantWhatsappDeploymentResponse, error)
+	CreateAssistantPhoneDeployment(ctx context.Context, in *CreateAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantPhoneDeploymentResponse, error)
+	GetAssistantPhoneDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantPhoneDeploymentResponse, error)
 }
 
 type assistantDeploymentServiceClient struct {
@@ -55,9 +55,9 @@ func NewAssistantDeploymentServiceClient(cc grpc.ClientConnInterface) AssistantD
 	return &assistantDeploymentServiceClient{cc}
 }
 
-func (c *assistantDeploymentServiceClient) CreateAssistantApiDeployment(ctx context.Context, in *CreateAssistantApiDeploymentRequest, opts ...grpc.CallOption) (*AssistantApiDeploymentResponse, error) {
+func (c *assistantDeploymentServiceClient) CreateAssistantApiDeployment(ctx context.Context, in *CreateAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantApiDeploymentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AssistantApiDeploymentResponse)
+	out := new(GetAssistantApiDeploymentResponse)
 	err := c.cc.Invoke(ctx, AssistantDeploymentService_CreateAssistantApiDeployment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -65,9 +65,9 @@ func (c *assistantDeploymentServiceClient) CreateAssistantApiDeployment(ctx cont
 	return out, nil
 }
 
-func (c *assistantDeploymentServiceClient) GetAssistantApiDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*AssistantApiDeploymentResponse, error) {
+func (c *assistantDeploymentServiceClient) GetAssistantApiDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantApiDeploymentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AssistantApiDeploymentResponse)
+	out := new(GetAssistantApiDeploymentResponse)
 	err := c.cc.Invoke(ctx, AssistantDeploymentService_GetAssistantApiDeployment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -75,9 +75,9 @@ func (c *assistantDeploymentServiceClient) GetAssistantApiDeployment(ctx context
 	return out, nil
 }
 
-func (c *assistantDeploymentServiceClient) CreateAssistantWebpluginDeployment(ctx context.Context, in *CreateAssistantWebpluginDeploymentRequest, opts ...grpc.CallOption) (*AssistantWebpluginDeploymentResponse, error) {
+func (c *assistantDeploymentServiceClient) CreateAssistantWebpluginDeployment(ctx context.Context, in *CreateAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantWebpluginDeploymentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AssistantWebpluginDeploymentResponse)
+	out := new(GetAssistantWebpluginDeploymentResponse)
 	err := c.cc.Invoke(ctx, AssistantDeploymentService_CreateAssistantWebpluginDeployment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -85,9 +85,9 @@ func (c *assistantDeploymentServiceClient) CreateAssistantWebpluginDeployment(ct
 	return out, nil
 }
 
-func (c *assistantDeploymentServiceClient) GetAssistantWebpluginDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*AssistantWebpluginDeploymentResponse, error) {
+func (c *assistantDeploymentServiceClient) GetAssistantWebpluginDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantWebpluginDeploymentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AssistantWebpluginDeploymentResponse)
+	out := new(GetAssistantWebpluginDeploymentResponse)
 	err := c.cc.Invoke(ctx, AssistantDeploymentService_GetAssistantWebpluginDeployment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -95,9 +95,9 @@ func (c *assistantDeploymentServiceClient) GetAssistantWebpluginDeployment(ctx c
 	return out, nil
 }
 
-func (c *assistantDeploymentServiceClient) CreateAssistantDebuggerDeployment(ctx context.Context, in *CreateAssistantDebuggerDeploymentRequest, opts ...grpc.CallOption) (*AssistantDebuggerDeploymentResponse, error) {
+func (c *assistantDeploymentServiceClient) CreateAssistantDebuggerDeployment(ctx context.Context, in *CreateAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantDebuggerDeploymentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AssistantDebuggerDeploymentResponse)
+	out := new(GetAssistantDebuggerDeploymentResponse)
 	err := c.cc.Invoke(ctx, AssistantDeploymentService_CreateAssistantDebuggerDeployment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -105,9 +105,9 @@ func (c *assistantDeploymentServiceClient) CreateAssistantDebuggerDeployment(ctx
 	return out, nil
 }
 
-func (c *assistantDeploymentServiceClient) GetAssistantDebuggerDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*AssistantDebuggerDeploymentResponse, error) {
+func (c *assistantDeploymentServiceClient) GetAssistantDebuggerDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantDebuggerDeploymentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AssistantDebuggerDeploymentResponse)
+	out := new(GetAssistantDebuggerDeploymentResponse)
 	err := c.cc.Invoke(ctx, AssistantDeploymentService_GetAssistantDebuggerDeployment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -115,9 +115,9 @@ func (c *assistantDeploymentServiceClient) GetAssistantDebuggerDeployment(ctx co
 	return out, nil
 }
 
-func (c *assistantDeploymentServiceClient) CreateAssistantWhatsappDeployment(ctx context.Context, in *CreateAssistantWhatsappDeploymentRequest, opts ...grpc.CallOption) (*AssistantWhatsappDeploymentResponse, error) {
+func (c *assistantDeploymentServiceClient) CreateAssistantWhatsappDeployment(ctx context.Context, in *CreateAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantWhatsappDeploymentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AssistantWhatsappDeploymentResponse)
+	out := new(GetAssistantWhatsappDeploymentResponse)
 	err := c.cc.Invoke(ctx, AssistantDeploymentService_CreateAssistantWhatsappDeployment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -125,9 +125,9 @@ func (c *assistantDeploymentServiceClient) CreateAssistantWhatsappDeployment(ctx
 	return out, nil
 }
 
-func (c *assistantDeploymentServiceClient) GetAssistantWhatsappDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*AssistantWhatsappDeploymentResponse, error) {
+func (c *assistantDeploymentServiceClient) GetAssistantWhatsappDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantWhatsappDeploymentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AssistantWhatsappDeploymentResponse)
+	out := new(GetAssistantWhatsappDeploymentResponse)
 	err := c.cc.Invoke(ctx, AssistantDeploymentService_GetAssistantWhatsappDeployment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -135,9 +135,9 @@ func (c *assistantDeploymentServiceClient) GetAssistantWhatsappDeployment(ctx co
 	return out, nil
 }
 
-func (c *assistantDeploymentServiceClient) CreateAssistantPhoneDeployment(ctx context.Context, in *CreateAssistantPhoneDeploymentRequest, opts ...grpc.CallOption) (*AssistantPhoneDeploymentResponse, error) {
+func (c *assistantDeploymentServiceClient) CreateAssistantPhoneDeployment(ctx context.Context, in *CreateAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantPhoneDeploymentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AssistantPhoneDeploymentResponse)
+	out := new(GetAssistantPhoneDeploymentResponse)
 	err := c.cc.Invoke(ctx, AssistantDeploymentService_CreateAssistantPhoneDeployment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -145,9 +145,9 @@ func (c *assistantDeploymentServiceClient) CreateAssistantPhoneDeployment(ctx co
 	return out, nil
 }
 
-func (c *assistantDeploymentServiceClient) GetAssistantPhoneDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*AssistantPhoneDeploymentResponse, error) {
+func (c *assistantDeploymentServiceClient) GetAssistantPhoneDeployment(ctx context.Context, in *GetAssistantDeploymentRequest, opts ...grpc.CallOption) (*GetAssistantPhoneDeploymentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AssistantPhoneDeploymentResponse)
+	out := new(GetAssistantPhoneDeploymentResponse)
 	err := c.cc.Invoke(ctx, AssistantDeploymentService_GetAssistantPhoneDeployment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -159,16 +159,16 @@ func (c *assistantDeploymentServiceClient) GetAssistantPhoneDeployment(ctx conte
 // All implementations should embed UnimplementedAssistantDeploymentServiceServer
 // for forward compatibility.
 type AssistantDeploymentServiceServer interface {
-	CreateAssistantApiDeployment(context.Context, *CreateAssistantApiDeploymentRequest) (*AssistantApiDeploymentResponse, error)
-	GetAssistantApiDeployment(context.Context, *GetAssistantDeploymentRequest) (*AssistantApiDeploymentResponse, error)
-	CreateAssistantWebpluginDeployment(context.Context, *CreateAssistantWebpluginDeploymentRequest) (*AssistantWebpluginDeploymentResponse, error)
-	GetAssistantWebpluginDeployment(context.Context, *GetAssistantDeploymentRequest) (*AssistantWebpluginDeploymentResponse, error)
-	CreateAssistantDebuggerDeployment(context.Context, *CreateAssistantDebuggerDeploymentRequest) (*AssistantDebuggerDeploymentResponse, error)
-	GetAssistantDebuggerDeployment(context.Context, *GetAssistantDeploymentRequest) (*AssistantDebuggerDeploymentResponse, error)
-	CreateAssistantWhatsappDeployment(context.Context, *CreateAssistantWhatsappDeploymentRequest) (*AssistantWhatsappDeploymentResponse, error)
-	GetAssistantWhatsappDeployment(context.Context, *GetAssistantDeploymentRequest) (*AssistantWhatsappDeploymentResponse, error)
-	CreateAssistantPhoneDeployment(context.Context, *CreateAssistantPhoneDeploymentRequest) (*AssistantPhoneDeploymentResponse, error)
-	GetAssistantPhoneDeployment(context.Context, *GetAssistantDeploymentRequest) (*AssistantPhoneDeploymentResponse, error)
+	CreateAssistantApiDeployment(context.Context, *CreateAssistantDeploymentRequest) (*GetAssistantApiDeploymentResponse, error)
+	GetAssistantApiDeployment(context.Context, *GetAssistantDeploymentRequest) (*GetAssistantApiDeploymentResponse, error)
+	CreateAssistantWebpluginDeployment(context.Context, *CreateAssistantDeploymentRequest) (*GetAssistantWebpluginDeploymentResponse, error)
+	GetAssistantWebpluginDeployment(context.Context, *GetAssistantDeploymentRequest) (*GetAssistantWebpluginDeploymentResponse, error)
+	CreateAssistantDebuggerDeployment(context.Context, *CreateAssistantDeploymentRequest) (*GetAssistantDebuggerDeploymentResponse, error)
+	GetAssistantDebuggerDeployment(context.Context, *GetAssistantDeploymentRequest) (*GetAssistantDebuggerDeploymentResponse, error)
+	CreateAssistantWhatsappDeployment(context.Context, *CreateAssistantDeploymentRequest) (*GetAssistantWhatsappDeploymentResponse, error)
+	GetAssistantWhatsappDeployment(context.Context, *GetAssistantDeploymentRequest) (*GetAssistantWhatsappDeploymentResponse, error)
+	CreateAssistantPhoneDeployment(context.Context, *CreateAssistantDeploymentRequest) (*GetAssistantPhoneDeploymentResponse, error)
+	GetAssistantPhoneDeployment(context.Context, *GetAssistantDeploymentRequest) (*GetAssistantPhoneDeploymentResponse, error)
 }
 
 // UnimplementedAssistantDeploymentServiceServer should be embedded to have
@@ -178,34 +178,34 @@ type AssistantDeploymentServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedAssistantDeploymentServiceServer struct{}
 
-func (UnimplementedAssistantDeploymentServiceServer) CreateAssistantApiDeployment(context.Context, *CreateAssistantApiDeploymentRequest) (*AssistantApiDeploymentResponse, error) {
+func (UnimplementedAssistantDeploymentServiceServer) CreateAssistantApiDeployment(context.Context, *CreateAssistantDeploymentRequest) (*GetAssistantApiDeploymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAssistantApiDeployment not implemented")
 }
-func (UnimplementedAssistantDeploymentServiceServer) GetAssistantApiDeployment(context.Context, *GetAssistantDeploymentRequest) (*AssistantApiDeploymentResponse, error) {
+func (UnimplementedAssistantDeploymentServiceServer) GetAssistantApiDeployment(context.Context, *GetAssistantDeploymentRequest) (*GetAssistantApiDeploymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAssistantApiDeployment not implemented")
 }
-func (UnimplementedAssistantDeploymentServiceServer) CreateAssistantWebpluginDeployment(context.Context, *CreateAssistantWebpluginDeploymentRequest) (*AssistantWebpluginDeploymentResponse, error) {
+func (UnimplementedAssistantDeploymentServiceServer) CreateAssistantWebpluginDeployment(context.Context, *CreateAssistantDeploymentRequest) (*GetAssistantWebpluginDeploymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAssistantWebpluginDeployment not implemented")
 }
-func (UnimplementedAssistantDeploymentServiceServer) GetAssistantWebpluginDeployment(context.Context, *GetAssistantDeploymentRequest) (*AssistantWebpluginDeploymentResponse, error) {
+func (UnimplementedAssistantDeploymentServiceServer) GetAssistantWebpluginDeployment(context.Context, *GetAssistantDeploymentRequest) (*GetAssistantWebpluginDeploymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAssistantWebpluginDeployment not implemented")
 }
-func (UnimplementedAssistantDeploymentServiceServer) CreateAssistantDebuggerDeployment(context.Context, *CreateAssistantDebuggerDeploymentRequest) (*AssistantDebuggerDeploymentResponse, error) {
+func (UnimplementedAssistantDeploymentServiceServer) CreateAssistantDebuggerDeployment(context.Context, *CreateAssistantDeploymentRequest) (*GetAssistantDebuggerDeploymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAssistantDebuggerDeployment not implemented")
 }
-func (UnimplementedAssistantDeploymentServiceServer) GetAssistantDebuggerDeployment(context.Context, *GetAssistantDeploymentRequest) (*AssistantDebuggerDeploymentResponse, error) {
+func (UnimplementedAssistantDeploymentServiceServer) GetAssistantDebuggerDeployment(context.Context, *GetAssistantDeploymentRequest) (*GetAssistantDebuggerDeploymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAssistantDebuggerDeployment not implemented")
 }
-func (UnimplementedAssistantDeploymentServiceServer) CreateAssistantWhatsappDeployment(context.Context, *CreateAssistantWhatsappDeploymentRequest) (*AssistantWhatsappDeploymentResponse, error) {
+func (UnimplementedAssistantDeploymentServiceServer) CreateAssistantWhatsappDeployment(context.Context, *CreateAssistantDeploymentRequest) (*GetAssistantWhatsappDeploymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAssistantWhatsappDeployment not implemented")
 }
-func (UnimplementedAssistantDeploymentServiceServer) GetAssistantWhatsappDeployment(context.Context, *GetAssistantDeploymentRequest) (*AssistantWhatsappDeploymentResponse, error) {
+func (UnimplementedAssistantDeploymentServiceServer) GetAssistantWhatsappDeployment(context.Context, *GetAssistantDeploymentRequest) (*GetAssistantWhatsappDeploymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAssistantWhatsappDeployment not implemented")
 }
-func (UnimplementedAssistantDeploymentServiceServer) CreateAssistantPhoneDeployment(context.Context, *CreateAssistantPhoneDeploymentRequest) (*AssistantPhoneDeploymentResponse, error) {
+func (UnimplementedAssistantDeploymentServiceServer) CreateAssistantPhoneDeployment(context.Context, *CreateAssistantDeploymentRequest) (*GetAssistantPhoneDeploymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAssistantPhoneDeployment not implemented")
 }
-func (UnimplementedAssistantDeploymentServiceServer) GetAssistantPhoneDeployment(context.Context, *GetAssistantDeploymentRequest) (*AssistantPhoneDeploymentResponse, error) {
+func (UnimplementedAssistantDeploymentServiceServer) GetAssistantPhoneDeployment(context.Context, *GetAssistantDeploymentRequest) (*GetAssistantPhoneDeploymentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAssistantPhoneDeployment not implemented")
 }
 func (UnimplementedAssistantDeploymentServiceServer) testEmbeddedByValue() {}
@@ -229,7 +229,7 @@ func RegisterAssistantDeploymentServiceServer(s grpc.ServiceRegistrar, srv Assis
 }
 
 func _AssistantDeploymentService_CreateAssistantApiDeployment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateAssistantApiDeploymentRequest)
+	in := new(CreateAssistantDeploymentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -241,7 +241,7 @@ func _AssistantDeploymentService_CreateAssistantApiDeployment_Handler(srv interf
 		FullMethod: AssistantDeploymentService_CreateAssistantApiDeployment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistantDeploymentServiceServer).CreateAssistantApiDeployment(ctx, req.(*CreateAssistantApiDeploymentRequest))
+		return srv.(AssistantDeploymentServiceServer).CreateAssistantApiDeployment(ctx, req.(*CreateAssistantDeploymentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -265,7 +265,7 @@ func _AssistantDeploymentService_GetAssistantApiDeployment_Handler(srv interface
 }
 
 func _AssistantDeploymentService_CreateAssistantWebpluginDeployment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateAssistantWebpluginDeploymentRequest)
+	in := new(CreateAssistantDeploymentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -277,7 +277,7 @@ func _AssistantDeploymentService_CreateAssistantWebpluginDeployment_Handler(srv 
 		FullMethod: AssistantDeploymentService_CreateAssistantWebpluginDeployment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistantDeploymentServiceServer).CreateAssistantWebpluginDeployment(ctx, req.(*CreateAssistantWebpluginDeploymentRequest))
+		return srv.(AssistantDeploymentServiceServer).CreateAssistantWebpluginDeployment(ctx, req.(*CreateAssistantDeploymentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -301,7 +301,7 @@ func _AssistantDeploymentService_GetAssistantWebpluginDeployment_Handler(srv int
 }
 
 func _AssistantDeploymentService_CreateAssistantDebuggerDeployment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateAssistantDebuggerDeploymentRequest)
+	in := new(CreateAssistantDeploymentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -313,7 +313,7 @@ func _AssistantDeploymentService_CreateAssistantDebuggerDeployment_Handler(srv i
 		FullMethod: AssistantDeploymentService_CreateAssistantDebuggerDeployment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistantDeploymentServiceServer).CreateAssistantDebuggerDeployment(ctx, req.(*CreateAssistantDebuggerDeploymentRequest))
+		return srv.(AssistantDeploymentServiceServer).CreateAssistantDebuggerDeployment(ctx, req.(*CreateAssistantDeploymentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -337,7 +337,7 @@ func _AssistantDeploymentService_GetAssistantDebuggerDeployment_Handler(srv inte
 }
 
 func _AssistantDeploymentService_CreateAssistantWhatsappDeployment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateAssistantWhatsappDeploymentRequest)
+	in := new(CreateAssistantDeploymentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -349,7 +349,7 @@ func _AssistantDeploymentService_CreateAssistantWhatsappDeployment_Handler(srv i
 		FullMethod: AssistantDeploymentService_CreateAssistantWhatsappDeployment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistantDeploymentServiceServer).CreateAssistantWhatsappDeployment(ctx, req.(*CreateAssistantWhatsappDeploymentRequest))
+		return srv.(AssistantDeploymentServiceServer).CreateAssistantWhatsappDeployment(ctx, req.(*CreateAssistantDeploymentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -373,7 +373,7 @@ func _AssistantDeploymentService_GetAssistantWhatsappDeployment_Handler(srv inte
 }
 
 func _AssistantDeploymentService_CreateAssistantPhoneDeployment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateAssistantPhoneDeploymentRequest)
+	in := new(CreateAssistantDeploymentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -385,7 +385,7 @@ func _AssistantDeploymentService_CreateAssistantPhoneDeployment_Handler(srv inte
 		FullMethod: AssistantDeploymentService_CreateAssistantPhoneDeployment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AssistantDeploymentServiceServer).CreateAssistantPhoneDeployment(ctx, req.(*CreateAssistantPhoneDeploymentRequest))
+		return srv.(AssistantDeploymentServiceServer).CreateAssistantPhoneDeployment(ctx, req.(*CreateAssistantDeploymentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
