@@ -9,7 +9,7 @@ import (
 	"github.com/rapidaai/rapida-go/rapida/connections"
 )
 
-func CreateAssistantApiDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateAssistantApiDeploymentRequest) (*web_api.AssistantApiDeploymentResponse, error) {
+func CreateAssistantApiDeployment(ctx context.Context, connection connections.ConnectionConfig, req *web_api.CreateAssistantDeploymentRequest) (*web_api.GetAssistantApiDeploymentResponse, error) {
 	c, err := connection.AssistantDeploymentServiceClient()
 	if err != nil {
 		return nil, err
@@ -17,7 +17,7 @@ func CreateAssistantApiDeployment(connection connections.ConnectionConfig, ctx c
 	return c.CreateAssistantApiDeployment(connection.WithAuth(ctx), req)
 }
 
-func GetAssistantApiDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAssistantDeploymentRequest) (*web_api.AssistantApiDeploymentResponse, error) {
+func GetAssistantApiDeployment(ctx context.Context, connection connections.ConnectionConfig, req *web_api.GetAssistantDeploymentRequest) (*web_api.GetAssistantApiDeploymentResponse, error) {
 	c, err := connection.AssistantDeploymentServiceClient()
 	if err != nil {
 		return nil, err
@@ -25,7 +25,7 @@ func GetAssistantApiDeployment(connection connections.ConnectionConfig, ctx cont
 	return c.GetAssistantApiDeployment(connection.WithAuth(ctx), req)
 }
 
-func CreateAssistantWebpluginDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateAssistantWebpluginDeploymentRequest) (*web_api.AssistantWebpluginDeploymentResponse, error) {
+func CreateAssistantWebpluginDeployment(ctx context.Context, connection connections.ConnectionConfig, req *web_api.CreateAssistantDeploymentRequest) (*web_api.GetAssistantWebpluginDeploymentResponse, error) {
 	c, err := connection.AssistantDeploymentServiceClient()
 	if err != nil {
 		return nil, err
@@ -33,7 +33,7 @@ func CreateAssistantWebpluginDeployment(connection connections.ConnectionConfig,
 	return c.CreateAssistantWebpluginDeployment(connection.WithAuth(ctx), req)
 }
 
-func GetAssistantWebpluginDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAssistantDeploymentRequest) (*web_api.AssistantWebpluginDeploymentResponse, error) {
+func GetAssistantWebpluginDeployment(ctx context.Context, connection connections.ConnectionConfig, req *web_api.GetAssistantDeploymentRequest) (*web_api.GetAssistantWebpluginDeploymentResponse, error) {
 	c, err := connection.AssistantDeploymentServiceClient()
 	if err != nil {
 		return nil, err
@@ -41,7 +41,7 @@ func GetAssistantWebpluginDeployment(connection connections.ConnectionConfig, ct
 	return c.GetAssistantWebpluginDeployment(connection.WithAuth(ctx), req)
 }
 
-func CreateAssistantDebuggerDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateAssistantDebuggerDeploymentRequest) (*web_api.AssistantDebuggerDeploymentResponse, error) {
+func CreateAssistantDebuggerDeployment(ctx context.Context, connection connections.ConnectionConfig, req *web_api.CreateAssistantDeploymentRequest) (*web_api.GetAssistantDebuggerDeploymentResponse, error) {
 	c, err := connection.AssistantDeploymentServiceClient()
 	if err != nil {
 		return nil, err
@@ -49,7 +49,7 @@ func CreateAssistantDebuggerDeployment(connection connections.ConnectionConfig, 
 	return c.CreateAssistantDebuggerDeployment(connection.WithAuth(ctx), req)
 }
 
-func GetAssistantDebuggerDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAssistantDeploymentRequest) (*web_api.AssistantDebuggerDeploymentResponse, error) {
+func GetAssistantDebuggerDeployment(ctx context.Context, connection connections.ConnectionConfig, req *web_api.GetAssistantDeploymentRequest) (*web_api.GetAssistantDebuggerDeploymentResponse, error) {
 	c, err := connection.AssistantDeploymentServiceClient()
 	if err != nil {
 		return nil, err
@@ -57,7 +57,7 @@ func GetAssistantDebuggerDeployment(connection connections.ConnectionConfig, ctx
 	return c.GetAssistantDebuggerDeployment(connection.WithAuth(ctx), req)
 }
 
-func CreateAssistantWhatsappDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateAssistantWhatsappDeploymentRequest) (*web_api.AssistantWhatsappDeploymentResponse, error) {
+func CreateAssistantWhatsappDeployment(ctx context.Context, connection connections.ConnectionConfig, req *web_api.CreateAssistantDeploymentRequest) (*web_api.GetAssistantWhatsappDeploymentResponse, error) {
 	c, err := connection.AssistantDeploymentServiceClient()
 	if err != nil {
 		return nil, err
@@ -65,7 +65,7 @@ func CreateAssistantWhatsappDeployment(connection connections.ConnectionConfig, 
 	return c.CreateAssistantWhatsappDeployment(connection.WithAuth(ctx), req)
 }
 
-func GetAssistantWhatsappDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAssistantDeploymentRequest) (*web_api.AssistantWhatsappDeploymentResponse, error) {
+func GetAssistantWhatsappDeployment(ctx context.Context, connection connections.ConnectionConfig, req *web_api.GetAssistantDeploymentRequest) (*web_api.GetAssistantWhatsappDeploymentResponse, error) {
 	c, err := connection.AssistantDeploymentServiceClient()
 	if err != nil {
 		return nil, err
@@ -73,7 +73,7 @@ func GetAssistantWhatsappDeployment(connection connections.ConnectionConfig, ctx
 	return c.GetAssistantWhatsappDeployment(connection.WithAuth(ctx), req)
 }
 
-func CreateAssistantPhoneDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateAssistantPhoneDeploymentRequest) (*web_api.AssistantPhoneDeploymentResponse, error) {
+func CreateAssistantPhoneDeployment(ctx context.Context, connection connections.ConnectionConfig, req *web_api.CreateAssistantDeploymentRequest) (*web_api.GetAssistantPhoneDeploymentResponse, error) {
 	c, err := connection.AssistantDeploymentServiceClient()
 	if err != nil {
 		return nil, err
@@ -81,7 +81,7 @@ func CreateAssistantPhoneDeployment(connection connections.ConnectionConfig, ctx
 	return c.CreateAssistantPhoneDeployment(connection.WithAuth(ctx), req)
 }
 
-func GetAssistantPhoneDeployment(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAssistantDeploymentRequest) (*web_api.AssistantPhoneDeploymentResponse, error) {
+func GetAssistantPhoneDeployment(ctx context.Context, connection connections.ConnectionConfig, req *web_api.GetAssistantDeploymentRequest) (*web_api.GetAssistantPhoneDeploymentResponse, error) {
 	c, err := connection.AssistantDeploymentServiceClient()
 	if err != nil {
 		return nil, err

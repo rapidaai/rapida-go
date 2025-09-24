@@ -10,7 +10,7 @@ import (
 	"google.golang.org/grpc"
 )
 
-func Invoke(connection connections.ConnectionConfig, ctx context.Context, req *web_api.InvokeRequest, opts ...grpc.CallOption) (*web_api.InvokeResponse, error) {
+func Invoke(ctx context.Context, connection connections.ConnectionConfig, req *web_api.InvokeRequest, opts ...grpc.CallOption) (*web_api.InvokeResponse, error) {
 	c, err := connection.DeploymentClient()
 	if err != nil {
 		return nil, err
@@ -18,7 +18,7 @@ func Invoke(connection connections.ConnectionConfig, ctx context.Context, req *w
 	return c.Invoke(connection.WithAuth(ctx), req, opts...)
 }
 
-func Update(connection connections.ConnectionConfig, ctx context.Context, req *web_api.UpdateRequest, opts ...grpc.CallOption) (*web_api.UpdateResponse, error) {
+func Update(ctx context.Context, connection connections.ConnectionConfig, req *web_api.UpdateRequest, opts ...grpc.CallOption) (*web_api.UpdateResponse, error) {
 	c, err := connection.DeploymentClient()
 	if err != nil {
 		return nil, err
@@ -26,7 +26,7 @@ func Update(connection connections.ConnectionConfig, ctx context.Context, req *w
 	return c.Update(connection.WithAuth(ctx), req, opts...)
 }
 
-func Probe(connection connections.ConnectionConfig, ctx context.Context, req *web_api.ProbeRequest, opts ...grpc.CallOption) (*web_api.ProbeResponse, error) {
+func Probe(ctx context.Context, connection connections.ConnectionConfig, req *web_api.ProbeRequest, opts ...grpc.CallOption) (*web_api.ProbeResponse, error) {
 	c, err := connection.DeploymentClient()
 	if err != nil {
 		return nil, err

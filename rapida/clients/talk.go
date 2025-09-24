@@ -17,7 +17,7 @@ func AssistantTalk(connection connections.ConnectionConfig, ctx context.Context)
 	return c.AssistantTalk(connection.WithAuth(ctx))
 }
 
-func GetAllAssistantConversation(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAllAssistantConversationRequest) (*web_api.GetAllAssistantConversationResponse, error) {
+func GetAllAssistantConversation(ctx context.Context, connection connections.ConnectionConfig, req *web_api.GetAllAssistantConversationRequest) (*web_api.GetAllAssistantConversationResponse, error) {
 	c, err := connection.TalkServiceClient()
 	if err != nil {
 		return nil, err
@@ -25,7 +25,7 @@ func GetAllAssistantConversation(connection connections.ConnectionConfig, ctx co
 	return c.GetAllAssistantConversation(connection.WithAuth(ctx), req)
 }
 
-func GetAllConversationMessage(connection connections.ConnectionConfig, ctx context.Context, req *web_api.GetAllConversationMessageRequest) (*web_api.GetAllConversationMessageResponse, error) {
+func GetAllConversationMessage(ctx context.Context, connection connections.ConnectionConfig, req *web_api.GetAllConversationMessageRequest) (*web_api.GetAllConversationMessageResponse, error) {
 	c, err := connection.TalkServiceClient()
 	if err != nil {
 		return nil, err
@@ -33,7 +33,7 @@ func GetAllConversationMessage(connection connections.ConnectionConfig, ctx cont
 	return c.GetAllConversationMessage(connection.WithAuth(ctx), req)
 }
 
-func CreateMessageMetric(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateMessageMetricRequest) (*web_api.CreateMessageMetricResponse, error) {
+func CreateMessageMetric(ctx context.Context, connection connections.ConnectionConfig, req *web_api.CreateMessageMetricRequest) (*web_api.CreateMessageMetricResponse, error) {
 	c, err := connection.TalkServiceClient()
 	if err != nil {
 		return nil, err
@@ -41,7 +41,7 @@ func CreateMessageMetric(connection connections.ConnectionConfig, ctx context.Co
 	return c.CreateMessageMetric(connection.WithAuth(ctx), req)
 }
 
-func CreateConversationMetric(connection connections.ConnectionConfig, ctx context.Context, req *web_api.CreateConversationMetricRequest) (*web_api.CreateConversationMetricResponse, error) {
+func CreateConversationMetric(ctx context.Context, connection connections.ConnectionConfig, req *web_api.CreateConversationMetricRequest) (*web_api.CreateConversationMetricResponse, error) {
 	c, err := connection.TalkServiceClient()
 	if err != nil {
 		return nil, err

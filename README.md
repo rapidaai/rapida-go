@@ -9,12 +9,12 @@ The Rapida SDK provides a powerful interface for interacting with Rapida AI serv
 To install the Rapida SDK, use the following command:
 
 ```
-go get github.com/rapidaai/rapida-sdk/rapida
+go get github.com/rapidaai/rapida-go@v0.0.7
 ```
 
 ## Quick Start
 
-Here's a basic example to get you started with the Rapida SDK:
+Here's how to get started with the Rapida SDK:
 
 ```go
 package main
@@ -22,60 +22,151 @@ package main
 import (
     "context"
     "fmt"
-    "github.com/rapidaai/rapida-sdk/rapida"
+    "github.com/rapidaai/rapida-go/rapida/connections"
 )
 
 func main() {
-    options := rapida.NewRapidaClientOption()
-    options.SetRapidaApiKey("your-api-key-here")
+    connectionConfig := connections.DefaultConnectionConfig(
+        connections.WithSDK("your-api-key-here"), // Replace with your SDK API Key
+    )
 
-    client, err := rapida.GetClient(options)
-    if err != nil {
-        fmt.Printf("Error creating client: %v\n", err)
-        return
-    }
+    client := connectionConfig.CreateClient(context.Background())
 
     // Use the client to make API calls
-    // ...
+    fmt.Println("Client initialized successfully!", client)
 }
 ```
 
-## Key Components
+## Authentication
 
-### RapidaClientOption
+You can configure the Rapida SDK to authenticate using your **API Key** or **Personal Token**:
 
-The `RapidaClientOption` struct allows you to configure the SDK client. Key methods include:
-
-- `NewRapidaClientOption()`: Creates a new option struct with default values.
-- `NewRapidaClientOptionWithParams()`: Creates a new option struct with custom parameters.
-- `SetRapidaApiKey()`: Sets the API key for authentication.
-- `SetRapidaEndpointUrl()`: Sets the endpoint URL.
-- `SetRapidaAssistantUrl()`: Sets the assistant URL.
-- `SetRapidaEnvironment()`: Sets the environment (e.g., production, staging).
-- `SetRapidaRegion()`: Sets the region for API calls.
-- `SetSecure()`: Sets whether to use a secure connection.
-
-### Initialize Rapida Client
-
-The `Client` interface defines the core functionality for making API calls:
+### Authenticating with API Key
 
 ```go
-client, _ := rapida.GetClient(rapida_builders.ClientOptionBuilder().WithApiKey("{RAPIDA_KEY}").Build())
+import (
+    "os"
+    "github.com/rapidaai/rapida-go/rapida/connections"
+)
+
+connectionConfig := connections.DefaultConnectionConfig(
+    connections.WithSDK(
+        os.Getenv("RAPIDA_API_KEY"), // API Key from environment variables
+    ),
+)
 ```
 
-### Calling Rapida endpoint
-
-The `Client` interface defines the core functionality for making API calls:
+### Authenticating with Personal Token
 
 ```go
+import (
+    "os"
+    "github.com/rapidaai/rapida-go/rapida/connections"
+)
 
-endpoint, _ := rapida_definitions.NewEndpoint(2084859551571509248, "vrsn_2084859551600869376")
-res, _ := client.Invoke(rapida_builders.InvokeRequestBuilder(endpoint).Build())
-data, err := res.GetData()
-if err == nil {
-    for _, c := range data {
-        print(c.ToText())
+connectionConfig := connections.DefaultConnectionConfig(
+    connections.WithPersonalToken(
+        os.Getenv("RAPIDA_AUTHORIZATION_TOKEN"), // Authorization Token
+        os.Getenv("RAPIDA_AUTH_ID"),            // Authentication ID
+        os.Getenv("RAPIDA_PROJECT_ID"),         // Project ID
+    ),
+)
+```
+
+## Initializing a Client
+
+Once the configuration is set, you can initialize the Rapida client. Example:
+
+```go
+package main
+
+import (
+    "context"
+    "github.com/rapidaai/rapida-go/rapida/connections"
+)
+
+func main() {
+    connectionConfig := connections.DefaultConnectionConfig(
+        connections.WithSDK("your-api-key-here"),
+    )
+
+    client := connectionConfig.CreateClient(context.Background())
+
+    // Client ready for API calls
+    fmt.Println("Client initialized successfully!")
+}
+```
+
+## Invoking API Endpoints
+
+Here’s an example of how to call a specific API endpoint with the initialized client:
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "log"
+    "github.com/rapidaai/rapida-go/rapida"
+    "github.com/rapidaai/rapida-go/rapida/builders"
+    "github.com/rapidaai/rapida-go/rapida/definitions"
+)
+
+func main() {
+    connectionConfig := connections.DefaultConnectionConfig(
+        connections.WithSDK("your-api-key-here"),
+    )
+
+    client := connectionConfig.CreateClient(context.Background())
+
+    endpoint, err := definitions.NewEndpoint(2084859551571509248, "vrsn_2084859551600869376")
+    if err != nil {
+        log.Fatalf("Failed to create endpoint: %v", err)
+    }
+
+    request := builders.InvokeRequestBuilder(endpoint).Build()
+    response, err := client.Invoke(request)
+    if err != nil {
+        log.Fatalf("API call failed: %v", err)
+    }
+
+    data, err := response.GetData()
+    if err != nil {
+        log.Fatalf("Failed to process response: %v", err)
+    }
+
+    for _, record := range data {
+        fmt.Println(record.ToText())
     }
 }
-
 ```
+
+## Configuration Options
+
+The `DefaultConnectionConfig` accepts multiple options for configuring the SDK. Key options include:
+
+- `WithSDK(apiKey string)`: Sets the API key for authentication.
+- `WithPersonalToken(authToken, authId, projectId string)`: Configures the connection for personal tokens.
+- `WithEndpointURL(url string)`: Overrides the default API endpoint URL.
+- `WithTimeout(timeout time.Duration)`: Sets the timeout for API requests.
+
+## Compatibility
+
+This SDK requires **Go 1.18 or later**. Ensure your system meets this requirement:
+
+```bash
+go version
+```
+
+To upgrade or specify a version, use the following command:
+
+```bash
+go get github.com/rapidaai/rapida-go@v0.0.7
+```
+
+---
+
+## Conclusion
+
+The Rapida SDK provides everything necessary to integrate seamlessly with Rapida AI services, offering flexible configuration and authentication options. With the examples provided, you should be able to get started quickly and make advanced API calls as needed.
