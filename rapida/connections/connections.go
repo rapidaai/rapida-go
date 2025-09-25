@@ -21,6 +21,7 @@ type ConnectionConfig interface {
 	AssistantServiceClient() (web_api.AssistantServiceClient, error)
 	AssistantDeploymentServiceClient() (web_api.AssistantDeploymentServiceClient, error)
 	DeploymentClient() (web_api.DeploymentClient, error)
+	EndpointServiceClient() (web_api.EndpointServiceClient, error)
 	// authenticaton
 	WithAuth(ctx context.Context) context.Context
 }
@@ -103,6 +104,14 @@ func (cc *connectionConfig) AssistantServiceClient() (web_api.AssistantServiceCl
 		return nil, err
 	}
 	return web_api.NewAssistantServiceClient(conn), nil
+}
+
+func (cc *connectionConfig) EndpointServiceClient() (web_api.EndpointServiceClient, error) {
+	conn, err := grpc.NewClient(cc.endpoint.assistant, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		return nil, err
+	}
+	return web_api.NewEndpointServiceClient(conn), nil
 }
 
 func (cc *connectionConfig) AssistantDeploymentServiceClient() (web_api.AssistantDeploymentServiceClient, error) {

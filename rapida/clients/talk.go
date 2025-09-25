@@ -7,9 +7,10 @@ import (
 
 	web_api "github.com/rapidaai/rapida-go/rapida/clients/protos"
 	"github.com/rapidaai/rapida-go/rapida/connections"
+	"google.golang.org/grpc"
 )
 
-func AssistantTalk(connection connections.ConnectionConfig, ctx context.Context) (web_api.TalkService_AssistantTalkClient, error) {
+func AssistantTalk(ctx context.Context, connection connections.ConnectionConfig, opts ...grpc.CallOption) (web_api.TalkService_AssistantTalkClient, error) {
 	c, err := connection.TalkServiceClient()
 	if err != nil {
 		return nil, err
@@ -17,7 +18,7 @@ func AssistantTalk(connection connections.ConnectionConfig, ctx context.Context)
 	return c.AssistantTalk(connection.WithAuth(ctx))
 }
 
-func GetAllAssistantConversation(ctx context.Context, connection connections.ConnectionConfig, req *web_api.GetAllAssistantConversationRequest) (*web_api.GetAllAssistantConversationResponse, error) {
+func GetAllAssistantConversation(ctx context.Context, connection connections.ConnectionConfig, req *web_api.GetAllAssistantConversationRequest, opts ...grpc.CallOption) (*web_api.GetAllAssistantConversationResponse, error) {
 	c, err := connection.TalkServiceClient()
 	if err != nil {
 		return nil, err
@@ -25,7 +26,7 @@ func GetAllAssistantConversation(ctx context.Context, connection connections.Con
 	return c.GetAllAssistantConversation(connection.WithAuth(ctx), req)
 }
 
-func GetAllConversationMessage(ctx context.Context, connection connections.ConnectionConfig, req *web_api.GetAllConversationMessageRequest) (*web_api.GetAllConversationMessageResponse, error) {
+func GetAllConversationMessage(ctx context.Context, connection connections.ConnectionConfig, req *web_api.GetAllConversationMessageRequest, opts ...grpc.CallOption) (*web_api.GetAllConversationMessageResponse, error) {
 	c, err := connection.TalkServiceClient()
 	if err != nil {
 		return nil, err
@@ -33,7 +34,7 @@ func GetAllConversationMessage(ctx context.Context, connection connections.Conne
 	return c.GetAllConversationMessage(connection.WithAuth(ctx), req)
 }
 
-func CreateMessageMetric(ctx context.Context, connection connections.ConnectionConfig, req *web_api.CreateMessageMetricRequest) (*web_api.CreateMessageMetricResponse, error) {
+func CreateMessageMetric(ctx context.Context, connection connections.ConnectionConfig, req *web_api.CreateMessageMetricRequest, opts ...grpc.CallOption) (*web_api.CreateMessageMetricResponse, error) {
 	c, err := connection.TalkServiceClient()
 	if err != nil {
 		return nil, err
@@ -41,7 +42,7 @@ func CreateMessageMetric(ctx context.Context, connection connections.ConnectionC
 	return c.CreateMessageMetric(connection.WithAuth(ctx), req)
 }
 
-func CreateConversationMetric(ctx context.Context, connection connections.ConnectionConfig, req *web_api.CreateConversationMetricRequest) (*web_api.CreateConversationMetricResponse, error) {
+func CreateConversationMetric(ctx context.Context, connection connections.ConnectionConfig, req *web_api.CreateConversationMetricRequest, opts ...grpc.CallOption) (*web_api.CreateConversationMetricResponse, error) {
 	c, err := connection.TalkServiceClient()
 	if err != nil {
 		return nil, err
