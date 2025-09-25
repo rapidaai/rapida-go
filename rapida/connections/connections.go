@@ -22,6 +22,7 @@ type ConnectionConfig interface {
 	AssistantDeploymentServiceClient() (web_api.AssistantDeploymentServiceClient, error)
 	DeploymentClient() (web_api.DeploymentClient, error)
 	EndpointServiceClient() (web_api.EndpointServiceClient, error)
+	VaultServiceClient() (web_api.VaultServiceClient, error)
 	// authenticaton
 	WithAuth(ctx context.Context) context.Context
 }
@@ -107,7 +108,7 @@ func (cc *connectionConfig) AssistantServiceClient() (web_api.AssistantServiceCl
 }
 
 func (cc *connectionConfig) EndpointServiceClient() (web_api.EndpointServiceClient, error) {
-	conn, err := grpc.NewClient(cc.endpoint.assistant, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient(cc.endpoint.endpoint, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		return nil, err
 	}
@@ -128,6 +129,14 @@ func (cc *connectionConfig) DeploymentClient() (web_api.DeploymentClient, error)
 		return nil, err
 	}
 	return web_api.NewDeploymentClient(conn), nil
+}
+
+func (cc *connectionConfig) VaultServiceClient() (web_api.VaultServiceClient, error) {
+	conn, err := grpc.NewClient(cc.endpoint.web, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	if err != nil {
+		return nil, err
+	}
+	return web_api.NewVaultServiceClient(conn), nil
 }
 
 func (cc *connectionConfig) WithAuth(ctx context.Context) context.Context {
