@@ -4,11 +4,13 @@ package connections
 
 import (
 	"context"
+	"crypto/tls"
 
 	web_api "github.com/rapidaai/rapida-go/rapida/clients/protos"
 	"github.com/rapidaai/rapida-go/rapida/configs"
 	"github.com/rapidaai/rapida-go/rapida/utils"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
 )
@@ -93,6 +95,8 @@ func (cc *connectionConfig) GetGrpcOption() []grpc.DialOption {
 	}
 	if cc.insecure {
 		grpcOpts = append(grpcOpts, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	} else {
+		grpcOpts = append(grpcOpts, grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true})))
 	}
 	return grpcOpts
 }
