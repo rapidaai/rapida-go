@@ -15,6 +15,8 @@ import (
 
 type ConnectionConfig interface {
 	WithLocal() ConnectionConfig
+	WithInsecureConnection() ConnectionConfig
+	WithCustomEndpoint(endpoint map[string]string) ConnectionConfig
 	// all the clients
 	TalkServiceClient() (web_api.TalkServiceClient, error)
 	AuthenticationServiceClient() (web_api.AuthenticationServiceClient, error)
@@ -62,7 +64,7 @@ func NewConnectionConfig(auth RapidaCredential, endpoint map[string]string, inse
 	return cc
 }
 
-func (cc *connectionConfig) WithCustomEndpoint(endpoint map[string]string) *connectionConfig {
+func (cc *connectionConfig) WithCustomEndpoint(endpoint map[string]string) ConnectionConfig {
 	if endpoint != nil {
 		if assistant, ok := endpoint["assistant"]; ok {
 			cc.endpoint.assistant = assistant
@@ -77,7 +79,7 @@ func (cc *connectionConfig) WithCustomEndpoint(endpoint map[string]string) *conn
 	return cc
 }
 
-func (cc *connectionConfig) WithInsecureConnection() *connectionConfig {
+func (cc *connectionConfig) WithInsecureConnection() ConnectionConfig {
 	cc.insecure = true
 	return cc
 }

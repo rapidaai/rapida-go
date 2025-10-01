@@ -3,8 +3,8 @@
 
 package configs
 
-var ASSISTANT_API = "workflow-01.rapida.ai"
-var ENDPOINT_API = "endpoint-01.rapida.ai"
+var ASSISTANT_API = "https://workflow-01.rapida.ai:443"
+var ENDPOINT_API = "https://endpoint-01.rapida.ai:443"
 var WEB_API = "web-01.rapida.ai"
 
 var LOCAL_ASSISTANT_API = "localhost:9007"
