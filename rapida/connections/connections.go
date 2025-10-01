@@ -82,9 +82,22 @@ func (cc *connectionConfig) WithInsecureConnection() *connectionConfig {
 	return cc
 }
 
+func (cc *connectionConfig) GetGrpcOption() []grpc.DialOption {
+	grpcOpts := []grpc.DialOption{
+		grpc.WithDefaultCallOptions(
+			grpc.MaxCallRecvMsgSize(10*1024*1024),
+			grpc.MaxCallSendMsgSize(10*1024*1024),
+		),
+	}
+	if cc.insecure {
+		grpcOpts = append(grpcOpts, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	}
+	return grpcOpts
+}
+
 // Example of one client getter method
 func (cc *connectionConfig) TalkServiceClient() (web_api.TalkServiceClient, error) {
-	conn, err := grpc.NewClient(cc.endpoint.assistant, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient(cc.endpoint.assistant, cc.GetGrpcOption()...)
 	if err != nil {
 		return nil, err
 	}
@@ -92,7 +105,7 @@ func (cc *connectionConfig) TalkServiceClient() (web_api.TalkServiceClient, erro
 }
 
 func (cc *connectionConfig) AuthenticationServiceClient() (web_api.AuthenticationServiceClient, error) {
-	conn, err := grpc.NewClient(cc.endpoint.web, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient(cc.endpoint.web, cc.GetGrpcOption()...)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +113,7 @@ func (cc *connectionConfig) AuthenticationServiceClient() (web_api.Authenticatio
 }
 
 func (cc *connectionConfig) AssistantServiceClient() (web_api.AssistantServiceClient, error) {
-	conn, err := grpc.NewClient(cc.endpoint.assistant, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient(cc.endpoint.assistant, cc.GetGrpcOption()...)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +121,7 @@ func (cc *connectionConfig) AssistantServiceClient() (web_api.AssistantServiceCl
 }
 
 func (cc *connectionConfig) EndpointServiceClient() (web_api.EndpointServiceClient, error) {
-	conn, err := grpc.NewClient(cc.endpoint.endpoint, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient(cc.endpoint.endpoint, cc.GetGrpcOption()...)
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +129,7 @@ func (cc *connectionConfig) EndpointServiceClient() (web_api.EndpointServiceClie
 }
 
 func (cc *connectionConfig) AssistantDeploymentServiceClient() (web_api.AssistantDeploymentServiceClient, error) {
-	conn, err := grpc.NewClient(cc.endpoint.assistant, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient(cc.endpoint.assistant, cc.GetGrpcOption()...)
 	if err != nil {
 		return nil, err
 	}
@@ -124,7 +137,7 @@ func (cc *connectionConfig) AssistantDeploymentServiceClient() (web_api.Assistan
 }
 
 func (cc *connectionConfig) DeploymentClient() (web_api.DeploymentClient, error) {
-	conn, err := grpc.NewClient(cc.endpoint.endpoint, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient(cc.endpoint.endpoint, cc.GetGrpcOption()...)
 	if err != nil {
 		return nil, err
 	}
@@ -132,7 +145,7 @@ func (cc *connectionConfig) DeploymentClient() (web_api.DeploymentClient, error)
 }
 
 func (cc *connectionConfig) VaultServiceClient() (web_api.VaultServiceClient, error) {
-	conn, err := grpc.NewClient(cc.endpoint.web, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient(cc.endpoint.web, cc.GetGrpcOption()...)
 	if err != nil {
 		return nil, err
 	}
