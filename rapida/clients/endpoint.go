@@ -1,9 +1,12 @@
+// Copyright (c) 2023-2025 RapidaAI
+// Author: Prashant Srivastav <prashant@rapida.ai>
+
 package clients
 
 import (
 	"context"
 
-	lexatic_backend "github.com/rapidaai/rapida-go/rapida/clients/protos"
+	lexatic_backend "github.com/rapidaai/rapida-go/protos"
 	"github.com/rapidaai/rapida-go/rapida/connections"
 	"google.golang.org/grpc"
 )

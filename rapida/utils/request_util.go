@@ -1,5 +1,6 @@
-// Copyright (c) 2024 Rapida
-// Licensed under the MIT License. See LICENSE file for details.
+// Copyright (c) 2023-2025 RapidaAI
+// Author: Prashant Srivastav <prashant@rapida.ai>
+
 package utils
 
 import (
@@ -8,7 +9,7 @@ import (
 	"fmt"
 	"strings"
 
-	web_api "github.com/rapidaai/rapida-go/rapida/clients/protos"
+	web_api "github.com/rapidaai/rapida-go/protos"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/structpb"

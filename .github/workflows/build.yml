@@ -25,7 +25,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.21"
+          go-version: "1.25"
 
       - name: Install dependencies
         run: go mod tidy
@@ -66,10 +66,16 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.21"
+          go-version: "1.25"
 
       - name: Install dependencies
         run: go mod tidy
+
+      - name: Run tests before release
+        run: |
+          echo "Running tests to ensure code quality before release..."
+          go test -v -race ./...
+          echo "All tests passed!"
 
       - name: Get version and create tag
         id: version
@@ -136,10 +142,10 @@ jobs:
             echo "Attempt $ATTEMPT: Checking module availability..."
             
             if go list -m github.com/rapidaai/rapida-go@${{ steps.version.outputs.TAG_NAME }} > /dev/null 2>&1; then
-              echo "✅ Module is available at github.com/rapidaai/rapida-go@${{ steps.version.outputs.TAG_NAME }}"
+              echo "Module is available at github.com/rapidaai/rapida-go@${{ steps.version.outputs.TAG_NAME }}"
               break
             else
-              echo "⏳ Module not yet available, waiting..."
+              echo "Module not yet available, waiting..."
               sleep 30
               ATTEMPT=$((ATTEMPT + 1))
             fi

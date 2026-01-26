@@ -1,12 +1,13 @@
-// Copyright (c) 2024 Rapida
-// Licensed under the MIT License. See LICENSE file for details.
+// Copyright (c) 2023-2025 RapidaAI
+// Author: Prashant Srivastav <prashant@rapida.ai>
+
 package connections
 
 import (
 	"context"
 	"crypto/tls"
 
-	web_api "github.com/rapidaai/rapida-go/rapida/clients/protos"
+	web_api "github.com/rapidaai/rapida-go/protos"
 	"github.com/rapidaai/rapida-go/rapida/configs"
 	"github.com/rapidaai/rapida-go/rapida/utils"
 	"google.golang.org/grpc"

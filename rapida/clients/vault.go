@@ -1,9 +1,12 @@
+// Copyright (c) 2023-2025 RapidaAI
+// Author: Prashant Srivastav <prashant@rapida.ai>
+
 package clients
 
 import (
 	"context"
 
-	lexatic_backend "github.com/rapidaai/rapida-go/rapida/clients/protos"
+	lexatic_backend "github.com/rapidaai/rapida-go/protos"
 	"github.com/rapidaai/rapida-go/rapida/connections"
 	"google.golang.org/grpc"
 )
@@ -15,14 +18,7 @@ func CreateProviderCredential(ctx context.Context, connectionConfig connections.
 	}
 	return client.CreateProviderCredential(connectionConfig.WithAuth(ctx), in, opts...)
 }
-func CreateToolCredential(ctx context.Context, connectionConfig connections.ConnectionConfig, in *lexatic_backend.CreateToolCredentialRequest, opts ...grpc.CallOption) (*lexatic_backend.GetCredentialResponse, error) {
-	client, err := connectionConfig.VaultServiceClient()
-	if err != nil {
-		return nil, err
-	}
 
-	return client.CreateToolCredential(connectionConfig.WithAuth(ctx), in, opts...)
-}
 func GetAllOrganizationCredential(ctx context.Context, connectionConfig connections.ConnectionConfig, in *lexatic_backend.GetAllOrganizationCredentialRequest, opts ...grpc.CallOption) (*lexatic_backend.GetAllOrganizationCredentialResponse, error) {
 	client, err := connectionConfig.VaultServiceClient()
 	if err != nil {
@@ -39,13 +35,13 @@ func DeleteCredential(ctx context.Context, connectionConfig connections.Connecti
 
 	return client.DeleteCredential(connectionConfig.WithAuth(ctx), in, opts...)
 }
-func GetProviderCredential(ctx context.Context, connectionConfig connections.ConnectionConfig, in *lexatic_backend.GetProviderCredentialRequest, opts ...grpc.CallOption) (*lexatic_backend.GetCredentialResponse, error) {
+func GetProviderCredential(ctx context.Context, connectionConfig connections.ConnectionConfig, in *lexatic_backend.GetCredentialRequest, opts ...grpc.CallOption) (*lexatic_backend.GetCredentialResponse, error) {
 	client, err := connectionConfig.VaultServiceClient()
 	if err != nil {
 		return nil, err
 	}
 
-	return client.GetProviderCredential(connectionConfig.WithAuth(ctx), in, opts...)
+	return client.GetCredential(connectionConfig.WithAuth(ctx), in, opts...)
 }
 func GetCredential(ctx context.Context, connectionConfig connections.ConnectionConfig, in *lexatic_backend.GetCredentialRequest, opts ...grpc.CallOption) (*lexatic_backend.GetCredentialResponse, error) {
 	client, err := connectionConfig.VaultServiceClient()
