@@ -208,7 +208,7 @@ const (
 type OpenAiServiceClient interface {
 	Embedding(ctx context.Context, in *EmbeddingRequest, opts ...grpc.CallOption) (*EmbeddingResponse, error)
 	Chat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*ChatResponse, error)
-	StreamChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ChatResponse], error)
+	StreamChat(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ChatRequest, ChatResponse], error)
 	VerifyCredential(ctx context.Context, in *VerifyCredentialRequest, opts ...grpc.CallOption) (*VerifyCredentialResponse, error)
 	GetModeration(ctx context.Context, in *GetModerationRequest, opts ...grpc.CallOption) (*GetModerationResponse, error)
 }
@@ -241,24 +241,18 @@ func (c *openAiServiceClient) Chat(ctx context.Context, in *ChatRequest, opts ..
 	return out, nil
 }
 
-func (c *openAiServiceClient) StreamChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ChatResponse], error) {
+func (c *openAiServiceClient) StreamChat(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ChatRequest, ChatResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &OpenAiService_ServiceDesc.Streams[0], OpenAiService_StreamChat_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	x := &grpc.GenericClientStream[ChatRequest, ChatResponse]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
 	return x, nil
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type OpenAiService_StreamChatClient = grpc.ServerStreamingClient[ChatResponse]
+type OpenAiService_StreamChatClient = grpc.BidiStreamingClient[ChatRequest, ChatResponse]
 
 func (c *openAiServiceClient) VerifyCredential(ctx context.Context, in *VerifyCredentialRequest, opts ...grpc.CallOption) (*VerifyCredentialResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -286,7 +280,7 @@ func (c *openAiServiceClient) GetModeration(ctx context.Context, in *GetModerati
 type OpenAiServiceServer interface {
 	Embedding(context.Context, *EmbeddingRequest) (*EmbeddingResponse, error)
 	Chat(context.Context, *ChatRequest) (*ChatResponse, error)
-	StreamChat(*ChatRequest, grpc.ServerStreamingServer[ChatResponse]) error
+	StreamChat(grpc.BidiStreamingServer[ChatRequest, ChatResponse]) error
 	VerifyCredential(context.Context, *VerifyCredentialRequest) (*VerifyCredentialResponse, error)
 	GetModeration(context.Context, *GetModerationRequest) (*GetModerationResponse, error)
 }
@@ -304,7 +298,7 @@ func (UnimplementedOpenAiServiceServer) Embedding(context.Context, *EmbeddingReq
 func (UnimplementedOpenAiServiceServer) Chat(context.Context, *ChatRequest) (*ChatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Chat not implemented")
 }
-func (UnimplementedOpenAiServiceServer) StreamChat(*ChatRequest, grpc.ServerStreamingServer[ChatResponse]) error {
+func (UnimplementedOpenAiServiceServer) StreamChat(grpc.BidiStreamingServer[ChatRequest, ChatResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method StreamChat not implemented")
 }
 func (UnimplementedOpenAiServiceServer) VerifyCredential(context.Context, *VerifyCredentialRequest) (*VerifyCredentialResponse, error) {
@@ -370,15 +364,11 @@ func _OpenAiService_Chat_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 func _OpenAiService_StreamChat_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ChatRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(OpenAiServiceServer).StreamChat(m, &grpc.GenericServerStream[ChatRequest, ChatResponse]{ServerStream: stream})
+	return srv.(OpenAiServiceServer).StreamChat(&grpc.GenericServerStream[ChatRequest, ChatResponse]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type OpenAiService_StreamChatServer = grpc.ServerStreamingServer[ChatResponse]
+type OpenAiService_StreamChatServer = grpc.BidiStreamingServer[ChatRequest, ChatResponse]
 
 func _OpenAiService_VerifyCredential_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VerifyCredentialRequest)
@@ -445,6 +435,7 @@ var OpenAiService_ServiceDesc = grpc.ServiceDesc{
 			StreamName:    "StreamChat",
 			Handler:       _OpenAiService_StreamChat_Handler,
 			ServerStreams: true,
+			ClientStreams: true,
 		},
 	},
 	Metadata: "integration-api.proto",
@@ -464,7 +455,7 @@ const (
 type AzureServiceClient interface {
 	Embedding(ctx context.Context, in *EmbeddingRequest, opts ...grpc.CallOption) (*EmbeddingResponse, error)
 	Chat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*ChatResponse, error)
-	StreamChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ChatResponse], error)
+	StreamChat(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ChatRequest, ChatResponse], error)
 	VerifyCredential(ctx context.Context, in *VerifyCredentialRequest, opts ...grpc.CallOption) (*VerifyCredentialResponse, error)
 	GetModeration(ctx context.Context, in *GetModerationRequest, opts ...grpc.CallOption) (*GetModerationResponse, error)
 }
@@ -497,24 +488,18 @@ func (c *azureServiceClient) Chat(ctx context.Context, in *ChatRequest, opts ...
 	return out, nil
 }
 
-func (c *azureServiceClient) StreamChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ChatResponse], error) {
+func (c *azureServiceClient) StreamChat(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ChatRequest, ChatResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &AzureService_ServiceDesc.Streams[0], AzureService_StreamChat_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	x := &grpc.GenericClientStream[ChatRequest, ChatResponse]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
 	return x, nil
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AzureService_StreamChatClient = grpc.ServerStreamingClient[ChatResponse]
+type AzureService_StreamChatClient = grpc.BidiStreamingClient[ChatRequest, ChatResponse]
 
 func (c *azureServiceClient) VerifyCredential(ctx context.Context, in *VerifyCredentialRequest, opts ...grpc.CallOption) (*VerifyCredentialResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -542,7 +527,7 @@ func (c *azureServiceClient) GetModeration(ctx context.Context, in *GetModeratio
 type AzureServiceServer interface {
 	Embedding(context.Context, *EmbeddingRequest) (*EmbeddingResponse, error)
 	Chat(context.Context, *ChatRequest) (*ChatResponse, error)
-	StreamChat(*ChatRequest, grpc.ServerStreamingServer[ChatResponse]) error
+	StreamChat(grpc.BidiStreamingServer[ChatRequest, ChatResponse]) error
 	VerifyCredential(context.Context, *VerifyCredentialRequest) (*VerifyCredentialResponse, error)
 	GetModeration(context.Context, *GetModerationRequest) (*GetModerationResponse, error)
 }
@@ -560,7 +545,7 @@ func (UnimplementedAzureServiceServer) Embedding(context.Context, *EmbeddingRequ
 func (UnimplementedAzureServiceServer) Chat(context.Context, *ChatRequest) (*ChatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Chat not implemented")
 }
-func (UnimplementedAzureServiceServer) StreamChat(*ChatRequest, grpc.ServerStreamingServer[ChatResponse]) error {
+func (UnimplementedAzureServiceServer) StreamChat(grpc.BidiStreamingServer[ChatRequest, ChatResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method StreamChat not implemented")
 }
 func (UnimplementedAzureServiceServer) VerifyCredential(context.Context, *VerifyCredentialRequest) (*VerifyCredentialResponse, error) {
@@ -626,15 +611,11 @@ func _AzureService_Chat_Handler(srv interface{}, ctx context.Context, dec func(i
 }
 
 func _AzureService_StreamChat_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ChatRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(AzureServiceServer).StreamChat(m, &grpc.GenericServerStream[ChatRequest, ChatResponse]{ServerStream: stream})
+	return srv.(AzureServiceServer).StreamChat(&grpc.GenericServerStream[ChatRequest, ChatResponse]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AzureService_StreamChatServer = grpc.ServerStreamingServer[ChatResponse]
+type AzureService_StreamChatServer = grpc.BidiStreamingServer[ChatRequest, ChatResponse]
 
 func _AzureService_VerifyCredential_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VerifyCredentialRequest)
@@ -701,6 +682,7 @@ var AzureService_ServiceDesc = grpc.ServiceDesc{
 			StreamName:    "StreamChat",
 			Handler:       _AzureService_StreamChat_Handler,
 			ServerStreams: true,
+			ClientStreams: true,
 		},
 	},
 	Metadata: "integration-api.proto",
@@ -719,7 +701,7 @@ const (
 type GeminiServiceClient interface {
 	Embedding(ctx context.Context, in *EmbeddingRequest, opts ...grpc.CallOption) (*EmbeddingResponse, error)
 	Chat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*ChatResponse, error)
-	StreamChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ChatResponse], error)
+	StreamChat(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ChatRequest, ChatResponse], error)
 	VerifyCredential(ctx context.Context, in *VerifyCredentialRequest, opts ...grpc.CallOption) (*VerifyCredentialResponse, error)
 }
 
@@ -751,24 +733,18 @@ func (c *geminiServiceClient) Chat(ctx context.Context, in *ChatRequest, opts ..
 	return out, nil
 }
 
-func (c *geminiServiceClient) StreamChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ChatResponse], error) {
+func (c *geminiServiceClient) StreamChat(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ChatRequest, ChatResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &GeminiService_ServiceDesc.Streams[0], GeminiService_StreamChat_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	x := &grpc.GenericClientStream[ChatRequest, ChatResponse]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
 	return x, nil
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type GeminiService_StreamChatClient = grpc.ServerStreamingClient[ChatResponse]
+type GeminiService_StreamChatClient = grpc.BidiStreamingClient[ChatRequest, ChatResponse]
 
 func (c *geminiServiceClient) VerifyCredential(ctx context.Context, in *VerifyCredentialRequest, opts ...grpc.CallOption) (*VerifyCredentialResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -786,7 +762,7 @@ func (c *geminiServiceClient) VerifyCredential(ctx context.Context, in *VerifyCr
 type GeminiServiceServer interface {
 	Embedding(context.Context, *EmbeddingRequest) (*EmbeddingResponse, error)
 	Chat(context.Context, *ChatRequest) (*ChatResponse, error)
-	StreamChat(*ChatRequest, grpc.ServerStreamingServer[ChatResponse]) error
+	StreamChat(grpc.BidiStreamingServer[ChatRequest, ChatResponse]) error
 	VerifyCredential(context.Context, *VerifyCredentialRequest) (*VerifyCredentialResponse, error)
 }
 
@@ -803,7 +779,7 @@ func (UnimplementedGeminiServiceServer) Embedding(context.Context, *EmbeddingReq
 func (UnimplementedGeminiServiceServer) Chat(context.Context, *ChatRequest) (*ChatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Chat not implemented")
 }
-func (UnimplementedGeminiServiceServer) StreamChat(*ChatRequest, grpc.ServerStreamingServer[ChatResponse]) error {
+func (UnimplementedGeminiServiceServer) StreamChat(grpc.BidiStreamingServer[ChatRequest, ChatResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method StreamChat not implemented")
 }
 func (UnimplementedGeminiServiceServer) VerifyCredential(context.Context, *VerifyCredentialRequest) (*VerifyCredentialResponse, error) {
@@ -866,15 +842,11 @@ func _GeminiService_Chat_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 func _GeminiService_StreamChat_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ChatRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(GeminiServiceServer).StreamChat(m, &grpc.GenericServerStream[ChatRequest, ChatResponse]{ServerStream: stream})
+	return srv.(GeminiServiceServer).StreamChat(&grpc.GenericServerStream[ChatRequest, ChatResponse]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type GeminiService_StreamChatServer = grpc.ServerStreamingServer[ChatResponse]
+type GeminiService_StreamChatServer = grpc.BidiStreamingServer[ChatRequest, ChatResponse]
 
 func _GeminiService_VerifyCredential_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VerifyCredentialRequest)
@@ -919,6 +891,7 @@ var GeminiService_ServiceDesc = grpc.ServiceDesc{
 			StreamName:    "StreamChat",
 			Handler:       _GeminiService_StreamChat_Handler,
 			ServerStreams: true,
+			ClientStreams: true,
 		},
 	},
 	Metadata: "integration-api.proto",
@@ -937,7 +910,7 @@ const (
 type VertexAiServiceClient interface {
 	Embedding(ctx context.Context, in *EmbeddingRequest, opts ...grpc.CallOption) (*EmbeddingResponse, error)
 	Chat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*ChatResponse, error)
-	StreamChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ChatResponse], error)
+	StreamChat(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ChatRequest, ChatResponse], error)
 	VerifyCredential(ctx context.Context, in *VerifyCredentialRequest, opts ...grpc.CallOption) (*VerifyCredentialResponse, error)
 }
 
@@ -969,24 +942,18 @@ func (c *vertexAiServiceClient) Chat(ctx context.Context, in *ChatRequest, opts 
 	return out, nil
 }
 
-func (c *vertexAiServiceClient) StreamChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ChatResponse], error) {
+func (c *vertexAiServiceClient) StreamChat(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ChatRequest, ChatResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &VertexAiService_ServiceDesc.Streams[0], VertexAiService_StreamChat_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	x := &grpc.GenericClientStream[ChatRequest, ChatResponse]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
 	return x, nil
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type VertexAiService_StreamChatClient = grpc.ServerStreamingClient[ChatResponse]
+type VertexAiService_StreamChatClient = grpc.BidiStreamingClient[ChatRequest, ChatResponse]
 
 func (c *vertexAiServiceClient) VerifyCredential(ctx context.Context, in *VerifyCredentialRequest, opts ...grpc.CallOption) (*VerifyCredentialResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -1004,7 +971,7 @@ func (c *vertexAiServiceClient) VerifyCredential(ctx context.Context, in *Verify
 type VertexAiServiceServer interface {
 	Embedding(context.Context, *EmbeddingRequest) (*EmbeddingResponse, error)
 	Chat(context.Context, *ChatRequest) (*ChatResponse, error)
-	StreamChat(*ChatRequest, grpc.ServerStreamingServer[ChatResponse]) error
+	StreamChat(grpc.BidiStreamingServer[ChatRequest, ChatResponse]) error
 	VerifyCredential(context.Context, *VerifyCredentialRequest) (*VerifyCredentialResponse, error)
 }
 
@@ -1021,7 +988,7 @@ func (UnimplementedVertexAiServiceServer) Embedding(context.Context, *EmbeddingR
 func (UnimplementedVertexAiServiceServer) Chat(context.Context, *ChatRequest) (*ChatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Chat not implemented")
 }
-func (UnimplementedVertexAiServiceServer) StreamChat(*ChatRequest, grpc.ServerStreamingServer[ChatResponse]) error {
+func (UnimplementedVertexAiServiceServer) StreamChat(grpc.BidiStreamingServer[ChatRequest, ChatResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method StreamChat not implemented")
 }
 func (UnimplementedVertexAiServiceServer) VerifyCredential(context.Context, *VerifyCredentialRequest) (*VerifyCredentialResponse, error) {
@@ -1084,15 +1051,11 @@ func _VertexAiService_Chat_Handler(srv interface{}, ctx context.Context, dec fun
 }
 
 func _VertexAiService_StreamChat_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ChatRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(VertexAiServiceServer).StreamChat(m, &grpc.GenericServerStream[ChatRequest, ChatResponse]{ServerStream: stream})
+	return srv.(VertexAiServiceServer).StreamChat(&grpc.GenericServerStream[ChatRequest, ChatResponse]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type VertexAiService_StreamChatServer = grpc.ServerStreamingServer[ChatResponse]
+type VertexAiService_StreamChatServer = grpc.BidiStreamingServer[ChatRequest, ChatResponse]
 
 func _VertexAiService_VerifyCredential_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VerifyCredentialRequest)
@@ -1137,6 +1100,7 @@ var VertexAiService_ServiceDesc = grpc.ServiceDesc{
 			StreamName:    "StreamChat",
 			Handler:       _VertexAiService_StreamChat_Handler,
 			ServerStreams: true,
+			ClientStreams: true,
 		},
 	},
 	Metadata: "integration-api.proto",
@@ -1153,7 +1117,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ReplicateServiceClient interface {
 	Chat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*ChatResponse, error)
-	StreamChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ChatResponse], error)
+	StreamChat(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ChatRequest, ChatResponse], error)
 	VerifyCredential(ctx context.Context, in *VerifyCredentialRequest, opts ...grpc.CallOption) (*VerifyCredentialResponse, error)
 }
 
@@ -1175,24 +1139,18 @@ func (c *replicateServiceClient) Chat(ctx context.Context, in *ChatRequest, opts
 	return out, nil
 }
 
-func (c *replicateServiceClient) StreamChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ChatResponse], error) {
+func (c *replicateServiceClient) StreamChat(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ChatRequest, ChatResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &ReplicateService_ServiceDesc.Streams[0], ReplicateService_StreamChat_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	x := &grpc.GenericClientStream[ChatRequest, ChatResponse]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
 	return x, nil
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type ReplicateService_StreamChatClient = grpc.ServerStreamingClient[ChatResponse]
+type ReplicateService_StreamChatClient = grpc.BidiStreamingClient[ChatRequest, ChatResponse]
 
 func (c *replicateServiceClient) VerifyCredential(ctx context.Context, in *VerifyCredentialRequest, opts ...grpc.CallOption) (*VerifyCredentialResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -1209,7 +1167,7 @@ func (c *replicateServiceClient) VerifyCredential(ctx context.Context, in *Verif
 // for forward compatibility.
 type ReplicateServiceServer interface {
 	Chat(context.Context, *ChatRequest) (*ChatResponse, error)
-	StreamChat(*ChatRequest, grpc.ServerStreamingServer[ChatResponse]) error
+	StreamChat(grpc.BidiStreamingServer[ChatRequest, ChatResponse]) error
 	VerifyCredential(context.Context, *VerifyCredentialRequest) (*VerifyCredentialResponse, error)
 }
 
@@ -1223,7 +1181,7 @@ type UnimplementedReplicateServiceServer struct{}
 func (UnimplementedReplicateServiceServer) Chat(context.Context, *ChatRequest) (*ChatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Chat not implemented")
 }
-func (UnimplementedReplicateServiceServer) StreamChat(*ChatRequest, grpc.ServerStreamingServer[ChatResponse]) error {
+func (UnimplementedReplicateServiceServer) StreamChat(grpc.BidiStreamingServer[ChatRequest, ChatResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method StreamChat not implemented")
 }
 func (UnimplementedReplicateServiceServer) VerifyCredential(context.Context, *VerifyCredentialRequest) (*VerifyCredentialResponse, error) {
@@ -1268,15 +1226,11 @@ func _ReplicateService_Chat_Handler(srv interface{}, ctx context.Context, dec fu
 }
 
 func _ReplicateService_StreamChat_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ChatRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(ReplicateServiceServer).StreamChat(m, &grpc.GenericServerStream[ChatRequest, ChatResponse]{ServerStream: stream})
+	return srv.(ReplicateServiceServer).StreamChat(&grpc.GenericServerStream[ChatRequest, ChatResponse]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type ReplicateService_StreamChatServer = grpc.ServerStreamingServer[ChatResponse]
+type ReplicateService_StreamChatServer = grpc.BidiStreamingServer[ChatRequest, ChatResponse]
 
 func _ReplicateService_VerifyCredential_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VerifyCredentialRequest)
@@ -1317,6 +1271,7 @@ var ReplicateService_ServiceDesc = grpc.ServiceDesc{
 			StreamName:    "StreamChat",
 			Handler:       _ReplicateService_StreamChat_Handler,
 			ServerStreams: true,
+			ClientStreams: true,
 		},
 	},
 	Metadata: "integration-api.proto",
@@ -1333,7 +1288,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AnthropicServiceClient interface {
 	Chat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*ChatResponse, error)
-	StreamChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ChatResponse], error)
+	StreamChat(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ChatRequest, ChatResponse], error)
 	VerifyCredential(ctx context.Context, in *VerifyCredentialRequest, opts ...grpc.CallOption) (*VerifyCredentialResponse, error)
 }
 
@@ -1355,24 +1310,18 @@ func (c *anthropicServiceClient) Chat(ctx context.Context, in *ChatRequest, opts
 	return out, nil
 }
 
-func (c *anthropicServiceClient) StreamChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ChatResponse], error) {
+func (c *anthropicServiceClient) StreamChat(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ChatRequest, ChatResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &AnthropicService_ServiceDesc.Streams[0], AnthropicService_StreamChat_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	x := &grpc.GenericClientStream[ChatRequest, ChatResponse]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
 	return x, nil
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AnthropicService_StreamChatClient = grpc.ServerStreamingClient[ChatResponse]
+type AnthropicService_StreamChatClient = grpc.BidiStreamingClient[ChatRequest, ChatResponse]
 
 func (c *anthropicServiceClient) VerifyCredential(ctx context.Context, in *VerifyCredentialRequest, opts ...grpc.CallOption) (*VerifyCredentialResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -1389,7 +1338,7 @@ func (c *anthropicServiceClient) VerifyCredential(ctx context.Context, in *Verif
 // for forward compatibility.
 type AnthropicServiceServer interface {
 	Chat(context.Context, *ChatRequest) (*ChatResponse, error)
-	StreamChat(*ChatRequest, grpc.ServerStreamingServer[ChatResponse]) error
+	StreamChat(grpc.BidiStreamingServer[ChatRequest, ChatResponse]) error
 	VerifyCredential(context.Context, *VerifyCredentialRequest) (*VerifyCredentialResponse, error)
 }
 
@@ -1403,7 +1352,7 @@ type UnimplementedAnthropicServiceServer struct{}
 func (UnimplementedAnthropicServiceServer) Chat(context.Context, *ChatRequest) (*ChatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Chat not implemented")
 }
-func (UnimplementedAnthropicServiceServer) StreamChat(*ChatRequest, grpc.ServerStreamingServer[ChatResponse]) error {
+func (UnimplementedAnthropicServiceServer) StreamChat(grpc.BidiStreamingServer[ChatRequest, ChatResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method StreamChat not implemented")
 }
 func (UnimplementedAnthropicServiceServer) VerifyCredential(context.Context, *VerifyCredentialRequest) (*VerifyCredentialResponse, error) {
@@ -1448,15 +1397,11 @@ func _AnthropicService_Chat_Handler(srv interface{}, ctx context.Context, dec fu
 }
 
 func _AnthropicService_StreamChat_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ChatRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(AnthropicServiceServer).StreamChat(m, &grpc.GenericServerStream[ChatRequest, ChatResponse]{ServerStream: stream})
+	return srv.(AnthropicServiceServer).StreamChat(&grpc.GenericServerStream[ChatRequest, ChatResponse]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type AnthropicService_StreamChatServer = grpc.ServerStreamingServer[ChatResponse]
+type AnthropicService_StreamChatServer = grpc.BidiStreamingServer[ChatRequest, ChatResponse]
 
 func _AnthropicService_VerifyCredential_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VerifyCredentialRequest)
@@ -1497,6 +1442,7 @@ var AnthropicService_ServiceDesc = grpc.ServiceDesc{
 			StreamName:    "StreamChat",
 			Handler:       _AnthropicService_StreamChat_Handler,
 			ServerStreams: true,
+			ClientStreams: true,
 		},
 	},
 	Metadata: "integration-api.proto",
@@ -1517,7 +1463,7 @@ type CohereServiceClient interface {
 	Embedding(ctx context.Context, in *EmbeddingRequest, opts ...grpc.CallOption) (*EmbeddingResponse, error)
 	Reranking(ctx context.Context, in *RerankingRequest, opts ...grpc.CallOption) (*RerankingResponse, error)
 	Chat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*ChatResponse, error)
-	StreamChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ChatResponse], error)
+	StreamChat(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ChatRequest, ChatResponse], error)
 	VerifyCredential(ctx context.Context, in *VerifyCredentialRequest, opts ...grpc.CallOption) (*VerifyCredentialResponse, error)
 }
 
@@ -1559,24 +1505,18 @@ func (c *cohereServiceClient) Chat(ctx context.Context, in *ChatRequest, opts ..
 	return out, nil
 }
 
-func (c *cohereServiceClient) StreamChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ChatResponse], error) {
+func (c *cohereServiceClient) StreamChat(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ChatRequest, ChatResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &CohereService_ServiceDesc.Streams[0], CohereService_StreamChat_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	x := &grpc.GenericClientStream[ChatRequest, ChatResponse]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
 	return x, nil
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type CohereService_StreamChatClient = grpc.ServerStreamingClient[ChatResponse]
+type CohereService_StreamChatClient = grpc.BidiStreamingClient[ChatRequest, ChatResponse]
 
 func (c *cohereServiceClient) VerifyCredential(ctx context.Context, in *VerifyCredentialRequest, opts ...grpc.CallOption) (*VerifyCredentialResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -1595,7 +1535,7 @@ type CohereServiceServer interface {
 	Embedding(context.Context, *EmbeddingRequest) (*EmbeddingResponse, error)
 	Reranking(context.Context, *RerankingRequest) (*RerankingResponse, error)
 	Chat(context.Context, *ChatRequest) (*ChatResponse, error)
-	StreamChat(*ChatRequest, grpc.ServerStreamingServer[ChatResponse]) error
+	StreamChat(grpc.BidiStreamingServer[ChatRequest, ChatResponse]) error
 	VerifyCredential(context.Context, *VerifyCredentialRequest) (*VerifyCredentialResponse, error)
 }
 
@@ -1615,7 +1555,7 @@ func (UnimplementedCohereServiceServer) Reranking(context.Context, *RerankingReq
 func (UnimplementedCohereServiceServer) Chat(context.Context, *ChatRequest) (*ChatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Chat not implemented")
 }
-func (UnimplementedCohereServiceServer) StreamChat(*ChatRequest, grpc.ServerStreamingServer[ChatResponse]) error {
+func (UnimplementedCohereServiceServer) StreamChat(grpc.BidiStreamingServer[ChatRequest, ChatResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method StreamChat not implemented")
 }
 func (UnimplementedCohereServiceServer) VerifyCredential(context.Context, *VerifyCredentialRequest) (*VerifyCredentialResponse, error) {
@@ -1696,15 +1636,11 @@ func _CohereService_Chat_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 func _CohereService_StreamChat_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ChatRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(CohereServiceServer).StreamChat(m, &grpc.GenericServerStream[ChatRequest, ChatResponse]{ServerStream: stream})
+	return srv.(CohereServiceServer).StreamChat(&grpc.GenericServerStream[ChatRequest, ChatResponse]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type CohereService_StreamChatServer = grpc.ServerStreamingServer[ChatResponse]
+type CohereService_StreamChatServer = grpc.BidiStreamingServer[ChatRequest, ChatResponse]
 
 func _CohereService_VerifyCredential_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VerifyCredentialRequest)
@@ -1753,6 +1689,7 @@ var CohereService_ServiceDesc = grpc.ServiceDesc{
 			StreamName:    "StreamChat",
 			Handler:       _CohereService_StreamChat_Handler,
 			ServerStreams: true,
+			ClientStreams: true,
 		},
 	},
 	Metadata: "integration-api.proto",
@@ -1907,7 +1844,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MistralServiceClient interface {
 	Chat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (*ChatResponse, error)
-	StreamChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ChatResponse], error)
+	StreamChat(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ChatRequest, ChatResponse], error)
 	VerifyCredential(ctx context.Context, in *VerifyCredentialRequest, opts ...grpc.CallOption) (*VerifyCredentialResponse, error)
 }
 
@@ -1929,24 +1866,18 @@ func (c *mistralServiceClient) Chat(ctx context.Context, in *ChatRequest, opts .
 	return out, nil
 }
 
-func (c *mistralServiceClient) StreamChat(ctx context.Context, in *ChatRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[ChatResponse], error) {
+func (c *mistralServiceClient) StreamChat(ctx context.Context, opts ...grpc.CallOption) (grpc.BidiStreamingClient[ChatRequest, ChatResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &MistralService_ServiceDesc.Streams[0], MistralService_StreamChat_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	x := &grpc.GenericClientStream[ChatRequest, ChatResponse]{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
 	return x, nil
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type MistralService_StreamChatClient = grpc.ServerStreamingClient[ChatResponse]
+type MistralService_StreamChatClient = grpc.BidiStreamingClient[ChatRequest, ChatResponse]
 
 func (c *mistralServiceClient) VerifyCredential(ctx context.Context, in *VerifyCredentialRequest, opts ...grpc.CallOption) (*VerifyCredentialResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
@@ -1963,7 +1894,7 @@ func (c *mistralServiceClient) VerifyCredential(ctx context.Context, in *VerifyC
 // for forward compatibility.
 type MistralServiceServer interface {
 	Chat(context.Context, *ChatRequest) (*ChatResponse, error)
-	StreamChat(*ChatRequest, grpc.ServerStreamingServer[ChatResponse]) error
+	StreamChat(grpc.BidiStreamingServer[ChatRequest, ChatResponse]) error
 	VerifyCredential(context.Context, *VerifyCredentialRequest) (*VerifyCredentialResponse, error)
 }
 
@@ -1977,7 +1908,7 @@ type UnimplementedMistralServiceServer struct{}
 func (UnimplementedMistralServiceServer) Chat(context.Context, *ChatRequest) (*ChatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Chat not implemented")
 }
-func (UnimplementedMistralServiceServer) StreamChat(*ChatRequest, grpc.ServerStreamingServer[ChatResponse]) error {
+func (UnimplementedMistralServiceServer) StreamChat(grpc.BidiStreamingServer[ChatRequest, ChatResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method StreamChat not implemented")
 }
 func (UnimplementedMistralServiceServer) VerifyCredential(context.Context, *VerifyCredentialRequest) (*VerifyCredentialResponse, error) {
@@ -2022,15 +1953,11 @@ func _MistralService_Chat_Handler(srv interface{}, ctx context.Context, dec func
 }
 
 func _MistralService_StreamChat_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ChatRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(MistralServiceServer).StreamChat(m, &grpc.GenericServerStream[ChatRequest, ChatResponse]{ServerStream: stream})
+	return srv.(MistralServiceServer).StreamChat(&grpc.GenericServerStream[ChatRequest, ChatResponse]{ServerStream: stream})
 }
 
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
-type MistralService_StreamChatServer = grpc.ServerStreamingServer[ChatResponse]
+type MistralService_StreamChatServer = grpc.BidiStreamingServer[ChatRequest, ChatResponse]
 
 func _MistralService_VerifyCredential_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VerifyCredentialRequest)
@@ -2071,6 +1998,7 @@ var MistralService_ServiceDesc = grpc.ServiceDesc{
 			StreamName:    "StreamChat",
 			Handler:       _MistralService_StreamChat_Handler,
 			ServerStreams: true,
+			ClientStreams: true,
 		},
 	},
 	Metadata: "integration-api.proto",
