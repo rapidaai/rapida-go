@@ -15,8 +15,8 @@ func TestAssistantAPIEndpoint(t *testing.T) {
 	if !strings.Contains(ASSISTANT_API, "rapida.ai") {
 		t.Errorf("ASSISTANT_API should contain 'rapida.ai', got %q", ASSISTANT_API)
 	}
-	if !strings.Contains(ASSISTANT_API, ":443") {
-		t.Errorf("ASSISTANT_API should contain port 443, got %q", ASSISTANT_API)
+	if !strings.Contains(ASSISTANT_API, ":50051") {
+		t.Errorf("ASSISTANT_API should contain port 50051, got %q", ASSISTANT_API)
 	}
 }
 
@@ -27,8 +27,8 @@ func TestEndpointAPIEndpoint(t *testing.T) {
 	if !strings.Contains(ENDPOINT_API, "rapida.ai") {
 		t.Errorf("ENDPOINT_API should contain 'rapida.ai', got %q", ENDPOINT_API)
 	}
-	if !strings.Contains(ENDPOINT_API, ":443") {
-		t.Errorf("ENDPOINT_API should contain port 443, got %q", ENDPOINT_API)
+	if !strings.Contains(ENDPOINT_API, ":50051") {
+		t.Errorf("ENDPOINT_API should contain port 50051, got %q", ENDPOINT_API)
 	}
 }
 
@@ -39,8 +39,8 @@ func TestWebAPIEndpoint(t *testing.T) {
 	if !strings.Contains(WEB_API, "rapida.ai") {
 		t.Errorf("WEB_API should contain 'rapida.ai', got %q", WEB_API)
 	}
-	if !strings.Contains(WEB_API, ":443") {
-		t.Errorf("WEB_API should contain port 443, got %q", WEB_API)
+	if !strings.Contains(WEB_API, ":50051") {
+		t.Errorf("WEB_API should contain port 50051, got %q", WEB_API)
 	}
 }
 
@@ -80,17 +80,17 @@ func TestEndpointValues(t *testing.T) {
 		{
 			name:     "ASSISTANT_API value",
 			endpoint: ASSISTANT_API,
-			expected: "workflow-01.rapida.ai:443",
+			expected: "assistant-01.in.rapida.ai:50051",
 		},
 		{
 			name:     "ENDPOINT_API value",
 			endpoint: ENDPOINT_API,
-			expected: "endpoint-01.rapida.ai:443",
+			expected: "api-01.in.rapida.ai:50051",
 		},
 		{
 			name:     "WEB_API value",
 			endpoint: WEB_API,
-			expected: "web-01.rapida.ai:443",
+			expected: "api-01.in.rapida.ai:50051",
 		},
 		{
 			name:     "LOCAL_ASSISTANT_API value",
@@ -118,30 +118,23 @@ func TestEndpointValues(t *testing.T) {
 	}
 }
 
-func TestEndpointsAreDifferent(t *testing.T) {
-	// Verify that all production endpoints are unique
-	endpoints := map[string]string{
-		"ASSISTANT_API": ASSISTANT_API,
-		"ENDPOINT_API":  ENDPOINT_API,
-		"WEB_API":       WEB_API,
+func TestProductionEndpointTopology(t *testing.T) {
+	if ASSISTANT_API == WEB_API {
+		t.Errorf("ASSISTANT_API and WEB_API should not be the same endpoint: %q", ASSISTANT_API)
 	}
-
-	seen := make(map[string]string)
-	for name, endpoint := range endpoints {
-		if existingName, exists := seen[endpoint]; exists {
-			t.Errorf("%s and %s have the same endpoint: %q", name, existingName, endpoint)
-		}
-		seen[endpoint] = name
+	if WEB_API != ENDPOINT_API {
+		t.Errorf("WEB_API and ENDPOINT_API should share the same endpoint, got %q and %q", WEB_API, ENDPOINT_API)
 	}
+}
 
-	// Verify that all local endpoints are unique
+func TestLocalEndpointsAreDifferent(t *testing.T) {
 	localEndpoints := map[string]string{
 		"LOCAL_ASSISTANT_API": LOCAL_ASSISTANT_API,
 		"LOCAL_ENDPOINT_API":  LOCAL_ENDPOINT_API,
 		"LOCAL_WEB_API":       LOCAL_WEB_API,
 	}
 
-	seen = make(map[string]string)
+	seen := make(map[string]string)
 	for name, endpoint := range localEndpoints {
 		if existingName, exists := seen[endpoint]; exists {
 			t.Errorf("%s and %s have the same endpoint: %q", name, existingName, endpoint)
