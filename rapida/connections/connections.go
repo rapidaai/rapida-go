@@ -27,7 +27,12 @@ type ConnectionConfig interface {
 	AssistantDeploymentServiceClient() (web_api.AssistantDeploymentServiceClient, error)
 	DeploymentClient() (web_api.DeploymentClient, error)
 	EndpointServiceClient() (web_api.EndpointServiceClient, error)
+	KnowledgeServiceClient() (web_api.KnowledgeServiceClient, error)
+	DocumentServiceClient() (web_api.DocumentServiceClient, error)
 	VaultServiceClient() (web_api.VaultServiceClient, error)
+	ConnectServiceClient() (web_api.ConnectServiceClient, error)
+	NotificationServiceClient() (web_api.NotificationServiceClient, error)
+	BillingServiceClient() (web_api.BillingServiceClient, error)
 	// authenticaton
 	WithAuth(ctx context.Context) context.Context
 }
@@ -135,6 +140,22 @@ func (cc *connectionConfig) EndpointServiceClient() (web_api.EndpointServiceClie
 	return web_api.NewEndpointServiceClient(conn), nil
 }
 
+func (cc *connectionConfig) KnowledgeServiceClient() (web_api.KnowledgeServiceClient, error) {
+	conn, err := grpc.NewClient(cc.endpoint.assistant, cc.GetGrpcOption()...)
+	if err != nil {
+		return nil, err
+	}
+	return web_api.NewKnowledgeServiceClient(conn), nil
+}
+
+func (cc *connectionConfig) DocumentServiceClient() (web_api.DocumentServiceClient, error) {
+	conn, err := grpc.NewClient(cc.endpoint.web, cc.GetGrpcOption()...)
+	if err != nil {
+		return nil, err
+	}
+	return web_api.NewDocumentServiceClient(conn), nil
+}
+
 func (cc *connectionConfig) AssistantDeploymentServiceClient() (web_api.AssistantDeploymentServiceClient, error) {
 	conn, err := grpc.NewClient(cc.endpoint.assistant, cc.GetGrpcOption()...)
 	if err != nil {
@@ -157,6 +178,30 @@ func (cc *connectionConfig) VaultServiceClient() (web_api.VaultServiceClient, er
 		return nil, err
 	}
 	return web_api.NewVaultServiceClient(conn), nil
+}
+
+func (cc *connectionConfig) ConnectServiceClient() (web_api.ConnectServiceClient, error) {
+	conn, err := grpc.NewClient(cc.endpoint.web, cc.GetGrpcOption()...)
+	if err != nil {
+		return nil, err
+	}
+	return web_api.NewConnectServiceClient(conn), nil
+}
+
+func (cc *connectionConfig) NotificationServiceClient() (web_api.NotificationServiceClient, error) {
+	conn, err := grpc.NewClient(cc.endpoint.web, cc.GetGrpcOption()...)
+	if err != nil {
+		return nil, err
+	}
+	return web_api.NewNotificationServiceClient(conn), nil
+}
+
+func (cc *connectionConfig) BillingServiceClient() (web_api.BillingServiceClient, error) {
+	conn, err := grpc.NewClient(cc.endpoint.web, cc.GetGrpcOption()...)
+	if err != nil {
+		return nil, err
+	}
+	return web_api.NewBillingServiceClient(conn), nil
 }
 
 func (cc *connectionConfig) WithAuth(ctx context.Context) context.Context {

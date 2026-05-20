@@ -3,9 +3,9 @@
 
 package configs
 
-var ASSISTANT_API = "assistant-01.in.rapida.ai/:443"
-var ENDPOINT_API = "endpoint-01.in.rapida.ai:443"
-var WEB_API = "api-01.in.rapida.ai:443"
+var ASSISTANT_API = "assistant-01.in.rapida.ai:50051"
+var ENDPOINT_API = "api-01.in.rapida.ai:50051"
+var WEB_API = "api-01.in.rapida.ai:50051"
 
 var LOCAL_ASSISTANT_API = "localhost:9007"
 var LOCAL_ENDPOINT_API = "localhost:9005"

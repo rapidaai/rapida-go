@@ -16,7 +16,7 @@ func AssistantTalk(ctx context.Context, connection connections.ConnectionConfig,
 	if err != nil {
 		return nil, err
 	}
-	return c.AssistantTalk(connection.WithAuth(ctx))
+	return c.AssistantTalk(connection.WithAuth(ctx), opts...)
 }
 
 func GetAllAssistantConversation(ctx context.Context, connection connections.ConnectionConfig, req *web_api.GetAllAssistantConversationRequest, opts ...grpc.CallOption) (*web_api.GetAllAssistantConversationResponse, error) {
@@ -24,7 +24,7 @@ func GetAllAssistantConversation(ctx context.Context, connection connections.Con
 	if err != nil {
 		return nil, err
 	}
-	return c.GetAllAssistantConversation(connection.WithAuth(ctx), req)
+	return c.GetAllAssistantConversation(connection.WithAuth(ctx), req, opts...)
 }
 
 func GetAllConversationMessage(ctx context.Context, connection connections.ConnectionConfig, req *web_api.GetAllConversationMessageRequest, opts ...grpc.CallOption) (*web_api.GetAllConversationMessageResponse, error) {
@@ -32,7 +32,7 @@ func GetAllConversationMessage(ctx context.Context, connection connections.Conne
 	if err != nil {
 		return nil, err
 	}
-	return c.GetAllConversationMessage(connection.WithAuth(ctx), req)
+	return c.GetAllConversationMessage(connection.WithAuth(ctx), req, opts...)
 }
 
 func CreateMessageMetric(ctx context.Context, connection connections.ConnectionConfig, req *web_api.CreateMessageMetricRequest, opts ...grpc.CallOption) (*web_api.CreateMessageMetricResponse, error) {
@@ -40,7 +40,7 @@ func CreateMessageMetric(ctx context.Context, connection connections.ConnectionC
 	if err != nil {
 		return nil, err
 	}
-	return c.CreateMessageMetric(connection.WithAuth(ctx), req)
+	return c.CreateMessageMetric(connection.WithAuth(ctx), req, opts...)
 }
 
 func CreateConversationMetric(ctx context.Context, connection connections.ConnectionConfig, req *web_api.CreateConversationMetricRequest, opts ...grpc.CallOption) (*web_api.CreateConversationMetricResponse, error) {
@@ -48,5 +48,5 @@ func CreateConversationMetric(ctx context.Context, connection connections.Connec
 	if err != nil {
 		return nil, err
 	}
-	return c.CreateConversationMetric(connection.WithAuth(ctx), req)
+	return c.CreateConversationMetric(connection.WithAuth(ctx), req, opts...)
 }

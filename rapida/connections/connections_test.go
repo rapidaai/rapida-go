@@ -274,8 +274,33 @@ func TestConnectionConfig_ClientCreation(t *testing.T) {
 		_ = err
 	})
 
+	t.Run("KnowledgeServiceClient creation", func(t *testing.T) {
+		_, err := cc.KnowledgeServiceClient()
+		_ = err
+	})
+
+	t.Run("DocumentServiceClient creation", func(t *testing.T) {
+		_, err := cc.DocumentServiceClient()
+		_ = err
+	})
+
 	t.Run("VaultServiceClient creation", func(t *testing.T) {
 		_, err := cc.VaultServiceClient()
+		_ = err
+	})
+
+	t.Run("ConnectServiceClient creation", func(t *testing.T) {
+		_, err := cc.ConnectServiceClient()
+		_ = err
+	})
+
+	t.Run("NotificationServiceClient creation", func(t *testing.T) {
+		_, err := cc.NotificationServiceClient()
+		_ = err
+	})
+
+	t.Run("BillingServiceClient creation", func(t *testing.T) {
+		_, err := cc.BillingServiceClient()
 		_ = err
 	})
 }
